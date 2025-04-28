@@ -1,0 +1,51 @@
+
+h1,h2{
+    text-align: center;
+}
+
+h2{
+    margin-bottom: 2em;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+
+form{
+    width: 40%;
+    /* display: flex;
+    flex-direction: column; */
+    background-color: green;
+    gap: 1em;
+    padding: 0;
+}
+
+img{
+    width: 30%;
+}
+
+form .label{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center; */
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+form .label label{
+    width: 60%;
+}
+
+form .label input{
+}
+
+form .label textarea{
+}
+
+button{
+    width: 50%;
+    /* display: flex;
+    justify-content: center; */
+}

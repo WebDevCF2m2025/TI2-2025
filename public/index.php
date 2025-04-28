@@ -21,6 +21,24 @@ require_once "../model/guestbookModel.php";
  * Activez le mode d'erreur de PDO à Exception et
  * le mode fetch à tableau associatif
  */
+try {
+    // nouvelle instance de PDO
+    $db = new PDO(
+        DB_DSN,
+        DB_LOGIN,
+        DB_PWD,
+        // tableau d'options
+        [
+            // par défaut les résultats sont en tableau associatif
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            // Afficher les exceptions
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]
+    );
+} catch (Exception $e) {
+    // arrêt du script et affichage du code erreur, et du message
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
 
 /*
  * Si le formulaire a été soumis
