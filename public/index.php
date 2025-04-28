@@ -63,17 +63,6 @@ if (isset(
         $_POST['postcode'],
         $_POST['message']
     );
-
-    // si l'insertion a réussi
-    if($insert === true) {
-
-        // on redirige vers la page actuelle (ou on affiche un message de succès)
-        $success = "Nous vous remercions pour votre commentaire";
-    } else {
-        
-        // sinon, on affiche un message d'erreur
-        $error = $insert;
-    }
 }
 
 
@@ -84,7 +73,7 @@ if (isset(
 
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
-# $messages = getAllGuestbook($db);
+$messages = getAllGuestbook($db);
 
 /*********************
  * Ou Bonus Pagination
