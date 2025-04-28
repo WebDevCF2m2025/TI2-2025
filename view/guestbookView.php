@@ -62,36 +62,38 @@
                 <span id="spanGeneral"></span>
             </div>
         </form>
-        <h2>Les précedents messages</h2>
-        <?php if ($count === 0) : ?>
-            <h3>Pas encore de message</h3>
-        <?php else: ?>
-            <?php if ($count === 1): ?>
-                <h3>Il y a 1 message</h3>
+        <div class="message">
+            <h2>Les précedents messages</h2>
+            <?php if ($count === 0) : ?>
+                <h3>Pas encore de message</h3>
             <?php else: ?>
-                <h3>Il y a <?= $count ?> message<?= $count > 1 ? "s" : "" ?> </h3>
-                <?php foreach ($messages as $message): ?>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Date</th>
-                                <th>Message</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><?= $message['firstname'] ?></td>
-                                <td><?= $message['lastname'] ?></td>
-                                <td><em><?= $message['datemessage'] ?></em></td>
-                                <td><?= $message['message'] ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                <?php endforeach; ?>
+                <?php if ($count === 1): ?>
+                    <h3>Il y a 1 message</h3>
+                <?php else: ?>
+                    <h3>Il y a <?= $count ?> message<?= $count > 1 ? "s" : "" ?> </h3>
+                    <?php foreach ($messages as $message): ?>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Prénom</th>
+                                    <th>Nom</th>
+                                    <th>Date</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><?= $message['firstname'] ?></td>
+                                    <td><?= $message['lastname'] ?></td>
+                                    <td><em><?= $message['datemessage'] ?></em></td>
+                                    <td><?= $message['message'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php endif; ?>
-        <?php endif; ?>
+        </div>
 
     </main>
     <?= $pagination ?>
