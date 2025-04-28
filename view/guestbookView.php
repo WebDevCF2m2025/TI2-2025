@@ -17,6 +17,7 @@
 <!-- Formulaire d'ajout d'un message -->
 
 <div class="tout"> <div class="image"><img src="img/sign-up-amico.png" alt=""></div>
+<h2>Laissez-nous un message</h2>
 
 <div class="formu">
     <form action="" method="POST">
@@ -34,7 +35,7 @@
         <button type="submit" >envoyer</button>
     </form>
 </div></div>
-
+<div class="reste">
 <!-- Si pas de message -->
 <h3>Pas encore de message</h3>
 <!-- Si 1 message -->
@@ -68,6 +69,7 @@ var_dump($_POST);
 echo '<p>$_GET</p>';
 var_dump($_GET);
 ?>
+</div>
 
 <script src="js/validation.js"></script>
 </body>

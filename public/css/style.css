@@ -1,10 +1,18 @@
+body{
+ background-color: antiquewhite;
+}
 div.formu{
  
     display: flex;
    justify-content: center;
+   text-align: center
 
 }
 form{
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px  #888888;
+    padding: 10px 50px;
     display: flex;
     flex-direction: column;
 }
@@ -12,9 +20,25 @@ h1, h2{
     text-align: center;
 }
 .image{
-    width: 50%;
+    width: 10vh;
+    margin: 0 auto;
+}
+img{
+    width: 10vh;
+}
+button{
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.reste{
+    text-align: center;
 }
 
-.tout{
-    display: flex;
+
+
+
+
+
+@media screen  {
+    
 }

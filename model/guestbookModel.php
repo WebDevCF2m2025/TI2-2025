@@ -86,7 +86,7 @@ function addGuestbook(PDO $db,
         );
         # Exécution de la requête
        
-            $prepare->execute([$firstname,$lastname,$phone,$postcode,$message]);
+            $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
             return true;
         }catch (Exception $e){
             die($e->getMessage());
