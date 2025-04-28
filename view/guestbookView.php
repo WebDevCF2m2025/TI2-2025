@@ -28,7 +28,11 @@
         <input type="text" name="nom" id="nom" required>
     </div>
     <div>
-        <label for="postal">E-mail*</label>
+        <label for="email">E-mail*</label>
+        <input type="email" name="email" id="email" required>
+    </div>
+    <div>
+        <label for="postal">c/postal*</label>
         <input type="number" name="postal" id="postal" required>
     </div>
     <div> 
@@ -44,38 +48,52 @@
     </div>
 </form>
 
+<?php
+// si on a pas de message $nbMessage === 0
+if(empty($nbtotalMessage )):
+?>
+ 
+<div class="nomessage">
 <h3>Pas encore de message</h3>
-<!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
-<!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
-
-<!-- Pagination (BONUS) -->
-
-<!-- Liste des messages -->
-<ul>
+</div>
+<?php
+else:
+// le tableau n'est pas vide
+    ;
+    // on va ajouter une variable pour le 's' de message
+    $pluriel = $nbtotalMessage >1? "s" : "";
+?>
+ 
+<div class="messages">
+    <h3>Il y a <?=$nbtotalMessage ?> message<?=$pluriel?></h3>
+    <nav><?=$pagination?></nav>
+    <?php
+    foreach ($messages as $message):
+ 
+        ?>
+       <ul>
     <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
+        <p><strong><?=$message['firstname']?></strong></p>
+        <p><em><?=dateFR($message['datemessage'])?></em></p>
+        <p><?=nl2br($message['message'])?></p>
     </li>
     <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
+  
 </ul>
-etc ...
-<!-- Pagination (BONUS) -->
-<?php
-// À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
-?>
+        <?php
+        endforeach;
+     
+        ?>
+     
+    </div>
+    <?php
+    
+    endif;
+var_dump($insert, $_POST);
+    ?>
+
+
+
 
 <script src="js/validation.js"></script>
 </body>

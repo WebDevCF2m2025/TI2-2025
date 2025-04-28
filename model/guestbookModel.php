@@ -34,8 +34,8 @@ function addGuestbook(PDO $db,
     $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
     $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
     $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
-    $phone = preg_replace('/[^0-9]/', '', $phone);
-    $postcode = preg_replace('/[^0-9]/', '', $postcode);
+    //$phone = preg_replace('/[^0-9]/', '', $phone);
+    //$postcode = preg_replace('/[^0-9]/', '', $postcode);
     $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
  
     if(
@@ -52,7 +52,7 @@ function addGuestbook(PDO $db,
  
     // pas d'erreur détectée
     $prepare = $db->prepare("
-   INSERT INTO `ti2web2025` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
+   INSERT INTO `guestbook` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
     VALUES (?,?,?,?,?,?)
     ");
     try{
@@ -112,7 +112,7 @@ function getAllGuestbook(PDO $db): array
 function getNbTotalGuestbook(PDO $db): int
 {
     try{
-        $request = $db->query("SELECT COUNT(*) as nb FROM ti2web2025 ");
+        $request = $db->query("SELECT COUNT(*) as nb FROM guestbook ");
         $nb = $request->fetch()['nb'];
         $request->closeCursor();
         return $nb;
@@ -138,8 +138,8 @@ function getGuestbookPagination(PDO $con, int $offset, int $limit): array
 {
     // préparation de la requête
     $prepare = $con->prepare("
-        SELECT * FROM `ti2web2025`
-        ORDER BY `ti2web2025`.`datemessage` ASC
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` ASC
         LIMIT ?,?
         ");
     $prepare->bindParam(1,$offset,PDO::PARAM_INT);
@@ -164,7 +164,14 @@ function getGuestbookPagination(PDO $con, int $offset, int $limit): array
 
 
 
-
+ 
+function dateFR(string $datetime): string
+{
+    // temps unix en seconde de la date venant de la db
+    $stringtotime = strtotime($datetime);
+    // retour de la date au format
+    return date("d/m/Y \à H:m:s",$stringtotime);
+}
 
 
 

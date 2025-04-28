@@ -24,7 +24,7 @@ require_once "../model/guestbookModel.php";
 
  try{
     // nouvelle instance de PDO
-    $db = new PDO(DB_DSN, DB_LOGIN, DB_PWD ,
+    $con = new PDO(DB_DSN, DB_LOGIN, DB_PWD ,
         // tableau d'options
         [
             // par défaut les résultats sont en tableau associatif
@@ -51,6 +51,28 @@ require_once "../model/guestbookModel.php";
 
 // sinon, on affiche un message d'erreur
 
+
+if(isset(
+    $_POST['prenom'],
+    $_POST['nom'],
+    $_POST['email'],
+    $_POST['postal'],
+    $_POST['portable'],
+    $_POST['message']
+ 
+)) {
+ 
+
+   $insert = addGuestbook($con,
+       $_POST['prenom'],
+       $_POST['nom'],
+       $_POST['email'],
+       $_POST['postal'],
+       $_POST['portable'],
+       $_POST['message']  
+    );
+}
+
 /*
  * On récupère les messages du livre d'or
  */
@@ -63,14 +85,25 @@ require_once "../model/guestbookModel.php";
 
 // on vérifie sur quelle page on est (et que c'est un string qui contient que des numériques sans "." ni "-" => ctype_digit) en utilisant la variable $_GET et les constantes de config.php
 
+if(
+    isset($_GET[PAGINATION_GET]) // existence
+    &&ctype_digit($_GET[PAGINATION_GET]) // string ne contient que 0..9
+    &&!empty($_GET[PAGINATION_GET])// pas 0
+){
+    // conversion de string à int pour la pagination
+    $page = (int) $_GET[PAGINATION_GET];
+// nous sommes sur l'accueil OU la variable n'est pas conforme
+}else{
+    $page = 1;
+}
 # on compte le nombre total de messages (SQL)
-
+$nbtotalMessage = getNbTotalGuestbook($con);
 # on récupère la pagination
-
+$pagination = pagination($nbtotalMessage,PAGINATION_GET,$page,PAGINATION_NB);
 # pour obtenir le $offset pour les messages (calcul)
-
+$offset = ($page-1)*PAGINATION_NB;
 # on veut récupérer les messages de la page courante
-
+$messages = getGuestbookPagination($con,$offset,PAGINATION_NB);
 /**************************
  * Fin du Bonus Pagination
  **************************/
@@ -80,3 +113,4 @@ require_once "../model/guestbookModel.php";
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+$db = null;
