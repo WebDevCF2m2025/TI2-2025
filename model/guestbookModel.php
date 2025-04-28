@@ -53,60 +53,37 @@ function getAllGuestbook(PDO $d_b): array
     }
 }
 
-/**************************
- * Pour le Bonus Pagination
- **************************/
-
-// SELECTION du nombre total de messages
-/**
- * @param PDO $db
- * @return int
- * Fonction qui compte le nombre total de messages dans la table 'guestbook'
- */
-function getNbTotalGuestbook(PDO $db): int
+function getNbTotalGuestbook(PDO $Db): int
 {
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur,
-    // renvoyez le nombre total de messages
-    return 0;
-    // sinon, on fait un die de l'erreur
-}
-// SELECTION de messages dans le livre d'or par ordre de date croissante
-// en lien avec la pagination
-/**
- * @param PDO $db
- * @param int $offset
- * @param int $limit
- * @return array
- * Fonction qui récupère les messages du livre d'or par ordre de date croissante
- * venant de la base de données 'ti2web2025' et de la table 'guestbook'
- * en utilisant une requête préparée (injection SQL), n'affiche que les messages
- * de la page courante
- */
-function getGuestbookPagination(PDO $db, int $offset, int $limit): array
-{
-    // Requête préparée obligatoire !
-    // Le $offset et le $limit sont des entiers, il faut donc les passer
-    // en paramètres de la requête préparée en tant qu'entiers !
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
+    try{
+        $req = $Db->prepare("SELECT COUNT(*) as nb FROM guestbook ");
+        $nb = $req->fetch()['nb'];
+        $req->closeCursor();
+        return $nb;
+    }catch (Exception $e){
+        die($e->getMessage());
+    }
 }
 
-// FONCTION de pagination
-/**
- * @param int $nbtotalMessage
- * @param string $get
- * @param int $pageActu
- * @param int $perPage
- * @return string
- * Fonction qui génère le code HTML de la pagination
- * si le nombre de pages est supérieur à une.
- */
+function getGuestbookPagination(PDO $dB, int $offset, int $limit): array
+{
+    $prep = $dB->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` DESC
+        LIMIT ?,?
+        ");
+    $prep->bindParam(1, $offset, PDO::PARAM_INT);
+    $prep->bindParam(2, $limit, PDO::PARAM_INT);
+    try {
+        $prep->execute();
+        $result = $prep->fetchAll();
+        $prep->closeCursor();
+        return $result;
+    } catch (Exception $exx) {
+        die($exx->getMessage());
+    }
+}
+
 function pagination(int $nbtotalMessage, string $get = "page", int $pageActu = 1, int $perPage = 5): string
 {
     $sortie = "";
