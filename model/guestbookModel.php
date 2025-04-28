@@ -54,7 +54,7 @@ function addGuestbook(PDO $db,
     VALUES (?,?,?,?)
     ");
     try{
-        $prepare->execute([$name,$email,$text,$telephone]);
+        $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
         return true;
     }catch(Exception $e){
         die($e->getMessage());
@@ -77,8 +77,8 @@ function addGuestbook(PDO $db,
 function getAllGuestbookOrderByDateASC(PDO $db): array
 {
     $prepare = $db->prepare("
-    SELECT * FROM `messages`
-    ORDER BY `messages`.`created_at` ASC
+    SELECT * FROM `message`
+    ORDER BY `message`.`created_at` ASC
     ");
 // essai / erreur
 try{
@@ -125,7 +125,7 @@ function getNbTotalGuestbook(PDO $db): int
  * en utilisant une requête préparée (injection SQL), n'affiche que les messages
  * de la page courante
  */
-function getGuestbookPagination(PDO $db, int $offset, int $limit): array
+/*function getGuestbookPagination(PDO $db, int $offset, int $limit): array
 {
     // Requête préparée obligatoire !
     // Le $offset et le $limit sont des entiers, il faut donc les passer
@@ -137,6 +137,7 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
     return [];
     // sinon, on fait un die de l'erreur
 }
+    */
 
 // FONCTION de pagination
 /*

@@ -51,7 +51,7 @@ if(empty($messages)):
 // nous avons au moins un article
 else:
     // on peut compter le nombre d'articles
-    $nbMessage = count($messages);
+    $nbMessage = count($message);
     // ternaire pour ajouter un s à article
     // si on en a plus d'un
     $pluriel = $nbMessage>1? "s" : "";
@@ -76,7 +76,7 @@ else:
 endif;
 
 
-var_dump($_POST,$messages,$_GET);
+var_dump($_POST,$message,$_GET);
 ?>
 
 <!-- Pagination (BONUS) -->
@@ -84,9 +84,9 @@ var_dump($_POST,$messages,$_GET);
 <!-- Liste des messages -->
 <ul>
     <li>
-        <p><strong>firstname lastname</strong></p>
+        <p><strong><?=$firstname?><?=$lastname?> lastname</strong></p>
         <p><em>datemessage</em></p>
-        <p>message</p>
+        <p><</p>
     </li>
     <!-- Autres messages -->
     <li>
