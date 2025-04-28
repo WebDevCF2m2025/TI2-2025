@@ -88,8 +88,7 @@ else:
     <!-- Liste des messages -->
     <ul>
         <li>
-            <p><strong><?=$message['firstname'], $message['lastname']?></strong> à écrit ce message</p>
-            <p>le <em><?=dateFR($message['datemessage'])?></em></p>
+            <p><strong><?=$message['firstname'] . ' ' . $message['lastname']?></strong> - a écrit le message le <em><?=dateFR($message['datemessage'])?></em></p>
             <p><?=$message['message']?></p>
         </li>
     </ul>
