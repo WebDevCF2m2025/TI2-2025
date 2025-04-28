@@ -27,35 +27,30 @@ function addGuestbook(
     INSERT INTO `guestbook` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
     VALUES (?,?,?,?,?,?)
     ");
-    try{
-        $prepare->execute([$firstname,$lastname,$usermail,$phone, $postcode, $message]);
+    try {
+        $prepare->execute([$firstname, $lastname, $usermail, $phone, $postcode, $message]);
         return true;
-    }catch(Exception $except){
+    } catch (Exception $except) {
         die($except->getMessage());
     }
-
 }
 
-/***************************
- * Sans le Bonus Pagination
- **************************/
-
-// SELECTION de messages dans le livre d'or par ordre de date croissante
-/**
- * @param PDO $db
- * @return array
- * Fonction qui récupère tous les messages du livre d'or par ordre de date croissante
- * venant de la base de données 'ti2web2025' et de la table 'guestbook'
- * Si pas de message, renvoie un tableau vide
- */
-function getAllGuestbook(PDO $db): array
+function getAllGuestbook(PDO $d_b): array
 {
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
+    $prepa = $d_b->prepare("
+    SELECT * FROM `guestbook`
+    ORDER BY `guestbook`.`datemessage` DESC
+    ");
+    try {
+
+        $prepa->execute();
+
+        $result = $prepa->fetchAll();
+        $prepa->closeCursor();
+        return $result;
+    } catch (Exception $exc) {
+        die($exc->getMessage());
+    }
 }
 
 /**************************
