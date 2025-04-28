@@ -62,6 +62,9 @@ if(isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'],$_POST['pho
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
+$guestbook = getAllGuestbook($connexion);
+$count = count($guestbook);
+
 /*********************
  * Ou Bonus Pagination
  *********************/

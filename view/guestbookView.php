@@ -43,13 +43,23 @@
         <h3 style="text-align: center;"><?=$notSaved?></h3>
     <?php endif;?>
 
-<h2>Ici le formulaire</h2>
-<!-- Si pas de message -->
-<h3>Pas encore de message</h3>
-<!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
-<!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
+
+
+
+    <!-- Si pas de message -->
+    <?php if ($count == 0):?>
+        <h3>Pas encore de message</h3>
+    <?php else : ?>
+        <!-- Si 1 message et Si plusieurs messages -->
+        <h3 style="text-align: center;"><?= $count>1?"Il y a " . $count . " messages": "Il y a " .  $count . " message"; ?></h3>
+        <?php foreach($guestbook as $message):?>
+            <p style="margin: 0 20%; margin-top: 20px; font-size: 12px; text-align: right;">Enregistré le : <?= $message['datemessage'];?></p>
+            <h4 style="margin: 0 20%;"><?= $message['firstname'];?></h4>
+            <h4 style="margin: 0 20%;"><?= $message['lastname'];?></h4>
+            <p style="margin: 0 20%;"><?= $message['message'];?></p>
+            <hr style="margin: auto; width: 80%; margin-top: 20px; box-shadow: 0px 1px 5px 0px gray;">
+        <?php endforeach; ?>
+    <?php endif; ?>
 
 <!-- Pagination (BONUS) -->
 
