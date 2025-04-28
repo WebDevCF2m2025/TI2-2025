@@ -20,7 +20,7 @@
  * Une requête préparée est utilisée pour éviter les injections SQL
  * Les données sont échappées pour éviter les injections XSS (protection backend)
  */
-$erreur;
+
  
 function addGuestbook(PDO $db,
                     string $firstname,
@@ -69,7 +69,7 @@ function addGuestbook(PDO $db,
 
 
     $prepare = $db->prepare("
-INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`) VALUES (?,?,?)
+INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`) VALUES (?,?,?,?,?,?)
     ");
     try{
         $prepare->execute([$firstnameVerify, $lastnameVerify, $usermail , $phone, $postcode, $message]);
@@ -122,7 +122,7 @@ try{
     // erreur de requête SQL
     die($e->getMessage());
 }
-
+   
 }
     // try catch
     // si la requête a réussi,

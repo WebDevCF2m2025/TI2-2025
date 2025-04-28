@@ -1,0 +1,48 @@
+body{
+    background-color: #c2c2c2;
+
+}
+
+.err{
+    color: red;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    width: 80%;
+
+}
+
+.container h2{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+}
+
+.formulaire{
+    display: grid;    
+    grid-row-start: 2;
+    grid-column-start: 2;
+    grid-template-columns: 1fr 4fr;
+    gap:20px;
+    background-color: rgb(107, 107, 107);
+    row-gap: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+label{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    text-align: end;
+    color: white;
+}
+
+input, textarea{
+    grid-column-start: 2;
+    grid-column-end: -1;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(43, 43, 43);
+}

@@ -47,7 +47,6 @@ if (isset($_POST["firstname"], $_POST["lastname"], $_POST["usermail"], $_POST["p
     $lastname = trim($lastname);
 
     $usermail = filter_var($_POST['usermail'], FILTER_VALIDATE_EMAIL);
-
  
     $phone = strip_tags($_POST['phone']);
     $phone = htmlspecialchars($phone, ENT_QUOTES);
@@ -69,7 +68,13 @@ if (isset($_POST["firstname"], $_POST["lastname"], $_POST["usermail"], $_POST["p
     && !empty($message) 
     && !empty($phone) 
     && !empty($postcode)) {
-        $insert = addGuestbook($db, $firstname, $lastname, $usermail, $phone,  $postcode,  $message);
+        $insert = addGuestbook($db, 
+        $firstname, 
+        $lastname, 
+        $usermail, 
+        $phone,  
+        $postcode, 
+        $message);
     } else {
         $erreur = "Erreur dans le formulaire !";}
 }
