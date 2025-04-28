@@ -28,8 +28,17 @@ function addGuestbook(PDO $db,
                     string $postcode,
                     string $message
 ): bool
-{
+
     // traitement des données backend (SECURITE)
+    if(
+        empty($firstname) || strlen($firstname) > 100 ||
+        empty($lastname) || strlen($lastname) > 100 ||
+        empty($usermail) || strlen($usermail) > 200 ||
+        empty($phone) || strlen($phone) > 20 ||
+        empty($postcode) || strlen($postcode) > 4 ||
+        empty($message) || strlen($message) > 500 ||
+
+    ){
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
     return false;
@@ -54,8 +63,8 @@ function addGuestbook(PDO $db,
  * venant de la base de données 'ti2web2025' et de la table 'guestbook'
  * Si pas de message, renvoie un tableau vide
  */
-function getAllGuestbookOrderByDateASC(PDO $db): array
-
+function getAllGuestbook(PDO $db): array
+{}
     
     // try catch
     // si la requête a réussi,
