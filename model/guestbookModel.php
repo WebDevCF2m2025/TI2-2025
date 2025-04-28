@@ -28,7 +28,7 @@ function addGuestbook(
     string $phone,
     string $postcode,
     string $message
-): bool {
+): bool | string {
     // traitement des données backend (SECURITE)
     $insertfirstName = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
     $insertlastName = trim(htmlspecialchars(strip_tags($lastname), ENT_QUOTES));
@@ -54,10 +54,10 @@ function addGuestbook(
     if (empty($messagesInsert)) return false;
     if (strlen($messagesInsert) >= 500) return false;
 
-    $prepare = $db->prepare("INSERT INTO `guestbook`(`firstname`,`lastname`,`phone`,`postcode`,`message`) VALUES (?,?,?,?,?);");
+    $prepare = $db->prepare("INSERT INTO `guestbook`(`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`) VALUES (?,?,?,?,?,?);");
 
     try {
-        $prepare->execute([$insertfirstName,$insertlastName, $insertPhone,$postcodeInsert, $messageInsert]);
+        $prepare->execute([$insertfirstName, $insertlastName, $usermailInsert, $insertPhone, $postcodeInsert, $messageInsert]);
         return true;
     } catch (Exception $e) {
         die($e->getMessage());

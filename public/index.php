@@ -43,16 +43,16 @@ try {
 /*
  * Si le formulaire a été soumis
  */
-if(isset($_POST['prenom'],$_POST['nom'],$_POST['telephone'],$_POST['email'],$_POST['postal'],$_POST['message'])){
-    $insert = addGuestbook($db,$_POST['prenom'],$_POST['nom'],$_POST['telephone'],$_POST['email'],$_POST['postal'],$_POST['message']);
+if(isset($_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['telephone'],$_POST['postal'],$_POST['message'])){
+    $insert = addGuestbook($db,$_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['telephone'],$_POST['postal'],$_POST['message']);
     if($insert===true){
         header("Location: ./");
         exit();
     }else{
         echo "ca n'a pas fonctionné";
-        exit();
     }
 }
+
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
 // si l'insertion a réussi
@@ -93,4 +93,4 @@ include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
 
-$db==null;
+$db=null;
