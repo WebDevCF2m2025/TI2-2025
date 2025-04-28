@@ -1,5 +1,4 @@
 <?php
-# view/guestbookView.php
 ?>
 <!doctype html>
 <html lang="fr">
