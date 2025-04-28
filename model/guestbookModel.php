@@ -27,10 +27,34 @@ function addGuestbook(PDO $db,
                     string $phone,
                     string $postcode,
                     string $message
-): bool
+): bool|string
 {
-    // traitement des données backend (SECURITE)
+    $erreur = "";
+    $firstnameVerify = strip_tags($firstname); # on retire les tags
+    if(empty($firstnameVerify)){
+        $erreur.="Votre nom est incorrect.<br>";
+    }elseif(strlen($firstnameVerify)>100){
+        $erreur.="Votre nom est trop long.<br>";
+    }
 
+    $lastnameVerify = strip_tags($lastname); 
+    $firstnameVerify = htmlspecialchars($firstnameVerify,ENT_QUOTES);
+    $lastnameVerify = trim($lastnameVerify); 
+    if(empty($lastnameVerify)){
+        $erreur.="Votre nom est incorrect.<br>";
+    }elseif(strlen($lastnameVerify)>100){
+        $erreur.="Votre nom est trop long.<br>";
+    }
+
+    $email = filter_var($usermail,FILTER_VALIDATE_EMAIL);
+    if($email===false){
+        $erreur .= "Email incorrect.<br>";
+    }
+
+    $text = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+    if(empty($text)||strlen($text)>300){
+        $erreur .= "Message incorrect<br>";
+    }
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
     return false;
     // requête préparée obligatoire !

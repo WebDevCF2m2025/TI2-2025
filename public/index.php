@@ -37,7 +37,32 @@ require_once "../model/guestbookModel.php";
 /*
  * Si le formulaire a été soumis
  */
+if (isset($_POST["firstname"],$_POST["lastname"], $_POST["usermail"], $_POST["phone"], $_POST["postcode"], $_POST["message"])) {
 
+    $firstname = strip_tags($_POST['firstname']);
+    $firstname = htmlspecialchars($firstname, ENT_QUOTES);
+    $firstname = trim($firstname);
+
+    $lastname = strip_tags($_POST['lastname']);
+    $lastname = htmlspecialchars($lastname, ENT_QUOTES);
+    $lastname = trim($lastname);
+
+
+
+    $usermail = filter_var($_POST['usermail'], FILTER_VALIDATE_EMAIL);
+
+    $message = strip_tags($_POST['message']);
+    $message = htmlspecialchars($message, ENT_QUOTES);
+    $message = trim($message);
+
+
+    //vérivication ultime avant d'appeler l'insertion
+    if (!empty($name) && $usermail !== false && !empty($message)) {
+        $insert = addGuestbook($db, $firstname, $lastname, $usermail, $phone, $postcode, $message);
+    } else {
+        $error = "Erreur dans le formulaire !";
+    }
+}
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
 // si l'insertion a réussi
