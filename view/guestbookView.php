@@ -21,76 +21,79 @@
 
     <main>
         <img src="img/sign-up-amico.png" alt="img-form" />
-        <form  action="" method="post">
-            <div class="label prenom">
-                <label for="nom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom" required>
+        <form method="post" action="" class="form">
+            <div class="champ">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom">
+                <div class="errorprenom"></div>
             </div>
-
-            <div class="label nom">
-                <label for="prenom">Nom :</label>
-                <input type="text" id="nom" name="nom" required>
+            <div class="champ">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom">
+                <div class="errornom"></div>
             </div>
-
-            <div class="label tel">
-                <label for="telephone">Portable :</label>
-                <input type="num" id="telephone" name="telephone" required>
+            <div class="champ">
+                <label for="mail">Email :</label>
+                <input type="email" id="mail" name="email">
+                <div class="erroremail"></div>
             </div>
-
-            <div class="label email">
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
+            <div class="champ">
+                <label for="tel">Telephone :</label>
+                <input type="num" id="tel" name="telephone">
+                <div class="errortelephone"></div>
             </div>
-
-            <div class="label postal">
-                <label for="email">Code postal :</label>
-                <input type="num" id="postal" name="postal" required>
+            <div class="champ">
+                <label for="code_postal">Code Postal :</label>
+                <input type="num" id="postal" name="postal">
+                <div class="errorpostal"></div>
             </div>
-
-            <div class="label message">
-                <label for="texte">Message :</label>
-                <textarea id="texte" name="message" rows="4" required></textarea>
+            <div class="champ">
+                <label for="message">Message :</label>
+                <textarea type="text" id="message" name="message" rows="5"></textarea>
             </div>
-            <div class="label button">
-                <button type="submit">Envoyer</button>
-            </div>
+            <button type="submit" id="button">Envoyer</button>
         </form>
-    </main>
+    </main
+        <?php
+        if (empty($message)):
+        ?>
+        <div class="nomessage">
     <!-- Si pas de message -->
     <h3>Pas encore de message</h3>
+    </div>
+<?php
+        else:
+            $nbmessage = count($message);
+            ($nbmessage > 1) ? $pluriel = "s" : $pluriel = "";
+?>
     <!-- Si 1 message -->
-    <h3>Il y a 1 message</h3>
+    <h3>Il y a <?= $nbmessage ?> message<?= $pluriel ?></h3>
     <!-- Si plusieurs messages -->
-    <h3>Il y a X messages</h3>
-
-    <!-- Pagination (BONUS) -->
-
-    <!-- Liste des messages -->
-    <ul>
-        <li>
-            <p><strong>firstname lastname</strong></p>
-            <p><em>datemessage</em></p>
-            <p>message</p>
-        </li>
-        <!-- Autres messages -->
-        <li>
-            <p><strong>firstname lastname</strong></p>
-            <p><em>datemessage</em></p>
-            <p>message</p>
-        </li>
-    </ul>
-    etc ...
-    <!-- Pagination (BONUS) -->
     <?php
-    // À commenter quand on a fini de tester
-    echo "<h3>Nos var_dump() pour le débugage</h3>";
-    echo '<p>$_POST</p>';
-    var_dump($_POST);
-    echo '<p>$_GET</p>';
-    var_dump($_GET);
+            foreach ($message as $messages):
     ?>
+        <!-- Pagination (BONUS) -->
 
-    <script src="js/validation.js"></script>
+        <!-- Liste des messages -->
+        <div class="message">
+            <div class="messagecontenu">
+                <p><strong><?= $messages['firstname'] ?> <?= $messages['lastname'] ?></strong></p>
+                <p> - a écrit le message le <span><em><?= $messages['datemessage'] ?> : </em></span></p>
+                <div><?= $messages['message'] ?></div>
+            </div>
+        </div>
+    <?php
+            endforeach;
+    ?>
+<?php
+        endif;
+?>
+<!-- Pagination (BONUS) -->
+<?php
+// À commenter quand on a fini de tester
+?>
+
+<script src="js/validation.js"></script>
 </body>
 
 </html>

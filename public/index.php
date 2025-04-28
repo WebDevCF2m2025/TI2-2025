@@ -49,7 +49,7 @@ if(isset($_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['telephone'],$_PO
         header("Location: ./");
         exit();
     }else{
-        echo "ca n'a pas fonctionné";
+       $error = $insert;
     }
 }
 

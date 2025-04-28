@@ -37,22 +37,22 @@ function addGuestbook(
     $postcodeInsert = trim(htmlspecialchars(strip_tags($postcode), ENT_QUOTES));
     $messageInsert = trim(htmlspecialchars(strip_tags($message), ENT_QUOTES));
 
-
-    if (empty($inserfirstName)) return false;
+    if (empty($insertfirstName)) return false;
     if (strlen($insertfirstName) >= 100) return false;
-
-    if (empty($inserlastName)) return false;
+    
+    if (empty($insertlastName)) return false;
     if (strlen($insertlastName) >= 100) return false;
-
-    if ($usermailInsert === false && $usermailInsert >= 200) return false;
-
-    if (strlen($phone) >= 20) return false;
-
+    
+    if ($usermailInsert === false || strlen($usermailInsert) >= 200) return false;
+    
+    if (strlen($insertPhone) >= 20) return false;
+    
     if (empty($postcodeInsert)) return false;
-    if ($postcodeInsert == 4) return false;
+    if (strlen($postcodeInsert) != 4) return false;
+    
+    if (empty($messageInsert)) return false;
+    if (strlen($messageInsert) >= 500) return false;
 
-    if (empty($messagesInsert)) return false;
-    if (strlen($messagesInsert) >= 500) return false;
 
     $prepare = $db->prepare("INSERT INTO `guestbook`(`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`) VALUES (?,?,?,?,?,?);");
 
