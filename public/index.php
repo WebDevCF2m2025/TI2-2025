@@ -1,7 +1,7 @@
 <?php
 # public/index.php
 
-
+echo "bonjour";
 /*
  * Front Controller de la gestion du livre d'or
  */
