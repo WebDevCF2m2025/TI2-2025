@@ -156,36 +156,96 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  * Fonction qui génère le code HTML de la pagination
  * si le nombre de pages est supérieur à une.
  */
-function pagination(int $nbtotalMessage, string $get = "page", int $pageActu = 1, int $perPage = 5): string
+function getNbTotalMessage(PDO $con): int
 {
+    // on compte le nombre de messages total
+    $query = $con->query("SELECT COUNT(*) as nb FROM `guestbook` ");
+    # bonne pratique
+    $result = $query->fetch()['nb'];
+    $query->closeCursor();
+    // on renvoie l'entier stocké dans nb
+    return $result;
+}
+ 
+function getMessagePagination(PDO $con, int $offset, int $limit): array
+{
+    $prepare = $con->prepare(
+        "SELECT * FROM `guestbook`
+        ORDER BY `datemessage` DESC
+        LIMIT ?,?"
+    );
+    try{
+        $prepare->bindParam(1, $offset, PDO::PARAM_INT);
+        $prepare->bindParam(2, $limit, PDO::PARAM_INT);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $prepare->closeCursor();
+        return $result;
+ 
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
+}
+ 
+function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
+{
+ 
+    // variable de sortie
     $sortie = "";
+ 
+    // si pas de page nécessaire
     if ($nbtotalMessage === 0) return "";
+ 
+    // nombre de pages, division du total des messages mis à l'entier supérieur
     $nbPages = ceil($nbtotalMessage / $perPage);
+ 
+    // si une seule page, pas de lien à afficher
     if ($nbPages == 1) return "";
+ 
+    // nous avons plus d'une page
     $sortie .= "<p>";
+ 
+ 
+    // tant qu'on a des pages
     for ($i = 1; $i <= $nbPages; $i++) {
+        // si on est au premier tour de boucle
         if ($i === 1) {
+            // si on est sur la première page
             if ($pageActu === 1) {
+                // pas de lien
                 $sortie .= "<< < 1 |";
+                // si nous sommes sur la page 2
             } elseif ($pageActu === 2) {
+                // tous les liens vont vers la page 1
                 $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
+                // si nous sommes sur d'autres pages, le retour va vers la page précédente
             } else {
                 $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
             }
+            // nous ne sommes pas sur le premier ni dernier tour de boucle
         } elseif ($i < $nbPages) {
+            // si nous sommes sur la page actuelle
             if ($i === $pageActu) {
+                // pas de lien
                 $sortie .= "  $i |";
             } else {
+                // si nous ne sommes pas sur la page actuelle
                 $sortie .= "  <a href='?$get=$i'>$i</a> |";
             }
+            // si nous sommes sur le dernier tour de boucle
         } else {
+            // si nous sommes sur la dernière page
             if ($pageActu >= $nbPages) {
+                // pas de lien
                 $sortie .= "  $nbPages > >>";
+                // si nous ne sommes pas sur la dernière page
             } else {
+                // tous les liens vont vers la dernière page
                 $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
             }
         }
     }
-    $sortie .= "</p>";
-    return $sortie;
-}
+        $sortie .= "</p>";
+        return $sortie;
+ 
+    }

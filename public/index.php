@@ -43,13 +43,13 @@ try {
 /*
  * Si le formulaire a été soumis
  */
-if(isset($_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['telephone'],$_POST['postal'],$_POST['message'])){
-    $insert = addGuestbook($db,$_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['telephone'],$_POST['postal'],$_POST['message']);
-    if($insert===true){
+if (isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['telephone'], $_POST['postal'], $_POST['message'])) {
+    $insert = addGuestbook($db, $_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['telephone'], $_POST['postal'], $_POST['message']);
+    if ($insert === true) {
         header("Location: ./");
         exit();
-    }else{
-       $error = $insert;
+    } else {
+        $error = $insert;
     }
 }
 
@@ -65,13 +65,30 @@ if(isset($_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['telephone'],$_PO
  * On récupère les messages du livre d'or
  */
 
- $message = getAllGuestbook($db);
+//  $message = getAllGuestbook($db);
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
 /*********************
  * Ou Bonus Pagination
  *********************/
+if (isset($_GET[PAGINATION_GET]) && ctype_digit($_GET[PAGINATION_GET])) {
+    // conversion de string vers int
+    $page = (int) $_GET[PAGINATION_GET];
+} else {
+    $page = 1;
+}
+
+# on compte le nombre total de messages
+$nbTotMessage = getNbTotalMessage($db);
+
+# on récupère la pagination
+$pagination = pagination($nbTotMessage, PAGINATION_GET, $page, PAGINATION_NB);
+
+# pour obtenir le $offset pour les messages
+$offset = ($page - 1) * PAGINATION_NB;
+
+$message = getMessagePagination($db, $offset, PAGINATION_NB);
 
 // on vérifie sur quelle page on est (et que c'est un string qui contient que des numériques sans "." ni "-" => ctype_digit) en utilisant la variable $_GET et les constantes de config.php
 
@@ -93,4 +110,4 @@ include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
 
-$db=null;
+$db = null;

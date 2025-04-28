@@ -20,7 +20,9 @@
     <h2>Ici le formulaire</h2>
 
     <main>
-        <img src="img/sign-up-amico.png" alt="img-form" />
+        <div class="img">
+            <img src="img/sign-up-amico.png" alt="img-form" id="image"/>
+        </div>
         <form method="post" action="" class="form">
             <div class="champ">
                 <label for="prenom">Prénom :</label>
@@ -30,7 +32,7 @@
             <div class="champ">
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom">
-            </div>                
+            </div>
             <div class="errornom show"></div>
             <div class="champ">
                 <label for="mail">Email :</label>
@@ -40,13 +42,13 @@
             <div class="champ">
                 <label for="tel">Telephone :</label>
                 <input type="num" id="tel" name="telephone">
-            </div>                
+            </div>
             <div class="errortelephone show"></div>
             <div class="champ">
                 <label for="code_postal">Code Postal :</label>
                 <input type="num" id="postal" name="postal">
             </div>
-            <div class="errorpostal show"></div>           
+            <div class="errorpostal show"></div>
             <div class="champ">
                 <label for="message">Message :</label>
                 <textarea type="text" id="message" name="message" rows="5"></textarea>
@@ -70,7 +72,7 @@
     <h3>Il y a <?= $nbmessage ?> message<?= $pluriel ?></h3>
     <!-- Si plusieurs messages -->
     <?php
-            foreach ($message as $messages):
+    foreach ($message as $messages):
     ?>
         <!-- Pagination (BONUS) -->
 
@@ -83,16 +85,17 @@
             </div>
         </div>
     <?php
-            endforeach;
+    endforeach;
     ?>
 <?php
         endif;
 ?>
 <!-- Pagination (BONUS) -->
-<?php
-// À commenter quand on a fini de tester
-?>
-
+<div class="pagination">
+    <?php
+    echo $pagination;
+    ?>
+</div>
 <script src="js/validation.js"></script>
 </body>
 
