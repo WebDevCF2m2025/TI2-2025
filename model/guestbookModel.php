@@ -55,8 +55,9 @@ function getAllGuestbook(PDO $d_b): array
 
 function getNbTotalGuestbook(PDO $Db): int
 {
+    $req = $Db->prepare("SELECT COUNT(*) as nb FROM guestbook ");
     try{
-        $req = $Db->prepare("SELECT COUNT(*) as nb FROM guestbook ");
+        $req->execute();
         $nb = $req->fetch()['nb'];
         $req->closeCursor();
         return $nb;
