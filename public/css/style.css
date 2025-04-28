@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body : toute la page occupe toute la fenêtre */
+
+body {
+    height: 100vh; /* Hauteur de la fenêtre */
+    display: grid;
+    place-items: center; /* Centrer horizontalement et verticalement */
+    font-family: Arial, sans-serif; /* Choix de police pour plus de lisibilité */
+}
+
+.monForm {
+    display: grid;
+    justify-items: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    width: 100%;
+    max-width: 500px; /* Largeur maximale du formulaire */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Style des champs de saisie */
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Style spécifique pour la zone de texte (textarea) */
+textarea {
+    resize: vertical; /* Permet de redimensionner la zone de texte verticalement */
+}
+
+/* Style du bouton */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol du bouton */
+button:hover {
+    background-color: #0056b3;
+}
