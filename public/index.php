@@ -77,7 +77,7 @@ if(isset(
 if(
   isset($_GET[PAGINATION_GET])
   &&ctype_digit($_GET[PAGINATION_GET])
-  &&!empty($_GET([PAGINATION_GET]))
+  &&!empty($_GET[PAGINATION_GET])
 ){
   $page = (int) $_GET[PAGINATION_GET];
 } else {

@@ -35,35 +35,50 @@ if(isset($insert)){
 <form action=""  method="post" id="form">
 <img src="img/sign-up-amico.png" id="sign-img">
   <h2>Laissez un message</h2>
-  <label for="firstname">Prénom</label>
-  <input type="text" name="firstname" id="firstname">
-  <label for="lastname">Nom</label>
-  <input type="text" name="lastname" id="lastname">
-  <label for="usermail">E-mail</label>
-  <input type="text" name="usermail" id="usermail">
-  <label for="phone">Phone</label>
-  <input type="text" name="phone" id="phone">
-  <label for="postcode">c/postalcode</label>
-  <input type="text" name="postcode" id="postcode">
-  <label for="message">Message</label>
-  <input type="text" name="message" id="message">
-  <button type="submit">Envoyer</button>
-<!-- Si pas de message -->
-  <?php
-  if(empty($nbGuessBook)):
-?>
-<h3>Pas encore de message</h3>
-  <?php else:
-    $pluriel = $nbGuessBook>1? "s":"";
-  ?>
-<!-- Si 1 message -->
+  <div class="input-control">
+    <label for="firstname">Prénom</label>
+    <input type="text" name="firstname" id="firstname">
+    <div class="error"></div>
+  </div>
 
-<h3>Il y a <?= $nbGuessBook ?> message<?=$pluriel ?></h3>
-<!-- Si plusieurs messages -->
-  <?php
-  endif;
-  ?>
-<h3>Il y a  <?= $nbGuessBook ?>  messages</h3>
+  <div class="input-control ">
+    <label for="lastname">Nom</label>
+    <input type="text" name="lastname" id="lastname">
+    <div class="error"></div>
+  </div>
+
+  <div class="input-control">
+    <label for="usermail">E-mail</label>
+    <input type="text" name="usermail" id="usermail">
+    <div class="error"></div>
+  </div>
+
+  <div class="input-control">
+    <label for="phone">Phone</label>
+    <input type="text" name="phone" id="phone" value="32">
+    <div class="error"></div>
+  </div>
+
+  <div class="input-control">
+    <label for="postcode">c/postalcode</label>
+    <input type="text" name="postcode" id="postcode">
+    <div class="error"></div>
+  </div>
+
+    <div class="input-control">
+      <label for="message">Message</label>
+      <input type="text" name="message" id="message">
+      <div class="error"></div>
+    </div>
+    <div>2</div>
+
+  <button type="submit">Envoyer</button>
+</form>
+<!-- Si pas de message -->
+<div class="smart-container">
+
+
+
 
 <!-- Pagination (BONUS) -->
   <h3><?= $pagination ?></h3>
@@ -77,15 +92,30 @@ if(isset($insert)){
     </li>
 </ul>
   <?php endforeach; ?>
-etc ...
-<!-- Pagination (BONUS) -->
+</div>
+
+<?php
+if(empty($nbGuessBook)):
+  ?>
+  <h3>Pas encore de message</h3>
+<?php else:
+  $pluriel = $nbGuessBook>1? "s":"";
+  ?>
+  <!-- Si 1 message -->
+  <h3>Le<?=$pluriel ?> message<?=$pluriel ?> précédent<?=$pluriel ?></h3>
+  <h3>Il y a <?= $nbGuessBook ?> message<?=$pluriel ?></h3>
+  <!-- Si plusieurs messages -->
+<?php
+endif;
+?>
 <?php
 // À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
+//echo "<h3>Nos var_dump() pour le débugage</h3>";
+//echo '<p>$_POST</p>';
+//var_dump($_POST);
+//echo '<p>$_GET</p>';
+//var_dump($_GET);
+// var_dump($nbGuessBook);
 
 ?>
 

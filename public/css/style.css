@@ -4,6 +4,7 @@
 
 body {
   background-color: lightslategrey;
+  font-family: sans-serif;
 }
 
 #form {
@@ -32,6 +33,7 @@ body {
 .input-control {
   display: flex;
   flex-direction: column;
+
 }
 
 .input-control input {
@@ -60,4 +62,8 @@ body {
 
 #sign-img {
   height: 250px;
+}
+
+.smart-container {
+display: none;
 }
