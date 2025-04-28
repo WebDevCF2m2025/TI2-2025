@@ -20,34 +20,49 @@
         <img class="signUp" src="../public/img/sign-up-amico.png" alt="Image tablette">
         <p>Laissez nous un messages</p>
         <form action="" method="post" id="form">
-            <label for="prenom">Prénom</label>
-            <input id="name-input" type="text" name="prenom">
-            <span id="spanName"></span>
+            <div>
+                <label for="prenom">Prénom</label>
+                <input id="name-input" type="text" name="prenom">
+                <span id="spanName"></span>
+            </div>
 
-            <label for="nom">Nom</label>
-            <input id="surname-input" type="text" name="nom">
-            <span id="spanSurname"></span>
+            <div>
+                <label for="nom">Nom</label>
+                <input id="surname-input" type="text" name="nom">
+                <span id="spanSurname"></span>
+            </div>
 
-            <label for="email">Email</label>
-            <input id="email-input" type="email" name="email">
-            <span id="spanEmail"></span>
+            <div>
+                <label for="email">Email</label>
+                <input id="email-input" type="email" name="email">
+                <span id="spanEmail"></span>
+            </div>
 
-            <label for="postal">Code Postal</label>
-            <input id="postal-input" type="number" name="postal">
-            <span id="spanPostal"></span>
+            <div>
 
-            <label for="phone">Telephone</label>
-            <input id="phone-input" type="number" name="phone">
-            <span id="spanPhone"></span>
+                <label for="postal">Postal</label>
+                <input id="postal-input" type="number" name="postal">
+                <span id="spanPostal"></span>
+            </div>
 
-            <label for="message">Message</label>
-            <textarea id="message-input" name="message" id="message"></textarea>
-            <span id="spanMessage"></span>
+            <div>
+                <label for="phone">Telephone</label>
+                <input id="phone-input" type="number" name="phone">
+                <span id="spanPhone"></span>
+            </div>
 
-            <button type="submit">Envoyez</button>
-            <span id="spanGeneral"></span>
+            <div>
+                <label for="message">Message</label>
+                <textarea id="message-input" name="message" id="message"></textarea>
+                <span id="spanMessage"></span>
+            </div>
+
+            <div>
+                <button type="submit">Envoyez</button>
+                <span id="spanGeneral"></span>
+            </div>
         </form>
-
+        <h2>Les précedents messages</h2>
         <?php if ($count === 0) : ?>
             <h3>Pas encore de message</h3>
         <?php else: ?>
@@ -78,8 +93,8 @@
             <?php endif; ?>
         <?php endif; ?>
 
-        <?= $pagination ?>
     </main>
+    <?= $pagination ?>
 
 
     <script src="../public/js/validation.js"></script>
