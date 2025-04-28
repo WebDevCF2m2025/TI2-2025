@@ -79,6 +79,25 @@ $count = count($guestbook);
 
 # on veut récupérer les messages de la page courante
 
+
+if(
+    isset($_GET[PAGINATION_GET]) 
+    &&ctype_digit($_GET[PAGINATION_GET]) 
+    &&!empty($_GET[PAGINATION_GET])
+){
+
+    $page = (int) $_GET[PAGINATION_GET];
+}else{
+    $page = 1;
+}
+
+
+$nbMessage = countMessages($connexion);
+$pagination = pagination($nbMessage,PAGINATION_GET,$page,PAGINATION_NB);
+$offset = ($page-1)*PAGINATION_NB;
+$messages = getGuestbookPagination($connexion,$offset,PAGINATION_NB);
+
+
 /**************************
  * Fin du Bonus Pagination
  **************************/

@@ -162,7 +162,7 @@ function getNbTotalGuestbook(PDO $db): int
     // renvoyez le nombre total de messages
     // sinon, on fait un die de l'erreur
     try{
-        $request = $db->query("SELECT COUNT(*) as nb FROM messages ");
+        $request = $db->query("SELECT COUNT(*) as nb FROM guestbook ");
         $nb = $request->fetch()['nb'];
         $request->closeCursor();
         return $nb;
@@ -195,11 +195,7 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
     // sinon, on fait un die de l'erreur
 
     
-    $prepare = $con->prepare("
-        SELECT * FROM `messages`
-        ORDER BY `messages`.`created_at` DESC
-        LIMIT ?,?
-        ");
+    $prepare = $con->prepare("SELECT * FROM guestbook ORDER BY guestbook . datemessage DESC LIMIT ?,?");
     $prepare->bindParam(1,$offset,PDO::PARAM_INT);
     $prepare->bindParam(2,$limit,PDO::PARAM_INT);
 
