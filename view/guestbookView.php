@@ -29,7 +29,7 @@
         }
         ?>
         <div class="b">
-            <form action="" method="POST">
+            <form id="formu" action="" method="POST">
                 <div>Laissez-nous un message</div>
                 <div class="merci"><?= $thanks ?></div>
                 <divclass="erreur"><?= $error ?>
@@ -49,12 +49,6 @@
         <input type="submit" value="Envoyer">
         </form>
     </div>
-    <!-- Si pas de message -->
-    <div class="c">Pas encore de message</div>
-    <!-- Si 1 message -->
-    <div class="d">Il y a 1 message</div>
-    <!-- Si plusieurs messages -->
-    <div class="e">Il y a X messages</div>
 
     <!-- Pagination (BONUS) -->
 
@@ -108,7 +102,7 @@
     var_dump($_GET);
     ?>
 
-    <script src="js/validation.js"></script>
+    <script src="../public/js/validation.js"></script>
 </body>
 
 </html>
