@@ -11,7 +11,6 @@ const text = document.getElementById('message')
 
 
 form.addEventListener("submit", (e) => {
-  e.preventDefault();
 
   validateInputs();
 });
@@ -59,51 +58,56 @@ const validateInputs = () => {
   const phoneValue = phone.value.trim()
   const textValue = text.value.trim()
   const postalValue = postcode.value.trim()
+  let isValid = 1
 
   if (usernameValue === "") {
-    setError(username, "Please provide a username");
+    setError(username, "Please provide a username"); isValid--;
   } else {
-    setSuccess(username);
+    setSuccess(username) ;
   }
 
   if (lastnameValue === "") {
-    setError(lastname, "Please provide a username");
+    setError(lastname, "Please provide a username"); isValid--;
   } else {
     setSuccess(lastname);
   }
 
   if (emailValue === "") {
-    setError(email, "Please provide an email.");
+    setError(email, "Please provide an email."); isValid--;
   } else if (!isValidEmail(emailValue)) {
-    setError(email, "Provide a valid email address.");
+    setError(email, "Provide a valid email address."); isValid--;
   } else {
     setSuccess(email);
   }
 
   if(phoneValue === ""){
-    setError(phone, "Please provide a phone number")
+    setError(phone, "Please provide a phone number"); isValid--;
   }else if (!isValidPhone(phoneValue)) {
-    setError(phone, "Provide a valid phone number.")
+    setError(phone, "Provide a valid phone number."); isValid--;
   }else {
     setSuccess(phone)
   }
 
   if(postalValue === ""){
-    setError(postcode, "Please provide a postal code")
+    setError(postcode, "Please provide a postal code"); isValid--;
   }else if (postalValue.length>4){
-    setError(postcode, "Your post code is too long")
+    setError(postcode, "Your post code is too long"); isValid--;
   }else if(!isValidPostal(postalValue)){
-    setError(postcode, "please provide a valid post code")
+    setError(postcode, "please provide a valid post code"); isValid--;
   }else{
     setSuccess(postcode)
   }
 
   if (textValue.length > 300 ) {
-    setError(text, "Too long, please shorter.")
+    setError(text, "Too long, please shorter."); isValid--;
   }else if (textValue === "") {
-    setError(text, "Please provide a text")
+    setError(text, "Please provide a text"); isValid--;
   }else {
     setSuccess(text)
+  }
+
+  if(isValid ===1) {
+    document.form.submit()
   }
 };
 

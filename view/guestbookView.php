@@ -81,9 +81,6 @@ if(isset($insert)){
   <button type="submit">Envoyer</button>
 </form>
 <!-- Si pas de message -->
-<div class="smart-container">
-
-
   <?php
   if(empty($nbGuessBook)):
     ?>
@@ -99,13 +96,13 @@ if(isset($insert)){
   endif;
   ?>
 
+
+
 <!-- Pagination (BONUS) -->
 <!-- Liste des messages -->
   <?php foreach ($books as $book):  ?>
   <div class="message-cont">
-        <p><strong><?= $book['firstname'] ?> <?= $book['lastname'] ?> - </strong></p>
-        <p><em> a écrit le message le <?= $book['datemessage']?> </em></p>
-        <p><?= $book['message']?></p>
+        <div class="message"><?= $book['firstname'] ?> <?= $book['lastname'] ?> - a écrit le message le <?= $book['datemessage']?> <?= $book['message']?></div>
   <?php endforeach; ?>
   </div>
 </div>
@@ -122,7 +119,7 @@ if(isset($insert)){
 // var_dump($nbGuessBook);
 
 ?>
-</div>
+
 <script src="js/validation.js"></script>
 </body>
 </html>
