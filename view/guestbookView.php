@@ -15,6 +15,17 @@
 <body>
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
+<div class="monForm">
+        <form id="formulaire">
+            <input type="text" name="name" id="name" placeholder="Nom">
+            <input type="text" name="surname" id="surname" placeholder="Prénom">
+            <input type="email" name="mail" id="mail" placeholder="Email">
+            <input type="text" name="postal" id="postal" placeholder="Code postal">
+            <input type="text" name="tel" id="tel" placeholder="Numéro de téléphone">
+            <textarea id="message" name="message" placeholder="Votre message"></textarea>
+            <button type="submit">Valider</button>
+        </form>
+    </div>
 <h2>Ici le formulaire</h2>
 <!-- Si pas de message -->
 <h3>Pas encore de message</h3>
