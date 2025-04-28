@@ -65,9 +65,16 @@ h2{
 .container{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
     
 .image1{
-    width: 200px;
+    width: 350px;
+    height: 350px;
 }
+
+#registrationForm{
+    display: flex ;
+}
+
 }
