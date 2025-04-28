@@ -47,13 +47,13 @@ if(isset($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['phone'],
   
     $insert = addGuestbook($db, $_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
  var_dump($insert);
-    /*
+  
     if($insert===true){
         header("Location: ./");
         exit();
     }else{
         $error = $insert;
-    } */
+    } 
 }
  
 // on appelle la fonction d'insertion dans la DB (addGuestbook())

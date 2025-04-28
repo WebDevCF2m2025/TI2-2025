@@ -55,13 +55,15 @@ function addGuestbook(PDO $db,
                     string $message
 ): bool
 {
+   
     // traitement des données backend (SECURITE)
+    
     $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
     $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
     $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
     $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
     $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
-
+    echo "salut";
   
     $usermail = filter_var($usermail,FILTER_VALIDATE_EMAIL); 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false

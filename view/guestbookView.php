@@ -60,7 +60,7 @@
         <p>message</p>
     </li>
 </ul>
-etc ...
+
 <!-- Pagination (BONUS) -->
 <?php
 // À commenter quand on a fini de tester
