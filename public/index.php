@@ -22,9 +22,43 @@ require_once "../model/guestbookModel.php";
  * le mode fetch à tableau associatif
  */
 
+try {
+    // nouvelle instance de PDO
+    $db = new PDO(
+        DB_DSN,
+        DB_CONNECT_USER,
+        DB_CONNECT_PWD,
+        // tableau d'options
+        [
+            // par défaut les résultats sont en tableau associatif
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            // Afficher les exceptions
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]
+    );
+} catch (Exception $e) {
+    // arrêt du script et affichage du code erreur, et du message
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
+
 /*
  * Si le formulaire a été soumis
  */
+
+ if(isset($_POST['surname'],$_POST['email'],$_POST['message'])){
+
+    // on va tenter l'insertion, car on a protégé addMessage()
+    $insert = addArticle($db,$_POST['surname'],$_POST['email'],$_POST['message']);
+
+    // l'insertion est réussie.
+    if($insert===true){
+        $thanks = "Merci pour votre nouveau message";
+    }else{
+        // on récupère les erreurs
+        $error = $insert;
+    }
+
+}
 
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
@@ -63,3 +97,4 @@ require_once "../model/guestbookModel.php";
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+$db=null;

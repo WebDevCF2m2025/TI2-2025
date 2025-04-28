@@ -56,12 +56,21 @@ function addGuestbook(PDO $db,
  */
 function getAllGuestbook(PDO $db): array
 {
+    $prepare = $connection->prepare("
+    SELECT * FROM `article`
+    ORDER BY `article`.`create_date` DESC
+    ");
     // try catch
+    try{
+        $prepare->execute();
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    return [];
+    return $prepare->fetchAll();
     // sinon, on fait un die de l'erreur
+    }catch (Exception $e){
+        die($e->getMessage());
+    }
 }
 
 /**************************
