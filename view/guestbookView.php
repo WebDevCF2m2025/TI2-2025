@@ -42,24 +42,41 @@
         <span class="span" id="codePostalError"></span>
 
         <label for="message">Message</label>
-        <textarea id="message" name="message" rows="11" placeholder="Entrez votre message"></textarea>
-        <span class="span" id="MessageError"></span>
+        <textarea id="messages" name="messages" rows="11" placeholder="Entrez votre message"></textarea>
+        <span class="span" id="messageError"></span>
 
         <button type="submit" id="btn">Envoyer</button>
     </form>
-    <!-- Si pas de message -->
-    <h3>Pas encore de message</h3>
-    <!-- Si 1 message -->
-    <h3>Il y a 1 message</h3>
-    <!-- Si plusieurs messages -->
-    <h3>Il y a X messages</h3>
+    <?php
+    $error = "";
+    $thanks = "";
+    if (isset($insert)) {
+        if ($insert === true) {
+            $thanks = "Message bien envoyé";
+        } elseif ($insert === false) {
+            $error = "Pas inséré côté serveur";
+        }
+    }
+    ?>
+    <?
+    foreach ($afficher as $e):
+        ?>
+        <p><strong><? $e['firstname'] ?>omer</strong></p>
+        <hr>
+        <?php
+
+
+        ?>
+    <?
+    endforeach;
+    ?>
 
     <!-- Pagination (BONUS) -->
 
     <!-- Liste des messages -->
     <ul>
         <li>
-            <p><strong>firstname lastname</strong></p>
+            <p><strong><? ?></strong></p>
             <p><em>datemessage</em></p>
             <p>message</p>
         </li>
@@ -78,7 +95,7 @@
     echo '<p>$_POST</p>';
     var_dump($_POST);
     echo '<p>$_GET</p>';
-    var_dump($_GET);
+    var_dump($_GET, $insert, $afficher);
     ?>
 
     <script src="js/validation.js"></script>

@@ -25,7 +25,7 @@ require_once "../model/guestbookModel.php";
 
 try {
 
-    $con = new PDO(
+    $conecte = new PDO(
         dns,
         DB_LOGIN,
         DB_PWD,
@@ -42,15 +42,18 @@ try {
 
 
 
-$afficher = addAllWeProfAsk($con);
+
+$afficher = addAllProfAsk($conecte);
 
 
-if (isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['telephone']) && isset($_POST['codePostal']) && isset($_POST['message'])) {
-    $insert = insert($con, $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['codePostal'], $_POST['message']);
-    header('Location: ./');
-    exit;
+if (isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['telephone']) && isset($_POST['codePostal']) && isset($_POST['messages'])) {
+    $insert = insert($conecte, $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['codePostal'], $_POST['messages']);
+    //header('Location: ./');
+    //exit;
 }
 
+
+$con = null;
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
 // si l'insertion a réussi
