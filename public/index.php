@@ -30,25 +30,42 @@ try{
     die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
 }
 
+var_dump($connexion)
 
+$articles = getAllGuestbook($connexion);
 
-$articles = select($connexion);
+//  Si le formulaire a été soumis
 
-
-if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['usermail']) && isset($_POST['phone']) && isset($_POST['postcode']) && isset($_post['message']) && isset($_post['datemessage']))
+if(isset($_POST['firstname']) && 
+    isset($_POST['lastname']) && 
+    isset($_POST['usermail']) && 
+    isset($_POST['phone']) && 
+    isset($_POST['postcode']) && 
+    isset($_post['message']) && 
+    isset($_post['datemessage']))
 {
-$insert = insert($connexion, $_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['phone'], $_POST['postcode'], $_post['message'], $_post['datemessage']);
+ // Insertion dans la base de données   
+$insert = addGuestbook($connexion, 
+                        $_POST['firstname'], 
+                        $_POST['lastname'], 
+                        $_POST['usermail'], 
+                        $_POST['phone'], 
+                        $_POST['postcode'], 
+                        $_post['message'], 
+                        $_post['datemessage']);
+
+ // Redirection après insertion
 header('Location: ./');
 exit;
 }
 
 
 
-
+// Appel de la vue
 require_once '../view/guestbookView.php';
 
 
-
+// Fermeture de la connexion (bonne pratique)
 $connexion = null;
 /*
  * Si le formulaire a été soumis
@@ -88,6 +105,21 @@ $connexion = null;
 
 // Appel de la vue
 
-include "../view/guestbookView.php";
+// include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+
+
+
+
+
+   
+
+
+    
+
+
+
+
+
+

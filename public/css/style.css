@@ -1,0 +1,82 @@
+.container,
+.containerTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5,auto); /* <-- ici tu dis : 2 colonnes */
+    gap: 10px;
+    grid-template-areas: 
+        "name message"
+        "prenom message"
+        "tel message"
+        "email message"
+        "password message";
+    /* optionnel pour aérer un peu */
+}
+
+#name {
+    grid-area: name;
+}
+#email {
+    grid-area: email;
+}
+#password {
+    grid-area: password;
+}
+#message {
+    grid-area: message;
+    justify-self: start; /* Aligne le message à gauche dans sa cellule */
+}
+#prenom {
+    grid-area: prenom;
+}
+#telephone {
+    grid-area: tel;
+}
+#photoSignUpAmico{
+    width: 50px;
+    height: auto;
+}
+
+
+@media screen and (width< 600px) {
+    form {
+        grid-template-columns: auto; /* Une seule colonne sur les petits écrans */
+        grid-template-areas: 
+            "name"
+            "prenom"
+            "tel"
+            "email"
+            "password"
+            "message";
+            
+    }
+    
+   
+}
+
+@media screen and (600px< width < 900px) {
+    form {
+        grid-template-columns: auto auto; /* Deux colonnes sur les écrans moyens */
+        grid-template-areas: 
+            "name prenom"
+            "tel email"
+  
+            "message message";
+    }
+    textarea {
+        width: 350px;
+       
+      }
+    
+}

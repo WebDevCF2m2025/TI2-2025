@@ -1,16 +1,16 @@
 <?php
-<?php
+
 
 function getAllGuestbook(PDO $con):array
 {
-$query=$con->query("SELECT * FROM guestbook");
+$query=$con->query("SELECT * FROM guestbook order by datetime ASC");
 $messages=$query->fetchAll();
 $query->closeCursor();
 return $messages;
 
 }
 
-function addGuestbook(PDO $conecte, string $firstname, string $lastname, string $usermail, string $phone, string $postcode, string $message,):bool
+function addGuestbook(PDO $conecte, string $firstname, string $lastname, string $usermail, string $phone, string $postcode, string $message):bool
 {
 
     $nomInsert = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
@@ -44,6 +44,7 @@ const nomError = document.getElementById("NomError");
 const prenomError = document.getElementById("PrenomError");
 const emailError = document.getElementById("EmailError");
 const telephoneError = document.getElementById("TelephoneError");
+const postcodeError = document.getElementById("postcodeError");
 const messageError = document.getElementById("MessageError");
 
   // Définition des expressions régulières pour valider les champs du formulaire.
@@ -63,7 +64,7 @@ const inputName = document.querySelector("#NomID").value.trim();
 const inputPrenom = document.querySelector("#prenomID").value.trim();
 const inputEmail = document.getElementById("emailID").value.trim();
 const inputTel = document.querySelector("#telephoneID").value.trim();
-const inputpostcode = document.querySelector("#-------ID").value.trim()/* a remplir champ vide pour ID inputpostcode*/
+const inputpostcode = document.querySelector("#postcodeErrorID").value.trim()/* a remplir champ vide pour ID inputpostcode*/
 const inputMessage = document.querySelector("#messageID").value.trim();
 
       // Validation du champ "Nom".

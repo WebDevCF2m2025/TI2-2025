@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
     
     <title>Formulaire</title>
 </head>
 <body>
 
 <div class="container">
-<h1>Formulaire de contact</h1>
+<h1>TI2|Livre d'or</h1>
 
 <form action="" method="post">
 
@@ -54,13 +54,16 @@
         
     
 </form>
+<div id="photoSignUpAmico">
+<img  src="../public/img/sign-up-amico.png" alt="">
+</div>
 
 </div>
 
 
 
 
-<?php
+ <!-- <?php
 
 $nbMessage = count($articles);
 if(empty($nbMessage)): ?>
@@ -77,18 +80,19 @@ if(empty($nbMessage)): ?>
     
         <?php foreach ($articles as $article): ?>
         <div class="article">
-            <h3><?= htmlspecialchars($article['nom']) ?></h3>
-            <h3><?= htmlspecialchars($article['prenom']) ?></h3>
-            <h3><?= htmlspecialchars($article['email']) ?></h3>
-            <h3><?= htmlspecialchars($article['telephon']) ?></h3>
+            <h3><?= htmlspecialchars($article['firstname']) ?></h3>
+            <h3><?= htmlspecialchars($article['lastname']) ?></h3>
+            <h3><?= htmlspecialchars($article['usermail']) ?></h3>
+            <h3><?= htmlspecialchars($article['phone']) ?></h3>
+            <h3><?= htmlspecialchars($article['postcode']) ?></h3>
             <h3><?= htmlspecialchars($article['message']) ?></h3>
             <br>
         </div>
         <?php endforeach; ?>
     </div>
-    <?php endif; ?>
+    <?php endif; ?>  -->
     
-<script src="script.js"></script>
+<script src="js/validation.js"></script>
 </body>
 </html>
 
