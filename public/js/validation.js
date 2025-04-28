@@ -9,30 +9,28 @@ let phone = document.getElementById("phone")
 let message = document.getElementById("message")
 let bug = document.getElementById("bug");
 form.addEventListener("submit", function(event){
-    firstnameRegex= /^([A-Z]|[a-z])[a-z]{3,15}$/;
-    lastnameRegex= /^([A-Z]|[a-z])[a-z]{3,15}$/;
+
     usermailRegex= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
     postcodeRegex= /^\d{4}/;
     phoneRegex= /^04\d{8}$/;
     messageRegex= /^[a-zA-Z0-9 ]{1,300}$/;
 
 
-    if(firstname){
-        bug.innerHTML= '<span style="background: red;">Le prénom est incorrect</span>';
-        event.preventDefault(); 
-    }else if(!lastnameRegex.test(lastname)){
-        bug.innerHTML= '<span style="background: red;">Le nom est incorrect</span>';
-        event.preventDefault();
-    }else if(!usermailRegex.test(usermail)){
+    ausermailRegex.test();
+    apostcodeRegex.test();
+    aphoneRegex.test();
+    amessageRegex.test();
+
+    if(!ausermailRegex){
         bug.innerHTML= '<span style="background: red;">Le email est incorrect</span>';
         event.preventDefault();
-    }else if(!postcodeRegex.test(postcode)){
+    }else if(!apostcodeRegex){
         bug.innerHTML= '<span style="background: red;">Le code postal est incorrect</span>';
         event.preventDefault();
-    }else if(!phoneRegex.test(phone)){
+    }else if(!aphoneRegex){
         bug.innerHTML= '<span style="background: red;">Le phone est incorrect</span>';
         event.preventDefault();
-    }else if(!messageRegex.test(message)){
+    }else if(amessageRegex){
         bug.innerHTML= '<span style="background: red;">Le message est incorrect</span>';
         event.preventDefault();
     }else{
