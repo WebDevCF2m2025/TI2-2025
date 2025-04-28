@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+ 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+img{
+    width: 130px;
+    
+}
+
+.container{
+ 
+    width: 100%;
+    height: 100%;
+    background: #fef1df;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(4,auto);
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+   
+
+}
+
+form {
+    width: 90%;
+    max-width: 480px;
+    padding: 50px 30px 20px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  
+    
+}
+form div {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+
+}
+
+
+button{
+       margin-top: 10px;
+       background-color: #747cdf;
+       color: white;
+       font-size: 15px;
+       border: none;
+       padding: 10px 20px;
+       border-radius: 5px;
+       outline: none;
+       cursor: pointer;
+       transition: transform 0.5s;
+    }
+
+ button:hover{
+        transform: scale(1.09);
+      
+      }
+
+ 
+
+  .pied-formulaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;  
+    padding: 20px;
+    text-align: center; /* centre aussi les titres et paragraphes */
+  }
+  
+  .pied-formulaire .messages,
+  .pied-formulaire .nomessage {
+    max-width: 600px; /* largeur max pour ne pas que ce soit trop large */
+    width: 100%;
+    
+  }
+  .messagees{
+    background-color: #747cdf;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 10px;
+color: white;
+  }
+  span {
+    height: 1vh;
+  }

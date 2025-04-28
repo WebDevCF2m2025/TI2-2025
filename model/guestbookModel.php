@@ -34,8 +34,8 @@ function addGuestbook(PDO $db,
     $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
     $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
     $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
-    //$phone = preg_replace('/[^0-9]/', '', $phone);
-    //$postcode = preg_replace('/[^0-9]/', '', $postcode);
+    $phone = preg_replace('/[^0-9]/', '', $phone);
+    $postcode = preg_replace('/[^0-9]/', '', $postcode);
     $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
  
     if(
@@ -43,7 +43,7 @@ function addGuestbook(PDO $db,
         empty($lastname) || strlen($lastname) > 100 ||
         $usermail === false || strlen($usermail) > 200 ||
         empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false   ||
-        empty($postcode) || strlen($postcode) > 4 || ctype_digit($postcode) === false ||
+        empty($postcode) || strlen($postcode) === 4 || ctype_digit($postcode) === false ||
         empty($message) || strlen($message) > 500 
 
     ){
