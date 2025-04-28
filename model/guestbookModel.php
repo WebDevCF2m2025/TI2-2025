@@ -125,12 +125,23 @@ function getAllGuestbook(PDO $db): array
 function getNbTotalGuestbook(PDO $db): int
 {
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur,
-    // renvoyez le nombre total de messages
-    return 0;
+    try {
+        // si la requête a réussi,
+        $request = $db->query("SELECT COUNT(*) as nb FROM guestbook");
+        $nb = $request->fetch()['nb'];
+
+        // bonne pratique, fermez le curseur,
+        $request->closeCursor();
+
+        // renvoyez le nombre total de messages
+        return $nb;
+    
     // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
+
 // SELECTION de messages dans le livre d'or par ordre de date croissante
 // en lien avec la pagination
 /**
@@ -146,14 +157,34 @@ function getNbTotalGuestbook(PDO $db): int
 function getGuestbookPagination(PDO $db, int $offset, int $limit): array
 {
     // Requête préparée obligatoire !
+    $prepare = $db->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` ASC
+        LIMIT ?,?
+    ");
+
     // Le $offset et le $limit sont des entiers, il faut donc les passer
     // en paramètres de la requête préparée en tant qu'entiers !
+    $prepare->bindParam(1,$offset,PDO::PARAM_INT);
+    $prepare->bindParam(2,$limit,PDO::PARAM_INT);
+
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
+
+    try {
+        // si la requête a réussi,
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+
+        // bonne pratique, fermez le curseur
+        $prepare->closeCursor();
+
+        // renvoyer le tableau de(s) message(s)
+        return $result;
+    
     // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
 
 // FONCTION de pagination
@@ -168,35 +199,76 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  */
 function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
 {
+    // Variable de sortie
     $sortie = "";
+
+    // Si pas de page nécéssaire
     if ($nbtotalMessage === 0) return "";
+
+    // Nombre de pages, division du total des messages mis à l'entier supérieur
     $nbPages = ceil($nbtotalMessage / $perPage);
+
+    // Si une seule page, pas de lien à afficher
     if ($nbPages == 1) return "";
+
+    // Nous avons plus d'une page
     $sortie .= "<p>";
+
+    // Tant qu'on a des pages
     for ($i = 1; $i <= $nbPages; $i++) {
+
+        // Si on est au premier tout de la boucle
         if ($i === 1) {
+
+            // Si on est sur la première page
             if ($pageActu === 1) {
+                
+                // Pas de lien
                 $sortie .= "<< < 1 |";
+
+            // Si nous sommes sur la deuxième page
             } elseif ($pageActu === 2) {
+
+                // Tous les liens vont vers la page 1
                 $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
+
+            // Si nous sommes sur d'autres pages, le retour va vers la page précédente
             } else {
                 $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
             }
+
+        // Nous ne sommes pas sur le premier ni sur le dernier tour de boucle
         } elseif ($i < $nbPages) {
+
+            // Si nous sommes sur la page actuelle
             if ($i === $pageActu) {
+
+                // Pas de lien
                 $sortie .= "  $i |";
+
             } else {
+
+                // Si nous sommes pas sur la page actuelle
                 $sortie .= "  <a href='?$get=$i'>$i</a> |";
             }
+
+        // Si nous sommes sur le dernier tour de boucle   
         } else {
+
+            // Si nous sommes sur la dernière page
             if ($pageActu >= $nbPages) {
+
+                // Pas de lien
                 $sortie .= "  $nbPages > >>";
+
+            // Si nous ne sommes pas sur la dernière page
             } else {
+
+                // Tous les liens vont vers la dernière page
                 $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
             }
         }
     }
     $sortie .= "</p>";
     return $sortie;
-
 }
