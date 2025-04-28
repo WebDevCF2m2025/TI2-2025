@@ -20,26 +20,91 @@
  * Une requête préparée est utilisée pour éviter les injections SQL
  * Les données sont échappées pour éviter les injections XSS (protection backend)
  */
-function addGuestbook(PDO $db,
-                    string $firstname,
-                    string $lastname,
-                    string $usermail,
-                    string $phone,
-                    string $postcode,
-                    string $message
-): bool
-{
+function addGuestbook(PDO $pdo, string $firstname,string $lastname,string $usermail,string $phone,string $postcode,string $message):bool {
+ 
     // traitement des données backend (SECURITE)
 
-    // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
-    // requête préparée obligatoire !
+    $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
+    if(empty($firstname)){
+        // $erreur .= "Prénom incorrect.<br>";
+        return false;
+    }elseif(strlen($firstname)>20){
+        // $erreur .= "Prénom trop long.<br>";
+        return false;
+    }
 
+    $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
+    if(empty($lastname)){
+        // $erreur .= "Nom incorrect.<br>";
+        return false;
+    }elseif(strlen($lastname)>20){
+        // $erreur .= "Nom trop long.<br>";
+        return false;
+    }
+
+    $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+    if(!$usermail){
+        // $erreur .= "Email Incorrect.<br>";
+        return false;
+    }
+
+    $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+    if(!ctype_digit($phone)){
+        // $erreur .= "Numéro incorrect ca va pas dit.<br>";
+        return false;
+    }
+        
+    if(empty($phone)){
+        // $erreur .= "Numéro incorrect.<br>";
+        return false;
+    }elseif(strlen($phone)>10){
+        // $erreur .= "Numéro trop long.<br>";
+        return false;
+    }
+
+    $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+    if(!ctype_digit($postcode)){
+        // $erreur .= "Code postal incorrect.<br>";
+        return false;
+    }
+
+    if(empty($postcode)){
+        // $erreur .= "Code postal incorrect.<br>";
+        return false;
+    }elseif(strlen($postcode)>4){
+        // $erreur .= "Code postal trop long.<br>";
+        return false;
+    }
+
+    $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+    if(empty($message)){
+        // $erreur .= "Message incorrect.<br>";
+        return false;
+    }elseif(strlen($message)>500){
+        // $erreur .= "Message trop long.<br>";
+        return false;
+    }
+
+    if(!empty($erreur)){ return false;}
+    
+   // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
+
+    // requête préparée obligatoire !
+    
+    $insert = $pdo->prepare("INSERT INTO guestbook (firstname, lastname, usermail, phone, postcode, message) VALUES (?,?,?,?,?,?) ");
+ 
+    
     // try catch
         // si l'insertion a réussi
         // on renvoie true
     // sinon, on fait un die de l'erreur
-
+    try{
+        $insert->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
+        $insert->closeCursor();
+        return true;
+    }catch(Exception $e){
+        die($e->getMessage());        
+    }
 }
 
 /***************************

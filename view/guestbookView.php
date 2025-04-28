@@ -13,8 +13,36 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
+    <form action="" method="POST" style="display:flex; flex-direction: column; width: 80%; margin: auto;">
+        <label for="firstname">prenom *</label>
+        <input type="text" id="firstname" name="firstname">
+
+        <label for="lastname">Nom *</label>
+        <input type="text" id="lastname" name="lastname">
+
+        <label for="usermail">Email *</label>
+        <input type="email" id="usermail" name="usermail">
+
+        <label for="postcode">c/postal *</label>
+        <input type="text" id="postcode" name="postcode">
+
+        <label for="phone">Portable *</label>
+        <input type="text" id="phone" name="phone">
+
+        <label for="message">Message *</label>
+        <textarea name="message" id="message"></textarea>
+
+        <button type="submit">Envoyer</button>
+    </form>
+    <?php if(isset($saved)): ?>
+        <h3 style="text-align: center;"><?=$saved?></h3>
+    <?php elseif(isset($notSaved)):?>
+        <h3 style="text-align: center;"><?=$notSaved?></h3>
+    <?php endif;?>
+
 <h2>Ici le formulaire</h2>
 <!-- Si pas de message -->
 <h3>Pas encore de message</h3>

@@ -1,7 +1,7 @@
 <?php
 # public/index.php
 
-echo "bonjour";
+
 /*
  * Front Controller de la gestion du livre d'or
  */
@@ -22,17 +22,39 @@ require_once "../model/guestbookModel.php";
  * le mode fetch à tableau associatif
  */
 
+try{
+    $connexion = new PDO(DSN, DB_LOGIN, DB_PWD,[
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+}catch (Exeption $e){
+    die($e->getMessage());
+}
+
+
+
 /*
  * Si le formulaire a été soumis
  */
 
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
+if(isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'],$_POST['phone'], $_POST['postcode'], $_POST['message'])){
+    $save = addGuestbook($connexion,$_POST['firstname'], $_POST['lastname'], $_POST['usermail'],$_POST['phone'], $_POST['postcode'], $_POST['message']);
 // si l'insertion a réussi
 
 // on redirige vers la page actuelle (ou on affiche un message de succès)
 
 // sinon, on affiche un message d'erreur
+
+    if($save === true){
+        $saved = "Message enregistré";
+    }else{
+        $notSaved = "Message NON enregistré";
+    }
+}
+
+
 
 /*
  * On récupère les messages du livre d'or
@@ -63,3 +85,4 @@ require_once "../model/guestbookModel.php";
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+$connexion = null;
