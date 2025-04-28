@@ -1,3 +1,6 @@
+//alert("Hello world")
+
+
 const form = document.getElementById("form");
 const username = document.getElementById("firstname");
 const lastname = document.getElementById('lastname');
@@ -5,6 +8,7 @@ const email = document.getElementById("usermail");
 const phone = document.getElementById('phone');
 const postcode = document.getElementById('postcode')
 const text = document.getElementById('message')
+
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -37,14 +41,14 @@ const isValidEmail = (email) => {
 };
 
 const isValidPhone = (phone) => {
-  const re = /^+32[1-9][0-9]{7,8}$/
-return re.test(String(phone));
+  const re = /^[0-9]{8,9}$/
+return re.test(phone);
 }
 
 const isValidPostal = (postal) => {
   const re =
     /^(?:(?:[1-9])(?:\d{3}))$/
-  return re.test(String(postal));
+  return re.test(postal);
 }
 
 
@@ -78,7 +82,7 @@ const validateInputs = () => {
 
   if(phoneValue === ""){
     setError(phone, "Please provide a phone number")
-  }else if (isValidPhone(phoneValue)) {
+  }else if (!isValidPhone(phoneValue)) {
     setError(phone, "Provide a valid phone number.")
   }else {
     setSuccess(phone)
@@ -102,3 +106,18 @@ const validateInputs = () => {
     setSuccess(text)
   }
 };
+
+
+////////////: TEXT
+
+
+let wordCount = document.getElementById("wordCount");
+
+text.addEventListener("keyup",function(){
+  let characters = text.value.split('');
+  wordCount.innerText = characters.length;
+
+  if(characters > 300) {
+    setError(text, "Too long")
+  }
+});

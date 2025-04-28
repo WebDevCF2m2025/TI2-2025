@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+
+<div class="container">
 <h1>TI2 | Livre d'or</h1>
 
 <?php
@@ -32,8 +35,8 @@ if(isset($insert)){
 <h3 class="erreur"><?=$error?></h3>
 
 <!-- Formulaire d'ajout d'un message -->
-<form action=""  method="post" id="form">
 <img src="img/sign-up-amico.png" id="sign-img">
+<form action=""  method="post" id="form">
   <h2>Laissez un message</h2>
   <div class="input-control">
     <label for="firstname">Prénom</label>
@@ -67,10 +70,13 @@ if(isset($insert)){
 
     <div class="input-control">
       <label for="message">Message</label>
-      <input type="text" name="message" id="message">
+      <textarea  name="message" id="message"></textarea>
       <div class="error"></div>
     </div>
-    <div>2</div>
+  <div id="the-count">
+    <span id="wordCount">0</span>
+    <span >/ 300 caractères</span>
+  </div>
 
   <button type="submit">Envoyer</button>
 </form>
@@ -118,7 +124,7 @@ endif;
 // var_dump($nbGuessBook);
 
 ?>
-
+</div>
 <script src="js/validation.js"></script>
 </body>
 </html>

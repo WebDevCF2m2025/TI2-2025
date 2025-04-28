@@ -16,6 +16,19 @@ body {
   font-size: 12px;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+
+textarea {
+  height: 150px;
+  resize: none;
+}
+
 #form h1 {
   color: #0f2027;
   text-align: center;
@@ -62,8 +75,14 @@ body {
 
 #sign-img {
   height: 250px;
+  width: 250px;
+  margin: auto;
 }
 
 .smart-container {
 display: none;
+}
+
+#the-count {
+  float: right;
 }
