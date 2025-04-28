@@ -17,7 +17,7 @@
     <main>
 
         <h1>TI2 | Livre d'or</h1>
-        <!-- <img class="signUp" src="../public/img/sign-up-amico.png" alt="Image tablette"> -->
+        <img class="signUp" src="../public/img/sign-up-amico.png" alt="Image tablette">
         <p>Laissez nous un messages</p>
         <form action="" method="post" id="form">
             <label for="prenom">Prénom</label>
@@ -43,7 +43,7 @@
             <label for="message">Message</label>
             <textarea id="message-input" name="message" id="message"></textarea>
             <span id="spanMessage"></span>
-            
+
             <button type="submit">Envoyez</button>
             <span id="spanGeneral"></span>
         </form>
@@ -56,13 +56,24 @@
             <?php else: ?>
                 <h3>Il y a <?= $count ?> message<?= $count > 1 ? "s" : "" ?> </h3>
                 <?php foreach ($messages as $message): ?>
-                    <ul>
-                        <li>
-                            <p><strong><?= $message['firstname'] ?> <?= $message['lastname'] ?></strong></p>
-                            <p><em><?= $message['datemessage'] ?></em></p>
-                            <p><?= $message['message'] ?></p>
-                        </li>
-                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Date</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><?= $message['firstname'] ?></td>
+                                <td><?= $message['lastname'] ?></td>
+                                <td><em><?= $message['datemessage'] ?></em></td>
+                                <td><?= $message['message'] ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 <?php endforeach; ?>
             <?php endif; ?>
         <?php endif; ?>

@@ -16,6 +16,8 @@ main {
   margin: 3rem 0;
 }
 
+
+/* formulaire */
 form {
   display: flex;
   flex-direction: column;
@@ -50,4 +52,35 @@ span{
 
 #successGeneral{
   color: green ;
+}
+
+/* Tableau */
+ul li{
+  list-style-type: none;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse; 
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+th, td {
+  border: 1px solid #ffffff;
+  text-align: left; 
+  padding: 8px;
+}
+
+th {
+  background-color: #666666;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Ligne alternative pour plus de lisibilité */
+}
+
+tr:hover {
+  background-color: #e0f7fa; /* Surbrillance au survol */
 }
