@@ -25,9 +25,7 @@ require_once "../model/guestbookModel.php";
 try {
     // nouvelle instance de PDO
     $db = new PDO(
-        DB_DSN,
-        DB_CONNECT_USER,
-        DB_CONNECT_PWD,
+        DB_DSN, DB_LOGIN, DB_PWD,
         // tableau d'options
         [
             // par défaut les résultats sont en tableau associatif
@@ -45,33 +43,33 @@ try {
  * Si le formulaire a été soumis
  */
 
- if(isset($_POST['surname'],$_POST['email'],$_POST['message'])){
+ if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'])){
 
-    // on va tenter l'insertion, car on a protégé addMessage()
-    $insert = addArticle($db,$_POST['surname'],$_POST['email'],$_POST['message']);
+    // on appelle la fonction d'insertion dans la DB (addGuestbook())
+    $insert = addArticle($db,$_POST['firstname'],$_POST['lastname'],$_POST['usermail']);
 
-    // l'insertion est réussie.
+    // si l'insertion a réussi
     if($insert===true){
         $thanks = "Merci pour votre nouveau message";
     }else{
-        // on récupère les erreurs
+        // sinon, on affiche un message d'erreur
         $error = $insert;
     }
 
 }
 
-// on appelle la fonction d'insertion dans la DB (addGuestbook())
 
-// si l'insertion a réussi
+
+
 
 // on redirige vers la page actuelle (ou on affiche un message de succès)
 
-// sinon, on affiche un message d'erreur
+
 
 /*
  * On récupère les messages du livre d'or
  */
-
+$articles = getAllGuestbook($db);
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
 /*********************
@@ -94,7 +92,7 @@ try {
 
 // Appel de la vue
 
-include "../view/guestbookView.php";
+require_once "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
 $db=null;
