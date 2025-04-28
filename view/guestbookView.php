@@ -17,6 +17,33 @@
 <!-- Formulaire d'ajout d'un message -->
 <h2>Ici le formulaire</h2>
 <!-- Si pas de message -->
+<form action="" method="post">
+    <div>
+    <div> 
+        <label for="prenom">Prénom*</label>
+        <input type="text" name="prenom" id="prenom" required>
+    </div>
+    <div> 
+        <label for="nom">nom*</label>
+        <input type="text" name="nom" id="nom" required>
+    </div>
+    <div>
+        <label for="postal">E-mail*</label>
+        <input type="number" name="postal" id="postal" required>
+    </div>
+    <div> 
+        <label for="portable">Portable*</label>
+        <input type="number" name="portable" id="portable" required>
+    </div>
+    <div>
+        <label for="message">Message*</label>
+        <textarea name="message" id="message" rows="10" required></textarea>
+    </div>
+    <div>
+        <button type="submit">Envoyer</button>
+    </div>
+</form>
+
 <h3>Pas encore de message</h3>
 <!-- Si 1 message -->
 <h3>Il y a 1 message</h3>
