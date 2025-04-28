@@ -51,8 +51,8 @@ form.addEventListener("submit", function(e){
     const postalCode = postal.trim()
     const phoneNumber = phone.trim()
 
-    if (firstName === " ") {
-        firstNameError.style.display = "block"
+    if (verifyMail(email) && verifyPostal(postalCode) && verifyPhone(phoneNumber)) {
+        sucessMessage.style.display = "block"
     }
     
     
