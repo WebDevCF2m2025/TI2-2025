@@ -18,12 +18,25 @@
     <section class="title">
         <h1>TI2 | Livre d'or</h1>
         <!-- Formulaire d'ajout d'un message -->
-        <h2>Laissez-nous un message</h2>
+        <h2 class="subtitle">Laissez-nous un message</h2>
+        <?php
+// si on a inséré un article
+if(isset($thanks)):
+    ?>
+    <h3 class="thanks"><?=$thanks?></h3>
+<?php
+
+elseif(isset($error)):
+    ?>
+    <h4 class="error"><?=$error?></h4>
+<?php
+endif;
+?>
     </section>
     <section class="form-container">
         <img class="banner" src="../public/img/sign-up-amico.png" alt="form-img" width="500" height="500">
         <!-- This one is gonna be hidden on desktop -->
-        <h2 class="subtitle">Laissez-nous un message</h2>
+        <h2 class="second-subtitle">Laissez-nous un message</h2>
         <form id="form" action="" method="post">
             <div class="fieldset">
                 <label id="prenom-label" for="prenom">Prénom *</label>
@@ -58,7 +71,7 @@
     </section>
     <?php
     // articles est un tableau vide
-    if (empty($articles)):
+    if (empty($guestBook)):
     ?>
         <div class="nomessage">
             <h3>Pas encore d'article</h3>
@@ -66,23 +79,23 @@
     // nous avons au moins un article
     else:
         // on peut compter le nombre d'articles
-        $countArticle = count($articles);
+        $countGuestBook = count($guestBook);
         // ternaire pour ajouter un s à article
         // si on en a plus d'un
-        $pluriel = $countArticle > 1 ? "s" : "";
+        $pluriel = $countGuestBook > 1 ? "s" : "";
         ?>
             <div class="messages">
-                <h3>Nous avons <?= $countArticle ?> article<?= $pluriel ?></h3>
+                <h3>Nous avons <?= $countGuestBook ?> guestbook<?= $pluriel ?></h3>
                 <hr>
 
                 <?php
                 // tant qu'on a des articles
-                foreach ($articles as $article):
+                foreach ($guestBook as $gb):
                 ?>
-                    <h4><?= $article['prenom'] ?></h4>
-                    <p><?= nl2br($article['nom']); // retour à la ligne automatique
+                    <h4><?= $gb['firstname'] ?></h4>
+                    <p><?= nl2br($gb['lastname']); // retour à la ligne automatique
                         ?></p>
-                    <h5><?= $article['email'] ?></h5>
+                    <h5><?= $gb['text'] ?></h5>
                     <hr>
             <?php
                 endforeach;
@@ -101,10 +114,10 @@
 
 
 
-            <!-- Pagination (BONUS) -->
+            <!-- Pagination (BONUS) 
 
             <!-- Liste des messages -->
-            <section>
+            <!-- <section>
                 <ul>
                     <li>
                         <p><strong>firstname lastname</strong></p>
@@ -112,13 +125,13 @@
                         <p>message</p>
                     </li>
                     <!-- Autres messages -->
-                    <li>
+                    <!-- <li>
                         <p><strong>firstname lastname</strong></p>
                         <p><em>datemessage</em></p>
                         <p>message</p>
                     </li>
-                </ul>
-            </section>
+                </ul> -->
+            <!-- </section>  -->
             <!-- etc ... -->
 
 

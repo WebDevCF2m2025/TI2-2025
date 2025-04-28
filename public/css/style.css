@@ -126,6 +126,12 @@ h3 {
 
 @media (width >= 960px) {
     .subtitle {
+        position: relative;
+        right: -17%;
+        padding: 20px 0;
+        margin-left: 100px;
+    }
+    .second-subtitle {
         display: none;
     }
     .form-container {

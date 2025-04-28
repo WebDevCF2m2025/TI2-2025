@@ -46,7 +46,7 @@ try {
  if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'])){
 
     // on appelle la fonction d'insertion dans la DB (addGuestbook())
-    $insert = addArticle($db,$_POST['firstname'],$_POST['lastname'],$_POST['usermail']);
+    $insert = addGuestbook($db,$_POST['firstname'],$_POST['lastname'],$_POST['usermail'], $_POST['datemessage']);
 
     // si l'insertion a réussi
     if($insert===true){
@@ -69,7 +69,7 @@ try {
 /*
  * On récupère les messages du livre d'or
  */
-$articles = getAllGuestbook($db);
+$guestBook = getAllGuestbook($db);
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
 /*********************
