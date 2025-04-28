@@ -1,26 +1,22 @@
 <?php
-# public/index.php
 
-
-/*
- * Front Controller de la gestion du livre d'or
- */
-
-/*
- * Chargement des dépendances
- */
-// chargement de configuration
 require_once "../config.php";
-// chargement du modèle de la table guestbook
+
 require_once "../model/guestbookModel.php";
 
-/*
- * Connexion à la base de données en utilisant PDO
- * Avec un try catch pour gérer les erreurs de connexion
- * Utilisez les constantes de config.php
- * Activez le mode d'erreur de PDO à Exception et
- * le mode fetch à tableau associatif
- */
+try {
+    $DB = new PDO(
+        DB_DSN,
+        DB_LOGIN,
+        DB_PWD,
+        [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]
+    );
+} catch (Exception $excep) {
+    die("Code : {$excep->getCode()} <br> Message : {$excep->getMessage()}");
+}
 
 /*
  * Si le formulaire a été soumis
