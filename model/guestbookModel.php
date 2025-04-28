@@ -55,26 +55,16 @@ function addGuestbook(PDO $db,
  * Si pas de message, renvoie un tableau vide
  */
 function getAllGuestbookOrderByDateASC(PDO $db): array
-{
-    $prepare = $db->prepare("
-        SELECT * FROM `messages`
-        ORDER BY `messages`.`created_at` ASC
-        ");
+
+    
     // try catch
-    try{
     // si la requête a réussi,
-    $prepare->execute();
 
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    return $prepare->fetchAll();
     
     // sinon, on fait un die de l'erreur
-}catch (Exception $e){
-    die($e->getMessage());
-}
 
-}
 
 /**************************
  * Pour le Bonus Pagination
