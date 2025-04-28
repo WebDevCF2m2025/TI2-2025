@@ -17,7 +17,7 @@
 <!-- Formulaire d'ajout d'un message -->
 <h2>Ici le formulaire</h2>
 <div class="monForm">
-        <form id="formulaire">
+        <form id="formulaire" method="post">
             <input type="text" name="name" id="name" placeholder="Nom">
             <input type="text" name="surname" id="surname" placeholder="Prénom">
             <input type="email" name="mail" id="mail" placeholder="Email">

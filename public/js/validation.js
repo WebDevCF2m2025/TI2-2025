@@ -21,8 +21,6 @@
       
       
       formulaire.addEventListener('submit', function(ev) {
-        ev.preventDefault();
-      
         const mail = eMail.value.trim();
         const tel = numTel.value.trim();
         const postal = codePostal.value.trim();
