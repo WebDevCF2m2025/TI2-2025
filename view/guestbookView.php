@@ -14,40 +14,43 @@
 <body>
 <h1>TI2 | Livre d'or</h1>
 
-<div class="image">
-    <img src="../public/img/sign-up-amico.png">
-</div>
+<div class="content-desktop">
+    <div class="image">
+        <img src="../public/img/sign-up-amico.png">
+    </div>
 
-<!-- Formulaire d'ajout d'un message -->
-<h2 class="avis">Laissez-nous un message</h2>
-<p id="verifEmail"></p>
-<p id="verifCP"></p>
-<p id="verifTel"></p>
+    <!-- Formulaire d'ajout d'un message -->
+    <div class="form-block"> 
+        <h2 class="avis">Laissez-nous un message</h2>
+        <p id="verifEmail"></p>
+        <p id="verifCP"></p>
+        <p id="verifTel"></p>
 
-<div class="container">
-    <form action="" id="formulaire" method="post">
+        <div class="container">
+            <form action="" id="formulaire" method="post">
+                <label for="firstname">Prénom *</label>
+                <input type="text" name="firstname" id="firstname" required>
 
-        <label for="firstname">Prénom *</label>
-        <input type="text" name="firstname" id="firstname" required>
+                <label for="lastname">Nom *</label>
+                <input type="text" name="lastname" id="lastname" required>
 
-        <label for="lastname">Nom *</label>
-        <input type="text" name="lastname" id="lastname" required>
+                <label for="usermail">E-mail *</label>
+                <input type="email" name="usermail" id="usermail">
 
-        <label for="usermail">E-mail *</label>
-        <input type="email" name="usermail" id="usermail">
-        
-        <label for="postcode">c/postal *</label>
-        <input type="text" name="postcode" id="postcode">
+                <label for="postcode">c/postal *</label>
+                <input type="text" name="postcode" id="postcode">
 
-        <label for="phone">Portable</label>
-        <input type="text" name="phone" id="phone">
+                <label for="phone">Portable</label>
+                <input type="text" name="phone" id="phone">
 
-        <label for="message">Message</label>
-        <textarea name="message" id="message" rows="10" maxlength="300" required></textarea>
-        <p id="caracCount">0/300 caractères</p>
+                <label for="message">Message</label>
+                <textarea name="message" id="message" rows="10" maxlength="300" required></textarea>
+                <p id="caracCount">0/300 caractères</p>
 
-        <button type="submit">Envoyer</button>
-    </form>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
 </div>
 <?php
 if(empty($nbMessage)):

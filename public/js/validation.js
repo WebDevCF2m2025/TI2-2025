@@ -48,44 +48,36 @@ const formulaire = document.getElementById("formulaire");
 formulaire.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    let formValid = true;
+    email2.textContent = "";
+    codePostal2.textContent = "";
+    telephone2.textContent = "";
+
     
     const mail = email.value.trim();
     if (!verifEmail(mail)) {
-        email2.textContent = 'Veuillez entrer un email valide';
+        email2.textContent = 'Veuillez entrer un e-mail valide (ex : prenom.nom@mail.com)';
         email2.style.color = 'red';
-        formValid = false;
         return;
-    } else {
-        email2.textContent = 'E-mail valide, merci.';
-        email2.style.color = 'green';
     }
 
     const postal = codePostal.value.trim();
     if (!verifCodePostal(postal)) {
         codePostal2.textContent = 'Veuillez entrer un code postal Belge valide (4 chiffres)';
         codePostal2.style.color = 'red';
-        formValid = false;
         return;
-    } else {
-        codePostal2.textContent = 'Code postal valide, merci.';
-        codePostal2.style.color = 'green';
     }
 
     const tel = telephone.value.trim();
     if (!verifTelephone(tel)) {
         telephone2.textContent = 'Veuillez entrer un numéro de téléphone correct (Qui commence par 04 et qui contient 10 chiffres. Ex : 0498150882)';
         telephone2.style.color = 'red';
-        formValid = false;
         return;
-    } else {
-        telephone2.textContent = 'Numéro de téléphone valide, merci.';
-        telephone2.style.color = 'green';
     }
-    if (formValid) {
+
+
         alert("Tout est valide, merci !");
         formulaire.submit();
-    }
+
 });
 
 
