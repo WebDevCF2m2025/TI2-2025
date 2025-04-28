@@ -160,8 +160,15 @@ function getNbTotalGuestbook(PDO $db): int
     // si la requête a réussi,
     // bonne pratique, fermez le curseur,
     // renvoyez le nombre total de messages
-    return 0;
     // sinon, on fait un die de l'erreur
+    try{
+        $request = $db->query("SELECT COUNT(*) as nb FROM messages ");
+        $nb = $request->fetch()['nb'];
+        $request->closeCursor();
+        return $nb;
+    }catch (Exception $e){
+        die($e->getMessage());
+    }
 }
 // SELECTION de messages dans le livre d'or par ordre de date croissante
 // en lien avec la pagination
@@ -184,8 +191,27 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    return [];
+
     // sinon, on fait un die de l'erreur
+
+    
+    $prepare = $con->prepare("
+        SELECT * FROM `messages`
+        ORDER BY `messages`.`created_at` DESC
+        LIMIT ?,?
+        ");
+    $prepare->bindParam(1,$offset,PDO::PARAM_INT);
+    $prepare->bindParam(2,$limit,PDO::PARAM_INT);
+
+    try{
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $prepare->closeCursor();
+        return $result;
+    }catch (Exception $e){
+        die($e->getMessage());
+    }
+    
 }
 
 // FONCTION de pagination

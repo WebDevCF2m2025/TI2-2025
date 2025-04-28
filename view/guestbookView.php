@@ -63,30 +63,7 @@
 
 <!-- Pagination (BONUS) -->
 
-<!-- Liste des messages -->
-<ul>
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-</ul>
-etc ...
-<!-- Pagination (BONUS) -->
-<?php
-// À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
-?>
+<nav style="display:flex; justify-content:center; margin: 10px;"><?=$pagination?></nav>  
 
 <script src="js/validation.js"></script>
 </body>
