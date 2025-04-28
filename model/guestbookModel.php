@@ -29,10 +29,10 @@ function addGuestbook(PDO $db,
                     string $phone,
                     string $postcode,
                     string $message
-): bool
+): bool|string
 
 {
-    $erreur = " ";
+    $erreur = "";
     
     $firstnameVerify = strip_tags($firstname);
     if(empty($firstnameVerify)){
@@ -50,17 +50,17 @@ function addGuestbook(PDO $db,
         $erreur.="Votre nom est trop long.<br>";
     }
 
-    $email = filter_var($usermail,FILTER_VALIDATE_EMAIL);
-    if($email===false){
+    $usermail = filter_var($usermail,FILTER_VALIDATE_EMAIL);
+    if($usermail===false){
         $erreur .= "Email incorrect.<br>";
     }
 
     if (!is_int($phone)){
-        $erreur .= "Phone n'est pas correct";
+        $erreur .= "Phone n'est pas correct <br>";
     }
 
-    $text = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
-    if(empty($text)||strlen($text)>300){
+    $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+    if(empty($message)||strlen($message)>300){
         $erreur .= "Message incorrect<br>";
     }
 
@@ -142,12 +142,13 @@ try{
  * @return int
  * Fonction qui compte le nombre total de messages dans la table 'guestbook'
  */
-function getNbTotalGuestbook(PDO $con): int
+function getNbTotalGuestbook(PDO $db): int
 {
-    $query = $con->query("SELECT COUNT(*) as nb FROM `guestbook` ");
+    $query = $db->query("SELECT COUNT(*) as nb FROM `guestbook` ");
     // on renvoie l'entier stocké dans nb
     return $query->fetch()['nb'];
 
+    
     // try catch
     // si la requête a réussi,
     // bonne pratique, fermez le curseur,

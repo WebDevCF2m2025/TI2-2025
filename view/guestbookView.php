@@ -15,7 +15,7 @@
 <body>
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
-<div class="container"></div>
+<div class="container">
 <h2>Ici le formulaire</h2>
 
 <?php if (isset($erreur)):?>
@@ -23,8 +23,6 @@
 <?php endif; ?>
 
 <div class="formulaire">
-
-
 
     <form action="" method="post">
         <label for="firstname">Prenom *</label>
@@ -42,6 +40,8 @@
         <button type="submit">Envoyer</button>
     </form>
 </div>
+</div>
+
 
 <!-- Si pas de message -->
 <h3>Pas encore de message</h3>

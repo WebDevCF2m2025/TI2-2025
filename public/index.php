@@ -22,8 +22,7 @@ require_once "../model/guestbookModel.php";
  * le mode fetch à tableau associatif
  */
 
- try{
- 
+ try{ 
     $db = new PDO(DB_DSN, DB_LOGIN, DB_PWD,        
         [            
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,         
@@ -37,7 +36,7 @@ require_once "../model/guestbookModel.php";
 /*
  * Si le formulaire a été soumis
  */
-if (isset($_POST["firstname"],$_POST["lastname"], $_POST["usermail"], $_POST["phone"], $_POST["postcode"], $_POST["message"])) {
+if (isset($_POST["firstname"], $_POST["lastname"], $_POST["usermail"], $_POST["phone"], $_POST["postcode"], $_POST["message"])) {
 
     $firstname = strip_tags($_POST['firstname']);
     $firstname = htmlspecialchars($firstname, ENT_QUOTES);
@@ -47,9 +46,16 @@ if (isset($_POST["firstname"],$_POST["lastname"], $_POST["usermail"], $_POST["ph
     $lastname = htmlspecialchars($lastname, ENT_QUOTES);
     $lastname = trim($lastname);
 
-
-
     $usermail = filter_var($_POST['usermail'], FILTER_VALIDATE_EMAIL);
+
+ 
+    $phone = strip_tags($_POST['phone']);
+    $phone = htmlspecialchars($phone, ENT_QUOTES);
+    $phone = trim($phone);
+
+    $postcode = strip_tags($_POST['postcode']);
+    $postcode = htmlspecialchars($postcode, ENT_QUOTES);
+    $postcode = trim($postcode);
 
     $message = strip_tags($_POST['message']);
     $message = htmlspecialchars($message, ENT_QUOTES);
@@ -63,7 +69,7 @@ if (isset($_POST["firstname"],$_POST["lastname"], $_POST["usermail"], $_POST["ph
     && !empty($message) 
     && !empty($phone) 
     && !empty($postcode)) {
-        $insert = addGuestbook($db, $firstname, $lastname, $usermail, $phone, $postcode, $message);
+        $insert = addGuestbook($db, $firstname, $lastname, $usermail, $phone,  $postcode,  $message);
     } else {
         $erreur = "Erreur dans le formulaire !";}
 }
@@ -91,12 +97,12 @@ if (isset($_POST["firstname"],$_POST["lastname"], $_POST["usermail"], $_POST["ph
 
 # on récupère la pagination
 
-# pour obtenir le $offset pour les messages (calcul)
+# 
+/**************************
+ * Fin du Bonus Paginationpour obtenir le $offset pour les messages (calcul)
 
 # on veut récupérer les messages de la page courante
 
-/**************************
- * Fin du Bonus Pagination
  **************************/
 
 // Appel de la vue
@@ -104,3 +110,4 @@ if (isset($_POST["firstname"],$_POST["lastname"], $_POST["usermail"], $_POST["ph
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+$db = null;
