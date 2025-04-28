@@ -2,7 +2,7 @@
 # view/guestbookView.php
 ?>
 <!doctype html>
-<html lang="fr">
+<html lang="be">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -13,32 +13,43 @@
 </head>
 <body>
 <h1>TI2 | Livre d'or</h1>
+
+<div class="image">
+    <img src="../public/img/sign-up-amico.png">
+</div>
+
 <!-- Formulaire d'ajout d'un message -->
-<h2>Laissez nous un message</h2>
-<form action="" method="post">
+<h2 class="avis">Laissez-nous un message</h2>
+<p id="verifEmail"></p>
 
-    <label for="firstname">Prénom *</label>
-    <input type="text" name="firstname" id="firstname" required>
+<div class="container">
+    <form action="" id="formulaire" method="post">
 
-    <label for="lastname">Nom *</label>
-    <input type="text" name="lastname" id="lastname" required>
+        <label for="firstname">Prénom *</label>
+        <input type="text" name="firstname" id="firstname" required>
 
-    <label for="usermail">E-mail *</label>
-    <input type="email" name="usermail" id="usermail" required>
+        <label for="lastname">Nom *</label>
+        <input type="text" name="lastname" id="lastname" required>
 
-    <label for="postcode">c/postal *</label>
-    <input type="text" name="postcode" id="postcode" required>
+        <label for="usermail">E-mail *</label>
+        <input type="email" name="usermail" id="usermail">
+        <p id="verifEmail"></p>
 
-    <label for="phone">Portable</label>
-    <input type="text" name="phone" id="phone" required>
+        <label for="postcode">c/postal *</label>
+        <input type="text" name="postcode" id="postcode">
+        <p id="verifCP"></p>
 
-    <label for="message">Message</label>
-    <textarea name="message" id="message" rows="10"></textarea required>
+        <label for="phone">Portable</label>
+        <input type="text" name="phone" id="phone">
+        <p id="verifTel"></p>
 
-    <button type="submit">Envoyer</button>
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="10" maxlength="300" required></textarea>
+        <p id="caracCount">0/300 caractères</p>
 
-</form>
-
+        <button type="submit">Envoyer</button>
+    </form>
+</div>
 <?php
 if(empty($nbMessage)):
 ?>
@@ -61,6 +72,7 @@ else:
 ?>
 
 <div class="message">
+    <h2>Les messages précédents</h2>
     <!-- Si 1 message ou $pluriel plusieurs messages -->
     <h3>Il y a <?=$nbMessage?> message<?=$pluriel?></h3>
 
@@ -74,8 +86,8 @@ else:
     <!-- Liste des messages -->
     <ul>
         <li>
-            <p><strong><?=$message['firstname']?></strong></p>
-            <p><em><?=$message['datemessage']?></em></p>
+            <p><strong><?=$message['firstname'], $message['lastname']?></strong> à écrit ce message</p>
+            <p>le <em><?=dateFR($message['datemessage'])?></em></p>
             <p><?=$message['message']?></p>
         </li>
     </ul>
@@ -94,11 +106,11 @@ echo"$pagination";
 
 <?php
 // À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
+// echo "<h3>Nos var_dump() pour le débugage</h3>";
+// echo '<p>$_POST</p>';
+// var_dump($_POST);
+// echo '<p>$_GET</p>';
+//var_dump($_GET);
 ?>
 
 <script src="js/validation.js"></script>
