@@ -1,6 +1,6 @@
 <?php
 # public/index.php
-
+ini_set('display_errors',1);
 
 /*
  * Front Controller de la gestion du livre d'or
@@ -17,6 +17,7 @@ require_once "../model/guestbookModel.php";
 /*
  * Connexion à la base de données en utilisant PDO
  */
+
 try{
     $db = new PDO(DB_DSN, DB_CONNECT_USER, DB_CONNECT_PWD,
         // tableau d'options
@@ -67,7 +68,7 @@ if(isset($_POST['surname'],$_POST['email'],$_POST['message'])){
  */
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
-$messages = getAllGuestbook($db);
+// $messages = getAllGuestbook($db);
 
 /*********************
  * Ou Bonus Pagination

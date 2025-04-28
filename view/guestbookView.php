@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div="container">
 <h1>TI2 | Livre d'or</h1>
 <img class="image1" src="../public/img/sign-up-amico.png" alt="">
 
@@ -20,31 +21,21 @@
 <h2>Laissez-nous un message</h2>
 <!-- Si pas de message -->
 <form id="registrationForm">
-            <div id="form1">
-                Prénom
-                <input id="prenom" type="text" name="prenom">
-            </div>
-            <div id="form1">
-                Nom
-                <input id="nom" type="text" name="name">
-            </div>
-            <div id="form1">
-                Email
-                <input id="email" type="email" name="email">
-            </div>
-            <div id="form1">
-                c/code postal
-            <input id="postal" type="text">
-            </div>
-            <div id="form1">
-                Portable
-                <input id="portable" type="text">
-            </div>
-            <div class="form1">
-                <input type="submit" placeholder="envoyer">
-			</div>
-</form>
 
+                <label for="firsname">Prénom *</label>
+                <input id="prenom" type="text" name="prenom">
+                <label for="lastname">Nom *</label>
+                <input id="nom" type="text" name="prenom">
+                <label for="email">Email *</label>
+                <input id="email" type="email" name="email" placeholder="email">
+                <label for="postal">c/code postal *</label>
+                <input id="postal" type="text" name="postal">
+                <label for="portable">Portable *</label>
+                <input id="portable" type="text" name="portable">
+                <button type="submit">Envoyer </button>
+            
+</form>
+</div>
 <?php
 // articles est un tableau vide
 if(empty($messages)):

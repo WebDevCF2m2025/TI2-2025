@@ -28,17 +28,8 @@ function addGuestbook(PDO $db,
                     string $postcode,
                     string $message
 ): bool
-
+{
     // traitement des données backend (SECURITE)
-    if(
-        empty($firstname) || strlen($firstname) > 100 ||
-        empty($lastname) || strlen($lastname) > 100 ||
-        empty($usermail) || strlen($usermail) > 200 ||
-        empty($phone) || strlen($phone) > 20 ||
-        empty($postcode) || strlen($postcode) > 4 ||
-        empty($message) || strlen($message) > 500 ||
-
-    ){
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
     return false;
@@ -63,17 +54,15 @@ function addGuestbook(PDO $db,
  * venant de la base de données 'ti2web2025' et de la table 'guestbook'
  * Si pas de message, renvoie un tableau vide
  */
-function getAllGuestbook(PDO $db): array
-{}
-    
+function getAllGuestbookOrderByDateASC(PDO $db): array
+{
     // try catch
     // si la requête a réussi,
-
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    
+    return [];
     // sinon, on fait un die de l'erreur
-
+}
 
 /**************************
  * Pour le Bonus Pagination
@@ -120,7 +109,7 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
 }
 
 // FONCTION de pagination
-/**
+/*
  * @param int $nbtotalMessage
  * @param string $get
  * @param int $pageActu
@@ -129,6 +118,7 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  * Fonction qui génère le code HTML de la pagination
  * si le nombre de pages est supérieur à une.
  */
+/*
 function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
 {
     $sortie = "";
@@ -163,3 +153,4 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
     return $sortie;
 
 }
+    */
