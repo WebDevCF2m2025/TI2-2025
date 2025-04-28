@@ -97,7 +97,7 @@ $pagination = pagination($nbMessage,PAGINATION_GET,$page,PAGINATION_NB);
 $offset = ($page-1)*PAGINATION_NB;
 $messages = getGuestbookPagination($connexion,$offset,PAGINATION_NB);
 
-var_dump($offset);
+
 
 
 /**************************

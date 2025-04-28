@@ -14,29 +14,47 @@
 </head>
 <body>
 
-<h1>TI2 | Livre d'or</h1>
-<!-- Formulaire d'ajout d'un message -->
-    <form action="" method="POST">
-        <label for="firstname">prenom *</label>
-        <input type="text" id="firstname" name="firstname">
+    <h1>TI2 | Livre d'or</h1>
+<div class="block">    
+    <div>
+        <div class="img">
+            <img src="img/sign-up-amico.png" alt="">
+        </div>
+    </div>
+    <div>
+         <h2>Laissez nous un message</h2>
+        <!-- Formulaire d'ajout d'un message -->
+        <form action="" method="POST">
+            <div class="label">
+                <label for="firstname">Prenom *</label>
+                <input type="text" id="firstname" name="firstname">
+            </div>
+            <div class="label">
+                <label for="lastname">Nom *</label>
+                <input type="text" id="lastname" name="lastname">
+            </div>
+            <div class="label">
+                <label for="usermail">Email *</label>
+                <input type="email" id="usermail" name="usermail">
+            </div>
+            <div class="label">
+                <label for="postcode">c/postal *</label>
+                <input type="text" id="postcode" name="postcode">
+            </div>
+            <div class="label">
+                <label for="phone">Portable *</label>
+                <input type="text" id="phone" name="phone">
+            </div>
+            <div class="label">
+                <label for="message">Message *</label>
+                <textarea name="message" id="message"></textarea>
+            </div>
 
-        <label for="lastname">Nom *</label>
-        <input type="text" id="lastname" name="lastname">
+            <button type="submit">Envoyer</button>
+        </form>
 
-        <label for="usermail">Email *</label>
-        <input type="email" id="usermail" name="usermail">
-
-        <label for="postcode">c/postal *</label>
-        <input type="text" id="postcode" name="postcode">
-
-        <label for="phone">Portable *</label>
-        <input type="text" id="phone" name="phone">
-
-        <label for="message">Message *</label>
-        <textarea name="message" id="message"></textarea>
-
-        <button type="submit">Envoyer</button>
-    </form>
+    </div>
+</div>
     <?php if(isset($saved)): ?>
         <h3 ><?=$saved?></h3>
     <?php elseif(isset($notSaved)):?>
@@ -48,16 +66,18 @@
 
     <!-- Si pas de message -->
     <?php if ($nbMessage == 0):?>
-        <h3>Pas encore de message</h3>
+        <h3 class="h3rose">Pas encore de message</h3>
     <?php else : ?>
         <!-- Si 1 message et Si plusieurs messages -->
-        <h3 ><?= $nbMessage>1?"Il y a " . $nbMessage . " messages": "Il y a " .  $nbMessage . " message"; ?></h3>
+        <h3 class="h3rose"><?= $nbMessage>1?"Il y a " . $nbMessage . " messages": "Il y a " .  $nbMessage . " message"; ?></h3>
         <?php foreach($messages as $message):?>
-            <p >Enregistré le : <?= goodDate($message['datemessage']);?></p>
-            <h4 ><?= $message['firstname'];?></h4>
-            <h4 ><?= $message['lastname'];?></h4>
-            <p ><?= $message['message'];?></p>
-            <hr >
+            <div class="message">
+                <p >Enregistré le : <?= goodDate($message['datemessage']);?></p>
+                <h4 ><?= $message['firstname'];?></h4>
+                <h4 ><?= $message['lastname'];?></h4>
+                <p ><?= $message['message'];?></p>
+            </div>
+
         <?php endforeach; ?>
     <?php endif; ?>
 
