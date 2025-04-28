@@ -12,50 +12,58 @@
     <title>TI2 | Livre d'or</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <div class="container">
-        <div>
+        <div id="titre">
             <h1>TI2 | Livre d'or</h1>
         </div>
-        <div>
+        <div id="image" >
             <img src="img/sign-up-amico.png" alt="Image d'inscription">
         </div>
-         <div>
+         <div id="titredeux" >
                 <h2>Laissez-nous un message</h2>
         </div>
-        <form action="" method="post">
+        <form id="form" action="" method="post">
            
 
-            <div>
+            <div class="groupe">
+            
                 <label for="prenom">Prénom*</label>
-                <input type="text" name="prenom" id="prenom" required>
-                <span id="PrenomError" ></span>
+                <input type="text" name="prenom" id="prenom" placeholder="Entrez votre nom" >
+                
+                <span id="prenomError" ></span>
+                
             </div>
-            <div>
+            <div class="groupe">
                 <label for="nom">nom*</label>
-                <input type="text" name="nom" id="nom" required>
+                <input type="text" name="nom" id="nom" placeholder="Entrez votre prénom">
+              
                 <span id="nomError"></span>
             </div>
-            <div>
+            <div class="groupe">
                 <label for="email">E-mail*</label>
-                <input type="email" name="email" id="email" required>
+                <input type="email" name="email" id="email" placeholder="Entrez votre Email">
+                
                 <span id="emailError"></span>
             </div>
-            <div>
+            <div class="groupe">
                 <label for="postal">c/postal*</label>
-                <input type="number" name="postal" id="postal" required>
+                <input type="number" name="postal" id="postal" placeholder="Entrez votre code postale">
+               
                 <span id="postalError"></span>
             </div>
-            <div>
+            <div class="groupe">
                 <label for="portable">Portable*</label>
-                <input type="number" name="portable" id="portable" required>
+                <input type="number" name="portable" id="portable" placeholder="Entrez votre numéro de télé<phone">
+                
                 <span id="portableError"></span>
             </div>
-            <div>
+            <div class="groupe">
                 <label for="message">Message*</label>
-                <textarea name="message" id="message" rows="10" required></textarea>
+                <textarea name="message" id="message" rows="10"  placeholder="saisisez ici ..."></textarea>
                 <span id="messageError"></span>
             </div>
             <div>
@@ -66,7 +74,7 @@
 
 
 
-<div class="pied-formulaire">
+<div class="pied-formulaire"  id="pied" >
 
         <?php
         

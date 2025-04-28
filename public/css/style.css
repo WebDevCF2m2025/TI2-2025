@@ -17,14 +17,67 @@ img{
     height: 100%;
     background: #fef1df;
     display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: repeat(4,auto);
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5,auto); 
     justify-content: center;
     align-items: center;
     justify-items: center;
+    gap: 10px;
+    grid-template-areas:
+            "titre"
+            "image"
+            "titredeux"
+            "form"
+            "pied";
+            
+        }
    
+     
+    #titre {
+        grid-area: titre;
+    }
+    #image {
+        grid-area: image;
+    }
+    #titredeux {
+        grid-area: titredeux;
+    }
+    #form {
+        grid-area: form;
+    }
+    #pied {
+        grid-area: pied;
+    }
+    
 
-}
+   label{
+display: inline-block;
+width: 100px;
+
+   }
+     .groupe input{
+        margin-top: 5px;
+        padding: 10px 5px 10px 30px ;
+        border: 1px solid #cfcfcf;
+        outline-color: #747cdf;
+        border-radius: 5px;
+        }
+
+
+         .groupe textarea{
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #d8d8d8;
+            border: 2px solid #747cdf;
+            outline: none;
+            border-radius: 5px;
+            resize: none;
+            height: 72%;
+         
+             
+         }
+
+
 
 form {
     width: 90%;
@@ -33,6 +86,7 @@ form {
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+
   
     
 }
@@ -57,6 +111,7 @@ button{
        outline: none;
        cursor: pointer;
        transition: transform 0.5s;
+       width: 100%;
     }
 
  button:hover{
@@ -91,3 +146,62 @@ color: white;
   span {
     height: 1vh;
   }
+ 
+
+  @media screen and (480px< width < 9600px) {
+
+  
+        form div {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+           
+        
+        }
+       
+    
+    
+    
+}
+
+@media screen and ( width > 960px) {
+
+  
+    form div {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+       
+    
+    }
+    .container{
+ 
+       
+     
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(4,auto); 
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        gap: 10px;
+        grid-template-areas:
+                "titre titre"
+                "titredeux titredeux"
+                "image form"
+                "pied pied";
+                
+            }
+       
+            img{
+                width: 400px;
+                
+            }
+
+
+
+}
+
+
