@@ -21,7 +21,7 @@ function verifCodePostal(postal) {
 
 // On attribue la constante codePostal à l'id "postcode" du formulaire qui est le code postal
 const codePostal = document.getElementById("postcode");
-
+const codePostal2 = document.getElementById("verifCP");
 
 
 //////////////////////////////////// NUMÉRO DE TÉLÉPHONE //////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ function verifTelephone(telephone) {
 
 // On attribue la constante telephone à l'id "phone" du formulaire qui est le téléphone
 const telephone = document.getElementById("phone");
-
+const telephone2 = document.getElementById("verifTel");
 
 
 //////////////////////////////////// EVENEMENT //////////////////////////////////////////////////////
@@ -52,23 +52,29 @@ formulaire.addEventListener("submit", function(event) {
     
     const mail = email.value.trim();
     if (!verifEmail(mail)) {
-        alert("Veuillez entrer un email valide");
+        email2.textContent = 'Veuillez entrer un email valide';
+        email2.style.color = 'red';
     } else {
-        alert("Email valide, merci.");
+        email2.textContent = 'E-mail valide, merci';
+        email2.style.color = 'green';
     }
 
     const postal = codePostal.value.trim();
     if (!verifCodePostal(postal)) {
-        alert("Veuillez entrer un code postal Belge valide (4 chiffres)");
+        codePostal2.textContent = 'Veuillez entrer un code postal Belge valide (4 chiffres)';
+        codePostal2.style.color = 'red';
     } else {
-        alert("Code postal valide, merci.");
+        codePostal2.textContent = 'Code postal valide, merci';
+        codePostal2.style.color = 'green';
     }
 
     const tel = telephone.value.trim();
     if (!verifTelephone(tel)) {
-        alert("Veuillez entrer un numéro de téléphone correct (Qui commence par 04 et qui contient 10 chiffres. Ex : 0498150882");
+        telephone2.textContent = 'Veuillez entrer un numéro de téléphone correct (Qui commence par 04 et qui contient 10 chiffres. Ex : 0498150882)';
+        telephone2.style.color = 'red';
     } else {
-        alert("Numéro de téléphone valide, merci.");
+        telephone2.textContent = 'Numéro de téléphone valide';
+        telephone2.style.color = 'red';
     }
 });
 

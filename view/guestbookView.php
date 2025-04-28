@@ -21,6 +21,8 @@
 <!-- Formulaire d'ajout d'un message -->
 <h2 class="avis">Laissez-nous un message</h2>
 <p id="verifEmail"></p>
+<p id="verifCP"></p>
+<p id="verifTel"></p>
 
 <div class="container">
     <form action="" id="formulaire" method="post">
@@ -33,15 +35,12 @@
 
         <label for="usermail">E-mail *</label>
         <input type="email" name="usermail" id="usermail">
-        <p id="verifEmail"></p>
-
+        
         <label for="postcode">c/postal *</label>
         <input type="text" name="postcode" id="postcode">
-        <p id="verifCP"></p>
 
         <label for="phone">Portable</label>
         <input type="text" name="phone" id="phone">
-        <p id="verifTel"></p>
 
         <label for="message">Message</label>
         <textarea name="message" id="message" rows="10" maxlength="300" required></textarea>
