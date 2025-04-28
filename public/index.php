@@ -30,20 +30,30 @@ try{
     die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
 }
 
-var_dump($connexion)
+//echo "coucou";
 
 $articles = getAllGuestbook($connexion);
 
 //  Si le formulaire a été soumis
+/*
+array (size=6)
+  'firstname' => string 'abdelkader' (length=10)
+  'lastname' => string 'nordine' (length=7)
+  'usermail' => string 'eloummalnordine@hotmail.com' (length=27)
+  'phone' => string '0484750037' (length=10)
+  'postcode' => string '1050' (length=4)
+  'message' => string '546' (length=3)
+  */
 
-if(isset($_POST['firstname']) && 
-    isset($_POST['lastname']) && 
-    isset($_POST['usermail']) && 
-    isset($_POST['phone']) && 
-    isset($_POST['postcode']) && 
-    isset($_post['message']) && 
-    isset($_post['datemessage']))
+
+if(isset($_POST['firstname'],
+        $_POST['lastname'],
+    $_POST['usermail'],
+    $_POST['phone'],
+    $_POST['postcode'],
+    $_POST['message']))
 {
+
  // Insertion dans la base de données   
 $insert = addGuestbook($connexion, 
                         $_POST['firstname'], 
@@ -51,10 +61,10 @@ $insert = addGuestbook($connexion,
                         $_POST['usermail'], 
                         $_POST['phone'], 
                         $_POST['postcode'], 
-                        $_post['message'], 
-                        $_post['datemessage']);
+                        $_POST['message'] 
+);
 
- // Redirection après insertion
+ //Redirection après insertion
 header('Location: ./');
 exit;
 }

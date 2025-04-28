@@ -130,7 +130,7 @@ function verificationDeInput() {
     const prenomRegex = /^[A-Za-zÀ-ÿ\s'-]{2,50}$/; // Prénom : mêmes règles que pour le nom.
     const emailRegex = /^[\w.-]+@[\w.-]+\.\w{2,}$/; // Email : format standard d'adresse email.
     const telRegex = /^(?:\+32|0)[1-9]\d{7,8}$/; // Téléphone : format belge (+32 ou 0 suivi de 8 ou 9 chiffres).
-    const postcodeRegex = ;
+    const postcodeRegex = /^?:\4[1-9]\d$/;
     const messageRegex = /^.{5,1000}$/; // Message : entre 5 et 1000 caractères.
 
     // Ajout d'un écouteur d'événement sur le bouton pour gérer le clic.
@@ -201,7 +201,7 @@ function verificationDeInput() {
             postcodeError.textContent = "Le champ du code postal est vide";
             postcodeError.style.color = "red";
             isValid = false;
-        } else if (!telRegex.test(inputTel)) {
+        } else if (!telRegex.test(inputpostcode)) {
             postcodeError.textContent = "Le code postal n'est pas valide";
             postcodeError.style.color = "red";
             isValid = false;
