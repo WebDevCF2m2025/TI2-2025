@@ -10,36 +10,128 @@ body {
     color: white;
 }
 
-.title {
-    h1, h2 {
-        padding: 20px 0;
-    }
+section, .form-container, .title, .nomessage, .messages {
     display: grid;
     place-items: center;
 }
 
-.form-container {
-    display: flex;
+.title {
+    h1 {
+        color: rgb(218, 143, 245);
+        padding: 20px 0;
+    }
 }
+
+h2 {
+    padding: 20px 0;
+}
+
+.banner {
+    scale: 60%;
+}
+
+
 
 form {
     background: grey;
     color: white;
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px 60px;
+    width: 400px;
     label {
-        text-align: center;
+        display: flex;
+        justify-content: center;
     }
     input, textarea, button {
         width: 100%;
         border-radius: 5px;
         border: none;
         background: #1E1E1E;
+        color: white;
         padding: 20px;
         margin: 10px 0;
         resize: none;
     }
+
     button {
         color: white;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+    }
+    button:hover {
+        background: rgb(218, 143, 245);
     }
 }
+
+
+
+
+/* PORTABLE INPUT */
+
+#portable {
+    padding: 40px 0;
+    margin: 10px 0 100px;
+}
+
+h3 {
+    padding: 20px 0;
+}
+
+/* MOBILE VIEW */
+
+@media (width <= 480px) {
+    .message-field {
+        display: none;
+    }
+}
+
+/* TABLET VIEW */
+
+@media (width > 480px) {
+    .banner {
+        scale: 100%;
+    }
+    
+    form {
+        width: 700px;
+    }
+    .fieldset {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        label {
+            width: 20%;
+        }
+    }
+    #portable {
+        padding: 20px;
+        margin: 0;
+    }
+    .message-field {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 150px;
+        label {
+            width: 20%;
+        }
+        textarea {
+            padding: 60px;
+        }
+    }
+}
+
+
+/* DESKTOP VIEW */
+
+@media (width >= 960px) {
+    .subtitle {
+        display: none;
+    }
+    .form-container {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+    }
+}
+
