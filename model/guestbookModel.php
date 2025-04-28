@@ -6,6 +6,39 @@
 
 // INSERTION d'un message dans le livre d'or
 
+
+function addAllWeProfAsk(PDO $con): array
+{
+    $query = $con->query("SELECT * FROM guestbook");
+    $messages = $query->fetchAll();
+    $query->closeCursor();
+    return $messages;
+
+}
+
+function insert(PDO $conecte, string $nom, string $prenom, string $email, string $telephone, string $message, string $codePostalInsert): bool
+{
+
+    $nomInsert = trim(htmlspecialchars(strip_tags($nom), ENT_QUOTES));
+    $prenomInsert = trim(htmlspecialchars(strip_tags($prenom), ENT_QUOTES));
+    $emailInsert = filter_var($email, FILTER_VALIDATE_EMAIL);
+    $messageInsert = trim(htmlspecialchars(strip_tags($message), ENT_QUOTES));
+    $telephoneInsert = trim(strip_tags($telephone), ENT_QUOTES);
+    $codePostalInsert = trim(htmlspecialchars(strip_tags($codePostalInsert), ENT_QUOTES));
+
+
+
+    if (empty($nomInsert) || strlen($nomInsert) > 60 || empty($codePostalInsert) || strlen($codePostalInsert) > 4 || empty($prenomInsert) || strlen($prenomInsert) > 60 || $emailInsert === false || empty($messageInsert) || strlen($messageInsert) > 500 || empty($telephoneInsert) || strlen($telephoneInsert) > 20) {
+        return false;
+    }
+
+    $insert = $conecte->prepare("INSERT INTO testtableti (nom, prenom, email, telephon, message) VALUES (?, ?, ?, ?, ?)");
+    $insert->execute([$nomInsert, $prenomInsert, $emailInsert, $telephoneInsert, $messageInsert]);
+    $insert->closeCursor();
+    return true;
+}
+
+
 /**
  * @param PDO $db
  * @param string $firstname
@@ -20,15 +53,15 @@
  * Une requête préparée est utilisée pour éviter les injections SQL
  * Les données sont échappées pour éviter les injections XSS (protection backend)
  */
-function addGuestbook(PDO $db,
-                    string $firstname,
-                    string $lastname,
-                    string $usermail,
-                    string $phone,
-                    string $postcode,
-                    string $message
-): bool
-{
+function addGuestbook(
+    PDO $db,
+    string $firstname,
+    string $lastname,
+    string $usermail,
+    string $phone,
+    string $postcode,
+    string $message
+): bool {
     // traitement des données backend (SECURITE)
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
@@ -36,8 +69,8 @@ function addGuestbook(PDO $db,
     // requête préparée obligatoire !
 
     // try catch
-        // si l'insertion a réussi
-        // on renvoie true
+    // si l'insertion a réussi
+    // on renvoie true
     // sinon, on fait un die de l'erreur
 
 }
@@ -68,6 +101,9 @@ function getAllGuestbook(PDO $db): array
  * Pour le Bonus Pagination
  **************************/
 
+
+
+
 // SELECTION du nombre total de messages
 /**
  * @param PDO $db
@@ -86,7 +122,7 @@ function getNbTotalGuestbook(PDO $db): int
 // SELECTION de messages dans le livre d'or par ordre de date croissante
 // en lien avec la pagination
 /**
- * @param PDO $db
+ * @param  PDO $db
  * @param int $offset
  * @param int $limit
  * @return array
@@ -118,12 +154,14 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  * Fonction qui génère le code HTML de la pagination
  * si le nombre de pages est supérieur à une.
  */
-function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
+function pagination(int $nbtotalMessage, string $get = "page", int $pageActu = 1, int $perPage = 5): string
 {
     $sortie = "";
-    if ($nbtotalMessage === 0) return "";
+    if ($nbtotalMessage === 0)
+        return "";
     $nbPages = ceil($nbtotalMessage / $perPage);
-    if ($nbPages == 1) return "";
+    if ($nbPages == 1)
+        return "";
     $sortie .= "<p>";
     for ($i = 1; $i <= $nbPages; $i++) {
         if ($i === 1) {

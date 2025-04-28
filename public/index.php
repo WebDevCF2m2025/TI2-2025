@@ -22,9 +22,34 @@ require_once "../model/guestbookModel.php";
  * le mode fetch à tableau associatif
  */
 
+
+try {
+
+    $con = new PDO(
+        dns,
+        DB_LOGIN,
+        DB_PWD,
+        [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,]
+    );
+} catch (Exception $e) {
+
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
+
 /*
  * Si le formulaire a été soumis
  */
+
+
+
+$afficher = addAllWeProfAsk($con);
+
+
+if (isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['telephone']) && isset($_POST['codePostal']) && isset($_POST['message'])) {
+    $insert = insert($con, $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['codePostal'], $_POST['message']);
+    header('Location: ./');
+    exit;
+}
 
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
