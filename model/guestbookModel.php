@@ -40,8 +40,12 @@ function addGuestbook(PDO $db,
 
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-  if(empty($firstname) || strlen($firstname) > 100 || empty($lastname) || strlen($lastname) > 100 ||
-  $usermail === false || strlen($usermail) > 200  ||  empty($phone) || strlen($phone) > 20 || empty($postcode) || strlen($postcode) > 4 ||
+  if(
+    empty($firstname) || strlen($firstname) > 100 ||
+    empty($lastname) || strlen($lastname) > 100 ||
+    $usermail === false || strlen($usermail) > 200  ||
+    empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false ||
+    empty($postcode) || strlen($postcode) > 4 ||
     empty($message) || strlen($message) > 500
   ) {
     return false;
@@ -50,7 +54,7 @@ function addGuestbook(PDO $db,
 
     // requête préparée obligatoire
   $prepare = $db->prepare("
-  INSERT INTO `gestbook` (
+  INSERT INTO `guestbook` (
                           `firstname`, `lastname`,
                           `usermail`,`phone`,
                           `postcode`,`message`
@@ -60,7 +64,7 @@ function addGuestbook(PDO $db,
         // on renvoie true
     // sinon, on fait un die de l'erreur
   try {
-    $prepare->execute([$firstname,$lastname,$usermail,$usermail,$phone,$postcode,$message]);
+    $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
     return true;
 
   }catch (Exception $e){
@@ -81,15 +85,7 @@ function addGuestbook(PDO $db,
  * venant de la base de données 'ti2web2025' et de la table 'guestbook'
  * Si pas de message, renvoie un tableau vide
  */
-function getAllGuestbook(PDO $db): array
-{
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
-}
+
 
 /**************************
  * Pour le Bonus Pagination
@@ -140,12 +136,13 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
     // renvoyer le tableau de(s) message(s)
 
   $prepare = $db->prepare("
-    SELECT * FROM `guestbook` ORDER BY `guestbook`.`datemessage`
-    DESC LIMIT ?,?
+    SELECT * FROM `guestbook` 
+    ORDER BY `guestbook`.`datemessage`
+    ASC LIMIT ?,?
   ");
 
   $prepare->bindParam(1,$offset,PDO::PARAM_INT);
-  $prepare->bindParam(2,$offset,PDO::PARAM_INT);
+  $prepare->bindParam(2,$limit,PDO::PARAM_INT);
 
   try {
     $prepare->execute();
@@ -203,4 +200,11 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
     $sortie .= "</p>";
     return $sortie;
 
+}
+function dateFR(string $datetime): string
+{
+  // temps unix en seconde de la date venant de la db
+  $stringtotime = strtotime($datetime);
+  // retour de la date au format
+  return date("d/m/Y \à H:m:s",$stringtotime);
 }
