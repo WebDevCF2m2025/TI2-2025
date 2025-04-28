@@ -69,7 +69,7 @@ formulaire.addEventListener("submit", function(event) {
 
     const tel = telephone.value.trim();
     if (!verifTelephone(tel)) {
-        telephone2.textContent = 'Veuillez entrer un numéro de téléphone correct (Qui commence par 04 et qui contient 10 chiffres. Ex : 0498150882)';
+        telephone2.textContent = 'Veuillez entrer un numéro de téléphone correct';
         telephone2.style.color = 'red';
         return;
     }
