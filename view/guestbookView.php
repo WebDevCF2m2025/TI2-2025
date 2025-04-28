@@ -16,7 +16,7 @@
 
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
-    <form action="" method="POST" style="display:flex; flex-direction: column; width: 80%; margin: auto;">
+    <form action="" method="POST">
         <label for="firstname">prenom *</label>
         <input type="text" id="firstname" name="firstname">
 
@@ -38,32 +38,32 @@
         <button type="submit">Envoyer</button>
     </form>
     <?php if(isset($saved)): ?>
-        <h3 style="text-align: center;"><?=$saved?></h3>
+        <h3 ><?=$saved?></h3>
     <?php elseif(isset($notSaved)):?>
-        <h3 style="text-align: center;"><?=$notSaved?></h3>
+        <h3 ><?=$notSaved?></h3>
     <?php endif;?>
 
 
 
 
     <!-- Si pas de message -->
-    <?php if ($count == 0):?>
+    <?php if ($nbMessage == 0):?>
         <h3>Pas encore de message</h3>
     <?php else : ?>
         <!-- Si 1 message et Si plusieurs messages -->
-        <h3 style="text-align: center;"><?= $count>1?"Il y a " . $count . " messages": "Il y a " .  $count . " message"; ?></h3>
-        <?php foreach($guestbook as $message):?>
-            <p style="margin: 0 20%; margin-top: 20px; font-size: 12px; text-align: right;">Enregistré le : <?= goodDate($message['datemessage']);?></p>
-            <h4 style="margin: 0 20%;"><?= $message['firstname'];?></h4>
-            <h4 style="margin: 0 20%;"><?= $message['lastname'];?></h4>
-            <p style="margin: 0 20%;"><?= $message['message'];?></p>
-            <hr style="margin: auto; width: 80%; margin-top: 20px; box-shadow: 0px 1px 5px 0px gray;">
+        <h3 ><?= $nbMessage>1?"Il y a " . $nbMessage . " messages": "Il y a " .  $nbMessage . " message"; ?></h3>
+        <?php foreach($messages as $message):?>
+            <p >Enregistré le : <?= goodDate($message['datemessage']);?></p>
+            <h4 ><?= $message['firstname'];?></h4>
+            <h4 ><?= $message['lastname'];?></h4>
+            <p ><?= $message['message'];?></p>
+            <hr >
         <?php endforeach; ?>
     <?php endif; ?>
 
 <!-- Pagination (BONUS) -->
 
-<nav style="display:flex; justify-content:center; margin: 10px;"><?=$pagination?></nav>  
+<nav ><?=$pagination?></nav>  
 
 <script src="js/validation.js"></script>
 </body>

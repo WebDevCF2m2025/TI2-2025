@@ -170,6 +170,7 @@ function getNbTotalGuestbook(PDO $db): int
         die($e->getMessage());
     }
 }
+
 // SELECTION de messages dans le livre d'or par ordre de date croissante
 // en lien avec la pagination
 /**
@@ -182,7 +183,7 @@ function getNbTotalGuestbook(PDO $db): int
  * en utilisant une requête préparée (injection SQL), n'affiche que les messages
  * de la page courante
  */
-function getGuestbookPagination(PDO $db, int $offset, int $limit): array
+function getGuestbookPagination(PDO $con, int $offset, int $limit): array
 {
     // Requête préparée obligatoire !
     // Le $offset et le $limit sont des entiers, il faut donc les passer
@@ -195,7 +196,11 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
     // sinon, on fait un die de l'erreur
 
     
-    $prepare = $con->prepare("SELECT * FROM guestbook ORDER BY guestbook . datemessage DESC LIMIT ?,?");
+    $prepare = $con->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` DESC
+        LIMIT ?,?
+        ");
     $prepare->bindParam(1,$offset,PDO::PARAM_INT);
     $prepare->bindParam(2,$limit,PDO::PARAM_INT);
 

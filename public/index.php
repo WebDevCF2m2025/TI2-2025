@@ -62,8 +62,8 @@ if(isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'],$_POST['pho
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
-$guestbook = getAllGuestbook($connexion);
-$count = count($guestbook);
+// $guestbook = getAllGuestbook($connexion);
+// $count = count($guestbook);
 
 /*********************
  * Ou Bonus Pagination
@@ -92,10 +92,12 @@ if(
 }
 
 
-$nbMessage = countMessages($connexion);
+$nbMessage = getNbTotalGuestbook($connexion);
 $pagination = pagination($nbMessage,PAGINATION_GET,$page,PAGINATION_NB);
 $offset = ($page-1)*PAGINATION_NB;
 $messages = getGuestbookPagination($connexion,$offset,PAGINATION_NB);
+
+var_dump($offset);
 
 
 /**************************
