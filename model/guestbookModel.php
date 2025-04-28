@@ -5,8 +5,34 @@
  *******************************/
 
 // INSERTION d'un message dans le livre d'or
+function insertGuestbookMessage(PDO $db, string $firstname, string $lastname, string $usermail, string $phone, string $postcode, string $message): bool
+{
+    try {
+
+        $sql = "INSERT INTO guestbook (firstname, lastname, usermail, phone, postcode, message, created_at) 
+                VALUES (:firstname, :lastname, :usermail, :phone, :postcode, :message, NOW())";
+        $stmt = $db->prepare($sql);
+
+
+        $stmt->bindParam(':firstname', htmlspecialchars($firstname), PDO::PARAM_STR);
+        $stmt->bindParam(':lastname', htmlspecialchars($lastname), PDO::PARAM_STR);
+        $stmt->bindParam(':usermail', htmlspecialchars($usermail), PDO::PARAM_STR);
+        $stmt->bindParam(':phone', htmlspecialchars($phone), PDO::PARAM_STR);
+        $stmt->bindParam(':postcode', htmlspecialchars($postcode), PDO::PARAM_STR);
+        $stmt->bindParam(':message', htmlspecialchars($message), PDO::PARAM_STR);
+
+        // Exécution de la requête
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        // Gestion des erreurs
+        error_log("Erreur lors de l'insertion dans le livre d'or : " . $e->getMessage());
+        return false;
+    }
+}
 
 /**
+ * 
+ * 
  * @param PDO $db
  * @param string $firstname
  * @param string $lastname
