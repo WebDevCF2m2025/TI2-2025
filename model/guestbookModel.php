@@ -34,11 +34,31 @@ function addGuestbook(PDO $db,
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
     return false;
     // requête préparée obligatoire !
+    if(
+        empty($firstname) || strlen($firstname) > 100 ||
+        empty($lastname) || strlen($lastname) > 100 ||
+        $usermail === false || strlen($usermail) > 120 ||
+        empty($phone) || strlen($phone) > 20 || ctype_digit($telephone) === false
+       
+
+    ){
+        return false;
+    }
 
     // try catch
         // si l'insertion a réussi
         // on renvoie true
     // sinon, on fait un die de l'erreur
+    $prepare = $con->prepare("
+    INSERT INTO `messages` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
+    VALUES (?,?,?,?)
+    ");
+    try{
+        $prepare->execute([$name,$email,$text,$telephone]);
+        return true;
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
 
 }
 
@@ -56,14 +76,24 @@ function addGuestbook(PDO $db,
  */
 function getAllGuestbookOrderByDateASC(PDO $db): array
 {
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
-}
+    $prepare = $db->prepare("
+    SELECT * FROM `messages`
+    ORDER BY `messages`.`created_at` ASC
+    ");
+// essai / erreur
+try{
+    // exécution de la requête
+    $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
 
+    // on renvoie le tableau (array) indexé contenant tous les résultats (peut être vide si pas de message).
+    return $prepare->fetchAll();
+
+    // en cas d'erreur sql
+}catch (Exception $e){
+    // erreur de requête SQL
+    die($e->getMessage());
+}
+}
 /**************************
  * Pour le Bonus Pagination
  **************************/

@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div="container">
 <h1>TI2 | Livre d'or</h1>
+
+<div class="container">
+
 <img class="image1" src="../public/img/sign-up-amico.png" alt="">
 
 <!-- Formulaire d'ajout d'un message -->
@@ -74,7 +76,7 @@ else:
 endif;
 
 
-var_dump($_POST,$messages);
+var_dump($_POST,$messages,$_GET);
 ?>
 
 <!-- Pagination (BONUS) -->

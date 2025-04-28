@@ -24,8 +24,9 @@ h2{
 }
 
 .container{
-    display:flex;
-    
+    display:grid;
+    grid-template-columns: 1fr;
+
 }
 
 #registrationForm label{
@@ -52,16 +53,21 @@ h2{
     padding:100px;
     height: 380px;
     margin:20px;
-    width: 200px;
+    width: 300px;
 
 
 }
 
-@media screen and (min-width:480px) and (max-width:960px) {
-    .container{
-    display: flex;
-    flex-direction:row;
-    justify-content: center;
-    align-items: center;
 
+
+@media (min-width:960px) {
+
+.container{
+    display: flex;
+    justify-content: center;
+}
+    
+.image1{
+    width: 200px;
+}
 }
