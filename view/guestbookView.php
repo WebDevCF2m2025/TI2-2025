@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <div></div>
     <div class="cont">
         <div class="a">TI2 | Livre d'or</div>
         <?php
