@@ -25,28 +25,28 @@
             <div class="champ">
                 <label for="prenom">Prénom :</label>
                 <input type="text" id="prenom" name="prenom">
-                <div class="errorprenom"></div>
             </div>
+            <div class="errorprenom show"></div>
             <div class="champ">
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom">
-                <div class="errornom"></div>
-            </div>
+            </div>                
+            <div class="errornom show"></div>
             <div class="champ">
                 <label for="mail">Email :</label>
                 <input type="email" id="mail" name="email">
-                <div class="erroremail"></div>
             </div>
+            <div class="erroremail show"></div>
             <div class="champ">
                 <label for="tel">Telephone :</label>
                 <input type="num" id="tel" name="telephone">
-                <div class="errortelephone"></div>
-            </div>
+            </div>                
+            <div class="errortelephone show"></div>
             <div class="champ">
                 <label for="code_postal">Code Postal :</label>
                 <input type="num" id="postal" name="postal">
-                <div class="errorpostal"></div>
             </div>
+            <div class="errorpostal show"></div>           
             <div class="champ">
                 <label for="message">Message :</label>
                 <textarea type="text" id="message" name="message" rows="5"></textarea>

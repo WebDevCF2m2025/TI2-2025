@@ -94,6 +94,7 @@ form.addEventListener('submit', function (e) {
         e.preventDefault();
     if (EnvoieFormulaire()) {
         alert("C'est validé !");
+        form.submit();
     }
 
 });
