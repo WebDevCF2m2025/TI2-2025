@@ -32,9 +32,10 @@ if(isset($insert)){
 <h3 class="erreur"><?=$error?></h3>
 
 <!-- Formulaire d'ajout d'un message -->
-<h2>Ici le formulaire</h2>
 <form action=""  method="post" id="form">
-  <label for="firstname">Prenom</label>
+<img src="img/sign-up-amico.png" id="sign-img">
+  <h2>Laissez un message</h2>
+  <label for="firstname">Prénom</label>
   <input type="text" name="firstname" id="firstname">
   <label for="lastname">Nom</label>
   <input type="text" name="lastname" id="lastname">
@@ -74,14 +75,8 @@ if(isset($insert)){
         <p><em><?= $book['datemessage']?> </em></p>
         <p><?= $book['message']?></p>
     </li>
-  <?php endforeach; ?>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
 </ul>
+  <?php endforeach; ?>
 etc ...
 <!-- Pagination (BONUS) -->
 <?php

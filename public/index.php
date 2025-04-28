@@ -46,7 +46,7 @@ if(isset(
 )) {
 
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
-  $insert = addGuestbook($db,
+    $insert = addGuestbook($db,
     $_POST['firstname'],
     $_POST['lastname'],
     $_POST['usermail'],
