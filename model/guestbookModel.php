@@ -69,7 +69,7 @@ function addGuestbook(PDO $db,
 
 
     $prepare = $db->prepare("
-INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`) VALUES (?,?,?,?,?,?)
+INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`) VALUES (?,?,?,?,??)
     ");
     try{
         $prepare->execute([$firstnameVerify, $lastnameVerify, $usermail , $phone, $postcode, $message]);
