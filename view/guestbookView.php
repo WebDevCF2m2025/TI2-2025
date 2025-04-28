@@ -53,7 +53,7 @@
         <!-- Si 1 message et Si plusieurs messages -->
         <h3 style="text-align: center;"><?= $count>1?"Il y a " . $count . " messages": "Il y a " .  $count . " message"; ?></h3>
         <?php foreach($guestbook as $message):?>
-            <p style="margin: 0 20%; margin-top: 20px; font-size: 12px; text-align: right;">Enregistré le : <?= $message['datemessage'];?></p>
+            <p style="margin: 0 20%; margin-top: 20px; font-size: 12px; text-align: right;">Enregistré le : <?= gooddate($message['datemessage']);?></p>
             <h4 style="margin: 0 20%;"><?= $message['firstname'];?></h4>
             <h4 style="margin: 0 20%;"><?= $message['lastname'];?></h4>
             <p style="margin: 0 20%;"><?= $message['message'];?></p>

@@ -136,6 +136,15 @@ function getAllGuestbook(PDO $pdo): array
 }
 
 /**************************
+ * BONUS DATE
+ **************************/
+
+function goodDate(string $dateOf):string {
+    return date("d/m/Y \à H:i", strtotime($dateOf));
+}
+
+
+/**************************
  * Pour le Bonus Pagination
  **************************/
 
