@@ -1,8 +1,0 @@
-# ignore config.php
-config.php
-# ignore PHPStorm files
-.idea/
-# ignore Visual Studio Code files
-.vscode/
-# ignore MacOS files
-*.DS_Store
