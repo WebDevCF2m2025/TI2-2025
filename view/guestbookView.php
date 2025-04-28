@@ -149,7 +149,7 @@ endif;
     var_dump($_GET);
     ?> -->
 
-            <script src="../js/validation.js"></script>
+            <script src="../public/js/validation.js" defer></script>
 </body>
 
 </html>

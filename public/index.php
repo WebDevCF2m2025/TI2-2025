@@ -1,6 +1,7 @@
 <?php
 # public/index.php
 
+ini_set('display_errors',1);
 
 /*
  * Front Controller de la gestion du livre d'or
@@ -43,10 +44,10 @@ try {
  * Si le formulaire a été soumis
  */
 
- if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'])){
+ if(isset($_POST['firstname'],$_POST['lastname'],$_POST['text'])){
 
     // on appelle la fonction d'insertion dans la DB (addGuestbook())
-    $insert = addGuestbook($db,$_POST['firstname'],$_POST['lastname'],$_POST['usermail'], $_POST['datemessage']);
+    $insert = addGuestbook($db,$_POST['firstname'],$_POST['lastname'],$_POST['text'], $_POST['datemessage']);
 
     // si l'insertion a réussi
     if($insert===true){
@@ -63,7 +64,6 @@ try {
 
 
 // on redirige vers la page actuelle (ou on affiche un message de succès)
-
 
 
 /*
