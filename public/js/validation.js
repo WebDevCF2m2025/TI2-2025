@@ -55,6 +55,8 @@ form.addEventListener("submit", function(e){
         sucessMessage.style.display = "block"
     } else if (firstName === "") {
         firstNameError.style.display = "block"
+    } else if (lastName === "") {
+        lastNameError.style.display = "block"
     }
     
     
