@@ -12,7 +12,7 @@
 // chargement de configuration
 require_once "../config.php";
 // chargement du modèle de la table guestbook
-require_once "../model/guestbookModel.php";
+require_once "../model/guestbookModel.php"; 
 
 /*
  * Connexion à la base de données en utilisant PDO
