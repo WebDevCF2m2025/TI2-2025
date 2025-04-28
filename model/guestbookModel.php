@@ -30,9 +30,24 @@ function addGuestbook(PDO $db,
 ): bool
 {
     // traitement des données backend (SECURITE)
+  $firstname = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
+  $lastname = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
+  $usermail =  filter_var($usermail, FILTER_VALIDATE_EMAIL);
+  $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+  $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+  $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+
+
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
+  if(empty($firstname) || strlen($firstname) > 100 || empty($lastname) || strlen($lastname) > 100 || empty($usermail) ||
+  $usermail === false || strlen($usermail) > 200  ||  empty($phone) || strlen($phone) > 20 || empty($postcode) || strlen($postcode) > 4 ||
+    empty($message) || strlen($message) > 500
+  ) {
     return false;
+  }
+
+
     // requête préparée obligatoire !
 
     // try catch
