@@ -62,6 +62,7 @@ input{
     background: rgb(59, 59, 83) ;
     margin: 10px;
     width: 80%;
+    color: white;
 }
 
 label{
@@ -76,6 +77,7 @@ textarea{
     margin: 10px;
     width: 80%;
     margin-bottom: 30px;
+    color: white;
 }
 
 button{

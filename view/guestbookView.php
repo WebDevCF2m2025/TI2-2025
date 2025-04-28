@@ -36,7 +36,7 @@
             </div>
             <div class="label">
                 <label for="usermail">Email *</label>
-                <input type="email" id="usermail" name="usermail">
+                <input type="text" id="usermail" name="usermail">
             </div>
             <div class="label">
                 <label for="postcode">c/postal *</label>
