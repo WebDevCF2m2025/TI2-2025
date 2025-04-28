@@ -65,6 +65,7 @@ input {
     padding: 10px;
     border-radius: 5px;
     color: white;
+    margin-bottom: 20px;
 }
 
 textarea {
@@ -106,8 +107,3 @@ img {
     height: 200px;
     margin: 20px 0;
 }
-
-p #caracCount {
-    float: right;
-}
-

@@ -8,7 +8,7 @@ function verifEmail(email) {
 
 // On attribue la constante email à l'id "usermail" du formulaire qui est l'email
 const email = document.getElementById("usermail");
-const email2 = document.getElementById("verifEmail");
+
 
 
 //////////////////////////////////// CODE POSTAL //////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ function verifCodePostal(postal) {
 
 // On attribue la constante codePostal à l'id "postcode" du formulaire qui est le code postal
 const codePostal = document.getElementById("postcode");
-const codePostal2 = document.getElementById("verifCP");
+
 
 
 //////////////////////////////////// NUMÉRO DE TÉLÉPHONE //////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ function verifTelephone(telephone) {
 
 // On attribue la constante telephone à l'id "phone" du formulaire qui est le téléphone
 const telephone = document.getElementById("phone");
-const telephone2 = document.getElementById("verifTel");
+
 
 
 //////////////////////////////////// EVENEMENT //////////////////////////////////////////////////////
@@ -45,36 +45,26 @@ const formulaire = document.getElementById("formulaire");
 
 // On ajoute un événement lorsqu'on envoit le formulaire
 formulaire.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-
-    let isValid = true;
     
     const mail = email.value.trim();
     if (!verifEmail(mail)) {
-        email2.textContent = 'Veuillez entrer un email valide';
-        email2.style.color = 'red';
+        alert("Veuillez entrer un email valide");
     } else {
-        email2.textContent = 'E-mail valide, merci';
-        email2.style.color = 'green';
+        alert("Email valide, merci.");
     }
 
     const postal = codePostal.value.trim();
     if (!verifCodePostal(postal)) {
-        codePostal2.textContent = 'Veuillez entrer un code postal Belge valide (4 chiffres)';
-        codePostal2.style.color = 'red';
+        alert("Veuillez entrer un code postal Belge valide (4 chiffres)");
     } else {
-        codePostal2.textContent = 'Code postal valide, merci';
-        codePostal2.style.color = 'green';
+        alert("Code postal valide, merci.");
     }
 
     const tel = telephone.value.trim();
     if (!verifTelephone(tel)) {
-        telephone2.textContent = 'Veuillez entrer un numéro de téléphone correct (Qui commence par 04 et qui contient 10 chiffres. Ex : 0498150882)';
-        telephone2.style.color = 'red';
+        alert("Veuillez entrer un numéro de téléphone correct (Qui commence par 04 et qui contient 10 chiffres. Ex : 0498150882");
     } else {
-        telephone2.textContent = 'Numéro de téléphone valide';
-        telephone2.style.color = 'red';
+        alert("Numéro de téléphone valide, merci.");
     }
 });
 
