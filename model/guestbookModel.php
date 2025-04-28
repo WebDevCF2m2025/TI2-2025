@@ -136,13 +136,21 @@ VALUES (?,?,?,?,?,?)
  */
 function getAllGuestbook(PDO $db): array
 {
+    
     // try catch
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
+    try {
+        $query = $db->query("SELECT * FROM `guestbook` ORDER BY `datemessage` ASC");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        die("Erreur de récupération des messages: " . $e->getMessage());
+    }
+}
     return [];
     // sinon, on fait un die de l'erreur
-}
+
 
 /**************************
  * Pour le Bonus Pagination
@@ -198,37 +206,37 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  * Fonction qui génère le code HTML de la pagination
  * si le nombre de pages est supérieur à une.
  */
-function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
-{
-    $sortie = "";
-    if ($nbtotalMessage === 0) return "";
-    $nbPages = ceil($nbtotalMessage / $perPage);
-    if ($nbPages == 1) return "";
-    $sortie .= "<p>";
-    for ($i = 1; $i <= $nbPages; $i++) {
-        if ($i === 1) {
-            if ($pageActu === 1) {
-                $sortie .= "<< < 1 |";
-            } elseif ($pageActu === 2) {
-                $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
-            } else {
-                $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
-            }
-        } elseif ($i < $nbPages) {
-            if ($i === $pageActu) {
-                $sortie .= "  $i |";
-            } else {
-                $sortie .= "  <a href='?$get=$i'>$i</a> |";
-            }
-        } else {
-            if ($pageActu >= $nbPages) {
-                $sortie .= "  $nbPages > >>";
-            } else {
-                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
-            }
-        }
-    }
-    $sortie .= "</p>";
-    return $sortie;
+// function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
+// {
+//     $sortie = "";
+//     if ($nbtotalMessage === 0) return "";
+//     $nbPages = ceil($nbtotalMessage / $perPage);
+//     if ($nbPages == 1) return "";
+//     $sortie .= "<p>";
+//     for ($i = 1; $i <= $nbPages; $i++) {
+//         if ($i === 1) {
+//             if ($pageActu === 1) {
+//                 $sortie .= "<< < 1 |";
+//             } elseif ($pageActu === 2) {
+//                 $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
+//             } else {
+//                 $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
+//             }
+//         } elseif ($i < $nbPages) {
+//             if ($i === $pageActu) {
+//                 $sortie .= "  $i |";
+//             } else {
+//                 $sortie .= "  <a href='?$get=$i'>$i</a> |";
+//             }
+//         } else {
+//             if ($pageActu >= $nbPages) {
+//                 $sortie .= "  $nbPages > >>";
+//             } else {
+//                 $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
+//             }
+//         }
+//     }
+//     $sortie .= "</p>";
+//     return $sortie;
 
-}
+// }
