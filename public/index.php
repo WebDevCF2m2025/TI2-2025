@@ -22,17 +22,15 @@ require_once "../model/guestbookModel.php";
  * le mode fetch à tableau associatif
  */
 try {
-    $db = new PDO(
-     DB_DRIVER . ":host=" .  DB_HOST . ";dbname=" . DB_NAME . ";port=" . DB_PORT . ";charset=" . DB_CHARSET,
-     DB_LOGIN,
-     DB_PWD,
-      
-    
-      [
+  $db = new PDO(
+    DB_DRIVER . ":host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+    DB_LOGIN,
+    DB_PWD,
+    [
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-      ]
-    );
+    ]
+);
   } catch (Exception $e) {
 
 # ici notre code de traitement de la page
