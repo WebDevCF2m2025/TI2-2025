@@ -272,3 +272,14 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
     $sortie .= "</p>";
     return $sortie;
 }
+
+/* FONCTION DATE DU MESSAGE FORMATÉE AU FORMAT FRANÇAIS*/
+
+function dateFR(string $datetime): string
+{
+    // Temps unix en seconde de la date venant de la db
+    $stringtotime = strtotime($datetime);
+    
+    // Retour de la date au format
+    return date("d/m/Y \à H:m:s",$stringtotime);
+}
