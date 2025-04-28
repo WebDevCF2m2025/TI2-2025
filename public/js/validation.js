@@ -87,3 +87,5 @@ messageInput.addEventListener('input', function() {
         caracteresCount.style.color = 'black';
     }
 });
+
+/////// BONUS ////////
