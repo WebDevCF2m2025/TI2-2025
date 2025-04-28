@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<img src="../public/img/sign-up-amico.png" alt="">
+
 <h1>TI2 | Livre d'or</h1>
+<img src="../public/img/sign-up-amico.png" alt="">
 <!-- Formulaire d'ajout d'un message -->
 <h2>Ici le formulaire</h2>
 <div class="monForm">

@@ -10,28 +10,28 @@
         }
 
 
-/* Body : toute la page occupe toute la fenêtre */
+
 
 body {
-    height: 100vh; /* Hauteur de la fenêtre */
+    height: 100vh; 
     display: grid;
-    place-items: center; /* Centrer horizontalement et verticalement */
-    font-family: Arial, sans-serif; /* Choix de police pour plus de lisibilité */
+    place-items: center; 
+    font-family: Arial, sans-serif; 
 }
 
 .monForm {
     display: grid;
-    justify-items: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
+    justify-items: center; 
+    align-items: center; 
     width: 100%;
-    max-width: 500px; /* Largeur maximale du formulaire */
+    max-width: 500px; 
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9;
 }
 
-/* Style des champs de saisie */
+
 input[type="text"], input[type="email"], textarea {
     width: 100%;
     padding: 10px;
@@ -41,12 +41,12 @@ input[type="text"], input[type="email"], textarea {
     font-size: 1rem;
 }
 
-/* Style spécifique pour la zone de texte (textarea) */
+
 textarea {
-    resize: vertical; /* Permet de redimensionner la zone de texte verticalement */
+    resize: vertical; 
 }
 
-/* Style du bouton */
+
 button {
     width: 100%;
     padding: 10px;
@@ -59,7 +59,173 @@ button {
     transition: background-color 0.3s ease;
 }
 
-/* Effet au survol du bouton */
+
 button:hover {
     background-color: #0056b3;
+}
+
+
+    img {
+        width : 400px;
+        height : 300px;
+        }
+
+
+
+
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center; 
+    font-family: Arial, sans-serif; 
+}
+
+.monForm {
+    display: grid;
+    justify-items: center;
+    align-items: center; 
+    width: 100%;
+    max-width: 500px; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+
+textarea {
+    resize: vertical;
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+@media screen and (min-width: 960px) {
+    img {
+        width: 400px;
+        height: 300px;
+    }
+    .monForm {
+        display: grid;
+        justify-items: center;
+        align-items: center; 
+        width: 100%;
+        max-width: 500px; 
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+    
+    
+    input[type="text"], input[type="email"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+    
+    textarea {
+        resize: vertical;
+    }
+    
+    
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+}
+
+@media screen and (min-width: 480px) and (max-width: 960px) {
+    img {
+        width: 100%;
+        height: auto;
+    }
+    .monForm {
+        display: grid;
+        justify-items: center;
+        align-items: center; 
+        width: auto;
+        max-width: 500px; 
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+    
+    
+    input[type="text"], input[type="email"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+    
+    textarea {
+        resize: vertical;
+    }
+    
+    
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
 }
