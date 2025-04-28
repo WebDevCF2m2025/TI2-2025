@@ -18,23 +18,29 @@ try {
     die("Code : {$excep->getCode()} <br> Message : {$excep->getMessage()}");
 }
 
-/*
- * Si le formulaire a été soumis
- */
+if (isset(
+    $_POST['firstname'],
+    $_POST['lastname'],
+    $_POST['usermail'],
+    $_POST['phone'],
+    $_POST['postcode'],
+    $_POST['message'],
 
-// on appelle la fonction d'insertion dans la DB (addGuestbook())
+)) {
 
-// si l'insertion a réussi
 
-// on redirige vers la page actuelle (ou on affiche un message de succès)
+    $insert = addGuestbook(
+        $DB,
+        $_POST['firstname'],
+        $_POST['lastname'],
+        $_POST['usermail'],
+        $_POST['phone'],
+        $_POST['postcode'],
+        $_POST['message'],
+    );
+}
 
-// sinon, on affiche un message d'erreur
-
-/*
- * On récupère les messages du livre d'or
- */
-
-// on appelle la fonction de récupération de la DB (getAllGuestbook())
+$msg = getAllGuestbook($DB);
 
 /*********************
  * Ou Bonus Pagination
@@ -59,3 +65,4 @@ try {
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+$DB = null;
