@@ -8,6 +8,11 @@ div.formu{
    text-align: center
 
 }
+.un, .deux, .trois, .quatre, .cinq{
+   
+    display: flex;
+    flex-direction: column;
+}
 form{
     border: 1px solid black;
     border-radius: 10px;
@@ -20,11 +25,11 @@ h1, h2{
     text-align: center;
 }
 .image{
-    width: 10vh;
+    width: 20vh;
     margin: 0 auto;
 }
 img{
-    width: 10vh;
+    width: 100%;
 }
 button{
     border-radius: 20px;
@@ -39,6 +44,28 @@ button{
 
 
 
-@media screen  {
-    
+@media screen and (min-width: 820px) {
+    .un, .deux, .trois, .quatre, .cinq{
+   
+        display: flex;
+       flex-direction: row;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+  
+  body{
+    padding: 0 40vh;
+  }
+    .tout{
+    display: flex;
+    justify-content: space-between;
+   }
+   .image{
+    width: 50%;
+   }
+   img{
+    width: 100%;
+   }
 }

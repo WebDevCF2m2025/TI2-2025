@@ -15,23 +15,24 @@
 <body>
 <h1> TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
-
-<div class="tout"> <div class="image"><img src="img/sign-up-amico.png" alt=""></div>
 <h2>Laissez-nous un message</h2>
+<div class="tout"> <div class="image"><img src="img/sign-up-amico.png" alt=""></div>
+
 
 <div class="formu">
     <form action="" method="POST">
-        <label for="firstname">firstname</label>
-        <input type="text" name="firstname" id="firstname">
-        <label for="lastname">lastname</label>
-        <input type="text" name="lastname" id="lastname">
-        <label for="usermail">usermail</label>
-        <input type="email" name="email" id="email">
-        <label for="phone">phone</label>
-        <input type="text" name="phone" id="phone">
-        <label for="postcode">postcode</label>
-        <input type="text" name="postcode" id="postcode">
-        <textarea name="message" id="message" rows="10" required></textarea>
+        <div class="un"><label for="firstname">firstname</label>
+        <input type="text" name="firstname" id="firstname"></div>
+        <div class="deux">     <label for="lastname">lastname</label>
+        <input type="text" name="lastname" id="lastname"></div>
+   <div class="trois">   <label for="usermail">usermail</label>
+        <input type="email" name="email" id="email"></div>
+     <div class="quatre"> <label for="phone">phone</label>
+        <input type="text" name="phone" id="phone"></div>
+       <div class="cinq">       <label for="postcode">postcode</label>
+        <input type="text" name="postcode" id="postcode"></div>
+ <div class="six">    <textarea name="message" id="message" rows="10" required></textarea></div>
+    
         <button type="submit" >envoyer</button>
     </form>
 </div></div>
