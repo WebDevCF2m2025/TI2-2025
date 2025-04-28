@@ -21,7 +21,35 @@ require_once "../model/guestbookModel.php";
  * Activez le mode d'erreur de PDO à Exception et
  * le mode fetch à tableau associatif
  */
+try{
+  
+    $connexion = new PDO( DB_DSN , DB_LOGIN, DB_PWD,[PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,]
+    );
+}catch(Exception $e){
+  
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
 
+
+
+$articles = select($connexion);
+
+
+if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['usermail']) && isset($_POST['phone']) && isset($_POST['postcode']) && isset($_post['message']) && isset($_post['datemessage']))
+{
+$insert = insert($connexion, $_POST['firstname'], $_POST['lastname'], $_POST['usermail'], $_POST['phone'], $_POST['postcode'], $_post['message'], $_post['datemessage']);
+header('Location: ./');
+exit;
+}
+
+
+
+
+require_once '../view/guestbookView.php';
+
+
+
+$connexion = null;
 /*
  * Si le formulaire a été soumis
  */
