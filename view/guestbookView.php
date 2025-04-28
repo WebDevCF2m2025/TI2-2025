@@ -76,7 +76,7 @@ else:
 endif;
 
 
-//var_dump($_POST,$message,$_GET);
+//var_dump($_POST,$_GET,);
 ?>
 
 <!-- Pagination (BONUS) -->
