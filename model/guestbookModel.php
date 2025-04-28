@@ -46,7 +46,7 @@ function addGuestbook(PDO $db,
     // vérification du nombre de caractères strlen() et validité du prénom
     $lastNameVerify = strip_tags($lastname); # on retire les tags
     $lastNameVerify = htmlspecialchars($lastNameVerify,ENT_QUOTES); // protection des caractères spéciaux, avec guillemet et double-guillemet
-    $lastNameVerify = trim($lastname); # on retire les espaces avant/arrière du nom
+    $lastNameVerify = trim($lastNameVerify); # on retire les espaces avant/arrière du nom
  // si le nom est vide
  if(empty($lastNameVerify)){
      $erreur.="Votre prénom est incorrect.<br>";
@@ -64,7 +64,7 @@ function addGuestbook(PDO $db,
     //vérification code postal
     $postcodeVerif = strip_tags($postcode);
     $postcodeVerif = htmlspecialchars($postcodeVerif,ENT_QUOTES);
-    $postcodeVerif = trim($postcode);
+    $postcodeVerif = trim($postcodeVerif);
     if(empty($postcodeVerif)){
         $erreur.="Votre code postal est incorrect.<br>";
     }elseif(strlen($postcodeVerif)>4){
@@ -76,7 +76,7 @@ function addGuestbook(PDO $db,
     //vérification numéro de téléphone
     $phoneVerif = strip_tags($phone);
     $phoneVerif = htmlspecialchars($phoneVerif,ENT_QUOTES);
-    $phoneVerif = trim($phone);
+    $phoneVerif = trim($phoneVerif);
 
     if(empty($phoneVerif)){
         $erreur.="Votre code postal est incorrect.<br>";
@@ -97,8 +97,8 @@ if(!empty($erreur)) return $erreur;
 
 // pas d'erreur détectée
 $prepare = $db->prepare("
-INSERT INTO `messages` (`name`,`email`,`message`)
-VALUES (?,?,?)
+INSERT INTO `message` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
+VALUES (?,?,?,?,?,?)
 ");
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
     return false;
