@@ -76,7 +76,7 @@ else:
 endif;
 
 
-var_dump($_POST,$message,$_GET);
+//var_dump($_POST,$message,$_GET);
 ?>
 
 <!-- Pagination (BONUS) -->
@@ -84,7 +84,7 @@ var_dump($_POST,$message,$_GET);
 <!-- Liste des messages -->
 <ul>
     <li>
-        <p><strong><?=$firstname?><?=$lastname?> lastname</strong></p>
+        <p><strong><?=$firstname?><?=$lastname?></strong></p>
         <p><em>datemessage</em></p>
         <p><</p>
     </li>
@@ -99,7 +99,7 @@ etc ...
 <!-- Pagination (BONUS) -->
 
 
-<script src="js/validation.js"></script>
+<script src="validation.js"></script>
 </body>
 </html>
 

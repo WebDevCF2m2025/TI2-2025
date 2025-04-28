@@ -42,7 +42,7 @@ function addGuestbook(PDO $db,
        
 
     ){
-        return false;
+        return true;
     }
 
     // try catch
