@@ -1,44 +1,38 @@
 <?php
-# model/guestbookModel.php
-/********************************
- * Model de la page livre d'or
- *******************************/
 
-// INSERTION d'un message dans le livre d'or
+function addGuestbook(
+    PDO $db,
+    string $firstname,
+    string $lastname,
+    string $usermail,
+    string $phone,
+    string $postcode,
+    string $message
+): bool {
+    $firstname = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
+    $lastname = trim(htmlspecialchars(strip_tags($lastname), ENT_QUOTES));
+    $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+    $phone = trim(htmlspecialchars(strip_tags($phone), ENT_QUOTES));
+    $postcode = trim(htmlspecialchars(strip_tags($postcode), ENT_QUOTES));
+    $message = trim(htmlspecialchars(strip_tags($message), ENT_QUOTES));
 
-/**
- * @param PDO $db
- * @param string $firstname
- * @param string $lastname
- * @param string $usermail
- * @param string $phone
- * @param string $postcode
- * @param string $message
- * @return bool
- * Fonction qui insère un message dans la base de données 'ti2web2025' et sa table 'guestbook'
- * Renvoie true si l'insertion a réussi, false sinon
- * Une requête préparée est utilisée pour éviter les injections SQL
- * Les données sont échappées pour éviter les injections XSS (protection backend)
- */
-function addGuestbook(PDO $db,
-                    string $firstname,
-                    string $lastname,
-                    string $usermail,
-                    string $phone,
-                    string $postcode,
-                    string $message
-): bool
-{
-    // traitement des données backend (SECURITE)
+    if (
+        empty($firstname) || strlen($firstname) > 100 || empty($lastname) || strlen($lastname) > 100 || empty($usermail) || strlen($usermail) > 200 || empty($phone) || strlen($phone) > 20 ||
+        ctype_digit($phone) === false || empty($postcode) || strlen($postcode) > 4 || empty($message) || strlen($message) > 500
+    ) {
+        return false;
+    }
 
-    // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
-    // requête préparée obligatoire !
-
-    // try catch
-        // si l'insertion a réussi
-        // on renvoie true
-    // sinon, on fait un die de l'erreur
+    $prepare = $db->prepare("
+    INSERT INTO `guestbook` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
+    VALUES (?,?,?,?,?,?)
+    ");
+    try{
+        $prepare->execute([$firstname,$lastname,$usermail,$phone, $postcode, $message]);
+        return true;
+    }catch(Exception $except){
+        die($except->getMessage());
+    }
 
 }
 
@@ -118,7 +112,7 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  * Fonction qui génère le code HTML de la pagination
  * si le nombre de pages est supérieur à une.
  */
-function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
+function pagination(int $nbtotalMessage, string $get = "page", int $pageActu = 1, int $perPage = 5): string
 {
     $sortie = "";
     if ($nbtotalMessage === 0) return "";
@@ -150,5 +144,4 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
     }
     $sortie .= "</p>";
     return $sortie;
-
 }
