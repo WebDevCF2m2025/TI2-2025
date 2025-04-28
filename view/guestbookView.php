@@ -38,6 +38,12 @@
         <span class="error-message" id="TelephoneError"></span>
     </div>
 
+    <div id="postcode">
+        <label for="postcodeID">Code postal</label>
+        <input type="tel" id="postcodeID" name="postcode" placeholder="Entrez votre code postal" required>
+        <span class="error-message" id="postcodeError"></span>
+    </div>
+
     <div id="message">
         <label for="messageID">Message</label>
         <textarea id="messageID" name="message" rows="11" placeholder="Entrez votre message" required></textarea>
