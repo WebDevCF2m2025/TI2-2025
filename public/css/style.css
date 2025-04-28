@@ -33,9 +33,10 @@ h2 {
 
 
 form {
-    background: grey;
+    background: rgb(50, 50, 50);
     color: white;
     border-radius: 10px;
+    border: 1px solid rgb(218, 143, 245);;
     padding: 30px 60px;
     width: 400px;
     label {
@@ -77,9 +78,25 @@ h3 {
     padding: 20px 0;
 }
 
+/* MESSAGES */
+.error-message, .success-message {
+    display: none;
+    color: red;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.success-message {
+    color: green;
+}
+
+/* REPONSIVE */
 /* MOBILE VIEW */
 
 @media (width <= 480px) {
+    .second-sub {
+        display: none;
+    }
     .message-field {
         display: none;
     }
@@ -91,7 +108,9 @@ h3 {
     .banner {
         scale: 100%;
     }
-    
+    .second-sub {
+        display: none;
+    }
     form {
         width: 700px;
     }
@@ -126,13 +145,11 @@ h3 {
 
 @media (width >= 960px) {
     .subtitle {
-        position: relative;
-        right: -17%;
-        padding: 20px 0;
-        margin-left: 100px;
+    display: none;
     }
-    .second-subtitle {
-        display: none;
+    .second-sub {
+        text-align: center;
+        padding: 20px 0;
     }
     .form-container {
         display: flex;

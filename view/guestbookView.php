@@ -18,7 +18,9 @@
     <section class="title">
         <h1>TI2 | Livre d'or</h1>
         <!-- Formulaire d'ajout d'un message -->
+        <!-- This one is gonna be hidden on desktop -->
         <h2 class="subtitle">Laissez-nous un message</h2>
+       
         <?php
 // si on a inséré un article
 if(isset($thanks)):
@@ -35,8 +37,15 @@ endif;
     </section>
     <section class="form-container">
         <img class="banner" src="../public/img/sign-up-amico.png" alt="form-img" width="500" height="500">
-        <!-- This one is gonna be hidden on desktop -->
-        <h2 class="second-subtitle">Laissez-nous un message</h2>
+        <div>
+            <h2 class="second-sub">Laissez-nous un message</h2>
+        <p id="firstname-error" class="error-message">Prénom ne peut pas être vide</p>
+        <p id="lastname-error" class="error-message">Nom ne peut pas petre vide</p>
+        <p id="mail-error" class="error-message">Adresse email invalide</p>
+        <p id="postal-error" class="error-message">Code postal email invalide</p>
+        <p id="phone-error" class="error-message">Numéro de portable invalide</p>
+        <p id="message-error" class="error-message">Message invalide</p>
+        <p id="success-message" class="success-message">Toutes les informations sont valides</p>
         <form id="form" action="" method="post">
             <div class="fieldset">
                 <label id="prenom-label" for="prenom">Prénom *</label>
@@ -64,6 +73,7 @@ endif;
             </div>
             <button id="btn" type="submit">Envoyer</button>
         </form>
+        </div>
     </section>
     <section>
         <!-- Si pas de message -->
@@ -142,12 +152,12 @@ endif;
             <!-- Pagination (BONUS)
     <?php
     // À commenter quand on a fini de tester
-    echo "<h3>Nos var_dump() pour le débugage</h3>";
-    echo '<p>$_POST</p>';
-    var_dump($_POST);
-    echo '<p>$_GET</p>';
-    var_dump($_GET);
-    ?> -->
+    // echo "<h3>Nos var_dump() pour le débugage</h3>";
+    // echo '<p>$_POST</p>';
+    // var_dump($_POST);
+    // echo '<p>$_GET</p>';
+    // var_dump($_GET);
+    // // ?> -->
 
             <script src="../public/js/validation.js" defer></script>
 </body>
