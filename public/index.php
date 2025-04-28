@@ -16,8 +16,7 @@ try {
 }
 
 
-
-
+$success = "Vous avez enregistrée vos données";
 
 if (isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['phone'], $_POST['postal'], $_POST['message'])) {
 
@@ -25,9 +24,7 @@ if (isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['phone'], $_P
 }
 
 
-
 $messages = getAllGuestbook($conn);
-
 
 $count = count($messages);
 
@@ -37,7 +34,6 @@ if (isset($_GET[PAGINATION_GET]) && ctype_digit($_GET[PAGINATION_GET])) {
     $page = 1;
 }
 
-
 $nbTotMessage = getNbTotalGuestbook($conn);
 
 $pagination = pagination($nbTotMessage, PAGINATION_GET, $page, PAGINATION_NB);
@@ -45,8 +41,6 @@ $pagination = pagination($nbTotMessage, PAGINATION_GET, $page, PAGINATION_NB);
 $offset = ($page - 1) * PAGINATION_NB;
 
 $messages = getGuestbookPagination($conn,  $offset, PAGINATION_NB);
-
-
 
 include "../view/guestbookView.php";
 

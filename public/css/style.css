@@ -45,4 +45,9 @@ form input {
 
 span{
     height: 9vh;
+    color: red;
+}
+
+#successGeneral{
+  color: green ;
 }

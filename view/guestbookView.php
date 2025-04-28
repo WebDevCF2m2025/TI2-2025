@@ -43,7 +43,7 @@
             <label for="message">Message</label>
             <textarea id="message-input" name="message" id="message"></textarea>
             <span id="spanMessage"></span>
-
+            
             <button type="submit">Envoyez</button>
             <span id="spanGeneral"></span>
         </form>
@@ -72,6 +72,7 @@
 
 
     <script src="../public/js/validation.js"></script>
+
 </body>
 
 </html>

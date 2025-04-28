@@ -32,7 +32,7 @@ function addGuestbook(
             empty($newLastname) || strlen($newLastname) > 60 ||
             empty($newEmail) || strlen($newEmail) > 60 ||
             empty($newPhone) || strlen($newPhone) != 10 ||
-            empty($newPostcode) || strlen($newPostcode) > 4 || 
+            empty($newPostcode) || strlen($newPostcode) > 4 ||
             empty($newMessage) || strlen($newMessage) > 500
         ) {
             return false;
@@ -93,14 +93,13 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
         ORDER BY message, datemessage ASC
         LIMIT ?,?"
     );
-    try{
-        $prepare->bindParam(1,$offset,PDO::PARAM_INT);
-        $prepare->bindParam(2,$limit,PDO::PARAM_INT);
+    try {
+        $prepare->bindParam(1, $offset, PDO::PARAM_INT);
+        $prepare->bindParam(2, $limit, PDO::PARAM_INT);
         $prepare->closeCursor();
         $prepare->execute();
         return $prepare->fetchAll();
-
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 }
