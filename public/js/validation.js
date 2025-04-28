@@ -96,6 +96,6 @@ messageInput.addEventListener('input', function() {
         caracteresCount.style.color = 'red';
         messageInput.value = messageInput.value.slice(0, maxLength); // Bloquer au max
     } else {
-        caracteresCount.style.color = 'black';
+        caracteresCount.style.color = 'white';
     }
 });
