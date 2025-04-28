@@ -31,7 +31,7 @@ function addGuestbook(PDO $db,
 {
     // traitement des données backend (SECURITE)
   $firstname = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
-  $lastname = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
+  $lastname = trim(htmlspecialchars(strip_tags($lastname), ENT_QUOTES));
   $usermail =  filter_var($usermail, FILTER_VALIDATE_EMAIL);
   $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
   $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
@@ -40,7 +40,7 @@ function addGuestbook(PDO $db,
 
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-  if(empty($firstname) || strlen($firstname) > 100 || empty($lastname) || strlen($lastname) > 100 || empty($usermail) ||
+  if(empty($firstname) || strlen($firstname) > 100 || empty($lastname) || strlen($lastname) > 100 ||
   $usermail === false || strlen($usermail) > 200  ||  empty($phone) || strlen($phone) > 20 || empty($postcode) || strlen($postcode) > 4 ||
     empty($message) || strlen($message) > 500
   ) {
@@ -48,12 +48,24 @@ function addGuestbook(PDO $db,
   }
 
 
-    // requête préparée obligatoire !
-
+    // requête préparée obligatoire
+  $prepare = $db->prepare("
+  INSERT INTO `gestbook` (
+                          `firstname`, `lastname`,
+                          `usermail`,`phone`,
+                          `postcode`,`message`
+                          ) VALUES (?,?,?,?,?,?)" );
     // try catch
         // si l'insertion a réussi
         // on renvoie true
     // sinon, on fait un die de l'erreur
+  try {
+    $prepare->execute([$firstname,$lastname,$usermail,$usermail,$phone,$postcode,$message]);
+    return true;
+
+  }catch (Exception $e){
+    die($e->getMessage());
+  }
 
 }
 

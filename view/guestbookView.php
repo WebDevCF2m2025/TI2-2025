@@ -16,7 +16,20 @@
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
 <h2>Ici le formulaire</h2>
+<form action=""  id="form">
+  <label for="prenom">Prenom</label>
+  <input type="text" name="prenom" id="prenom">
+  <label for="nom">Nom</label>
+  <input type="text" name="nom" id="nom">
+  <label for="email">E-mail</label>
+  <input type="text" name="email" id="email">
+  <label for="postal">c/postal</label>
+  <input type="text" name="postal" id="postal">
+  <label for="message">Message</label>
+  <input type="text" name="message" id="message">
+  <button type="submit">Envoyer</button>
 <!-- Si pas de message -->
+  <?php  ?>
 <h3>Pas encore de message</h3>
 <!-- Si 1 message -->
 <h3>Il y a 1 message</h3>
