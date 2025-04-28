@@ -54,14 +54,26 @@ function addGuestbook(PDO $db,
  * venant de la base de données 'ti2web2025' et de la table 'guestbook'
  * Si pas de message, renvoie un tableau vide
  */
-function getAllGuestbook(PDO $db): array
+function getAllGuestbookOrderByDateASC(PDO $db): array
 {
+    $prepare = $db->prepare("
+        SELECT * FROM `messages`
+        ORDER BY `messages`.`created_at` ASC
+        ");
     // try catch
+    try{
     // si la requête a réussi,
+    $prepare->execute();
+
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    return [];
+    return $prepare->fetchAll();
+    
     // sinon, on fait un die de l'erreur
+}catch (Exception $e){
+    die($e->getMessage());
+}
+
 }
 
 /**************************
