@@ -20,6 +20,7 @@
  * Une requête préparée est utilisée pour éviter les injections SQL
  * Les données sont échappées pour éviter les injections XSS (protection backend)
  */
+
 function addGuestbook(PDO $db,
                     string $firstname,
                     string $lastname,
@@ -28,9 +29,77 @@ function addGuestbook(PDO $db,
                     string $postcode,
                     string $message
 ): bool
-{
+{ // erreur vide au cas où
+    $erreur = "";
     // traitement des données backend (SECURITE)
+    // vérification du nombre de caractères strlen() et validité du nom
+    $nameVerify = strip_tags($firstname); # on retire les tags
+    $nameVerify = htmlspecialchars($nameVerify,ENT_QUOTES); // protection des caractères spéciaux, avec guillemet et double-guillemet
+    $nameVerify = trim($nameVerify); # on retire les espaces avant/arrière du nom
+    // si le nom est vide
+    if(empty($nameVerify)){
+        $erreur.="Votre nom est incorrect.<br>";
+    // si le nom est plus long qu'autorisé en db
+    }elseif(strlen($nameVerify)>100){
+        $erreur.="Votre nom est trop long.<br>";
+    }
+    // vérification du nombre de caractères strlen() et validité du prénom
+    $lastNameVerify = strip_tags($lastname); # on retire les tags
+    $lastNameVerify = htmlspecialchars($lastNameVerify,ENT_QUOTES); // protection des caractères spéciaux, avec guillemet et double-guillemet
+    $lastNameVerify = trim($lastname); # on retire les espaces avant/arrière du nom
+ // si le nom est vide
+ if(empty($lastNameVerify)){
+     $erreur.="Votre prénom est incorrect.<br>";
+ // si le nom est plus long qu'autorisé en db
+ }elseif(strlen($lastNameVerify)>100){
+     $erreur.="Votre prénom est trop long.<br>";
+ }
 
+    // vérification du mail
+    $usermail = filter_var($usermail,FILTER_VALIDATE_EMAIL);
+    // si le mail n'est pas bon
+    if($usermail===false){
+        $erreur .= "Email incorrect.<br>";
+    }
+    //vérification code postal
+    $postcodeVerif = strip_tags($postcode);
+    $postcodeVerif = htmlspecialchars($postcodeVerif,ENT_QUOTES);
+    $postcodeVerif = trim($postcode);
+    if(empty($postcodeVerif)){
+        $erreur.="Votre code postal est incorrect.<br>";
+    }elseif(strlen($postcodeVerif)>4){
+        $erreur.="Votre code est trop long.<br>";
+    }elseif(strlen($postcodeVerif)<4){
+        $erreur.="Votre code est trop court.<br>";
+    }
+    
+    //vérification numéro de téléphone
+    $phoneVerif = strip_tags($phone);
+    $phoneVerif = htmlspecialchars($phoneVerif,ENT_QUOTES);
+    $phoneVerif = trim($phone);
+
+    if(empty($phoneVerif)){
+        $erreur.="Votre code postal est incorrect.<br>";
+    }elseif(strlen($phoneVerif)>10){
+        $erreur.="Votre code est trop long.<br>";
+    }elseif(strlen($phoneVerif)<10){
+        $erreur.="Votre code est trop court.<br>";
+    }
+
+// vérification du nombre de caractères strlen() et validité du message
+$text = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+if(empty($text)||strlen($text)>600){
+    $erreur .= "Message incorrect<br>";
+}
+
+// si on a au moins 1 erreur
+if(!empty($erreur)) return $erreur;
+
+// pas d'erreur détectée
+$prepare = $db->prepare("
+INSERT INTO `messages` (`name`,`email`,`message`)
+VALUES (?,?,?)
+");
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
     return false;
     // requête préparée obligatoire !
@@ -39,7 +108,18 @@ function addGuestbook(PDO $db,
         // si l'insertion a réussi
         // on renvoie true
     // sinon, on fait un die de l'erreur
+    try{
+        // exécution de la requête
+        $prepare->execute();
 
+        // on renvoie le tableau (array) indexé contenant tous les résultats (peut être vide si pas de message).
+        return $prepare->fetchAll();
+
+    // en cas d'erreur sql
+    }catch (Exception $e){
+        // erreur de requête SQL
+        die($e->getMessage());
+    }
 }
 
 /***************************

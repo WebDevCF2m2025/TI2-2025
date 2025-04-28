@@ -15,6 +15,7 @@
 <body>
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
+<h2>Ici le formulaire</h2>
 <div class="monForm">
         <form id="formulaire">
             <input type="text" name="name" id="name" placeholder="Nom">
@@ -26,30 +27,46 @@
             <button type="submit">Valider</button>
         </form>
     </div>
-<h2>Ici le formulaire</h2>
+<hr>
+<?php
+$nombMessage = isset($message) ? count($message) : 0;
+if ($nombMessage < 1): ?>
 <!-- Si pas de message -->
 <h3>Pas encore de message</h3>
+<?php elseif ($nombMessage === 1): ?>
 <!-- Si 1 message -->
 <h3>Il y a 1 message</h3>
+<p>1 message : Il y a <?= $nombMessage ?> message</p>
+<?php else: ?>
 <!-- Si plusieurs messages -->
 <h3>Il y a X messages</h3>
-
+<p>Plusieurs messages : Il y a <?= $nombMessage ?> messages</p>
+<?php endif; ?>
 <!-- Pagination (BONUS) -->
 
 <!-- Liste des messages -->
+<?php if (!empty($messages)): ?>
+<?php foreach ($messages as $message): ?>
 <ul>
     <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
+        <p><strong>firstname lastname</strong></p><h3 style="display: inline;"><?= htmlspecialchars($message['surname'] . ['name']) ?></h3><br>
+        <p><em>datemessage</em></p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
+        <p>message</p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
     </li>
+    <hr>
+    <?php endforeach; ?>
+<?php endif; ?>
     <!-- Autres messages -->
+    <?php if (!empty($messages)): ?>
+        <?php foreach ($messages as $message): ?>
     <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
+        <p><strong>firstname lastname</strong></p></p><h3 style="display: inline;"><?= htmlspecialchars($message['surname'] . ['name']) ?></h3><br>
+        <p><em>datemessage</em></p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
+        <p>message</p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
     </li>
 </ul>
+<?php endforeach; ?>
+<?php endif; ?>
 etc ...
 <!-- Pagination (BONUS) -->
 <?php
