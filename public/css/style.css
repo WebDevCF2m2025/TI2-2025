@@ -1,3 +1,7 @@
+.body{
+    background-color: aqua;
+}
+
 .cont {
     display: grid;
     height: 500px;
