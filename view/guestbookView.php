@@ -17,7 +17,15 @@
 <!-- Formulaire d'ajout d'un message -->
 <div class="container"></div>
 <h2>Ici le formulaire</h2>
+
+<?php if (isset($erreur)):?>
+    <h4 class="err"><?=$erreur?></h4>
+<?php endif; ?>
+
 <div class="formulaire">
+
+
+
     <form action="" method="post">
         <label for="firstname">Prenom *</label>
         <input type="text" name="firstname" id="firstname" maxlength="100" required>

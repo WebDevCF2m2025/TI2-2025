@@ -57,11 +57,15 @@ if (isset($_POST["firstname"],$_POST["lastname"], $_POST["usermail"], $_POST["ph
 
 
     //vérivication ultime avant d'appeler l'insertion
-    if (!empty($name) && $usermail !== false && !empty($message)) {
+    if (!empty($firstname) 
+    && !empty($lastname) 
+    && $usermail !== false 
+    && !empty($message) 
+    && !empty($phone) 
+    && !empty($postcode)) {
         $insert = addGuestbook($db, $firstname, $lastname, $usermail, $phone, $postcode, $message);
     } else {
-        $error = "Erreur dans le formulaire !";
-    }
+        $erreur = "Erreur dans le formulaire !";}
 }
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 

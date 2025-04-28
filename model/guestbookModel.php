@@ -20,6 +20,8 @@
  * Une requête préparée est utilisée pour éviter les injections SQL
  * Les données sont échappées pour éviter les injections XSS (protection backend)
  */
+$erreur;
+ 
 function addGuestbook(PDO $db,
                     string $firstname,
                     string $lastname,
@@ -27,10 +29,12 @@ function addGuestbook(PDO $db,
                     string $phone,
                     string $postcode,
                     string $message
-): bool|string
+): bool
+
 {
-    $erreur = "";
-    $firstnameVerify = strip_tags($firstname); # on retire les tags
+    $erreur = " ";
+    
+    $firstnameVerify = strip_tags($firstname);
     if(empty($firstnameVerify)){
         $erreur.="Votre nom est incorrect.<br>";
     }elseif(strlen($firstnameVerify)>100){
@@ -51,12 +55,33 @@ function addGuestbook(PDO $db,
         $erreur .= "Email incorrect.<br>";
     }
 
+    if (!is_int($phone)){
+        $erreur .= "Phone n'est pas correct";
+    }
+
     $text = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
     if(empty($text)||strlen($text)>300){
         $erreur .= "Message incorrect<br>";
     }
+
+
+    if(!empty($erreur)) return false;
+
+
+    $prepare = $db->prepare("
+INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`) VALUES (?,?,?)
+    ");
+    try{
+        $prepare->execute([$firstnameVerify, $lastnameVerify, $usermail , $phone, $postcode, $message]);
+        return true;
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
+
+
+
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
+    
     // requête préparée obligatoire !
 
     // try catch
@@ -80,13 +105,32 @@ function addGuestbook(PDO $db,
  */
 function getAllGuestbook(PDO $db): array
 {
+    $prepare = $db->prepare("
+    SELECT * FROM `guestbook`
+    ORDER BY `guestbook`.`datemessage` DESC
+    ");
+// essai / erreur
+try{
+    // exécution de la requête
+    $prepare->execute();
+
+    // on renvoie le tableau (array) indexé contenant tous les résultats (peut être vide si pas de message).
+    return $prepare->fetchAll();
+
+// en cas d'erreur sql
+}catch (Exception $e){
+    // erreur de requête SQL
+    die($e->getMessage());
+}
+
+}
     // try catch
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
     return [];
     // sinon, on fait un die de l'erreur
-}
+
 
 /**************************
  * Pour le Bonus Pagination
@@ -98,13 +142,17 @@ function getAllGuestbook(PDO $db): array
  * @return int
  * Fonction qui compte le nombre total de messages dans la table 'guestbook'
  */
-function getNbTotalGuestbook(PDO $db): int
+function getNbTotalGuestbook(PDO $con): int
 {
+    $query = $con->query("SELECT COUNT(*) as nb FROM `guestbook` ");
+    // on renvoie l'entier stocké dans nb
+    return $query->fetch()['nb'];
+
     // try catch
     // si la requête a réussi,
     // bonne pratique, fermez le curseur,
     // renvoyez le nombre total de messages
-    return 0;
+    
     // sinon, on fait un die de l'erreur
 }
 // SELECTION de messages dans le livre d'or par ordre de date croissante
