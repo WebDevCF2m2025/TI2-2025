@@ -22,6 +22,18 @@ require_once "../model/guestbookModel.php";
  * le mode fetch à tableau associatif
  */
 
+ try{
+ 
+    $db = new PDO(DB_DSN, DB_LOGIN, DB_PWD,        
+        [            
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,         
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]
+    );
+}catch(Exception $e){
+ 
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
 /*
  * Si le formulaire a été soumis
  */
