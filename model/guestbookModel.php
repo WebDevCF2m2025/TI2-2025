@@ -5,8 +5,34 @@
  *******************************/
 
 // INSERTION d'un message dans le livre d'or
+function insertGuestbookMessage(PDO $db, string $firstname, string $lastname, string $usermail, string $phone, string $postcode, string $message): bool
+{
+    try {
+
+        $sql = "INSERT INTO guestbook (firstname, lastname, usermail, phone, postcode, message, created_at) 
+                VALUES (:firstname, :lastname, :usermail, :phone, :postcode, :message, NOW())";
+        $stmt = $db->prepare($sql);
+
+
+        $stmt->bindParam(':firstname', htmlspecialchars($firstname), PDO::PARAM_STR);
+        $stmt->bindParam(':lastname', htmlspecialchars($lastname), PDO::PARAM_STR);
+        $stmt->bindParam(':usermail', htmlspecialchars($usermail), PDO::PARAM_STR);
+        $stmt->bindParam(':phone', htmlspecialchars($phone), PDO::PARAM_STR);
+        $stmt->bindParam(':postcode', htmlspecialchars($postcode), PDO::PARAM_STR);
+        $stmt->bindParam(':message', htmlspecialchars($message), PDO::PARAM_STR);
+
+        // Exécution de la requête
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        // Gestion des erreurs
+        error_log("Erreur lors de l'insertion dans le livre d'or : " . $e->getMessage());
+        return false;
+    }
+}
 
 /**
+ * 
+ * 
  * @param PDO $db
  * @param string $firstname
  * @param string $lastname
@@ -29,11 +55,44 @@ function addGuestbook(PDO $db,
                     string $message
 ): bool
 {
+   
     // traitement des données backend (SECURITE)
-
+    
+    $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
+    $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
+    $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+    $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+    $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+    echo "salut";
+  
+    $usermail = filter_var($usermail,FILTER_VALIDATE_EMAIL); 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
+    if(
+        empty($firstname)|| strlen($firstname)>100 || 
+        empty($lastname)|| strlen($lastname)>100 || 
+        empty($phone)|| strlen($phone)>20 || ctype_digit($phone)=== false ||
+        empty($postcode)|| strlen($postcode)>4 || ctype_digit($postcode)=== false ||
+        empty($message)|| strlen($message)>500
+        
+    ){
+        return false;
+    }
+
     // requête préparée obligatoire !
+    try{
+        # sinon, on prépare la requête
+        $prepare = $db->prepare(
+            "INSERT INTO `guestbook`
+                    (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
+                    VALUES (?,?,?,?,?,?);"
+        );
+        # Exécution de la requête
+       
+            $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
+            return true;
+        }catch (Exception $e){
+            die($e->getMessage());
+        }
 
     // try catch
         // si l'insertion a réussi

@@ -1,0 +1,71 @@
+body{
+ background-color: antiquewhite;
+}
+div.formu{
+ 
+    display: flex;
+   justify-content: center;
+   text-align: center
+
+}
+.un, .deux, .trois, .quatre, .cinq{
+   
+    display: flex;
+    flex-direction: column;
+}
+form{
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px  #888888;
+    padding: 10px 50px;
+    display: flex;
+    flex-direction: column;
+}
+h1, h2{
+    text-align: center;
+}
+.image{
+    width: 20vh;
+    margin: 0 auto;
+}
+img{
+    width: 100%;
+}
+button{
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.reste{
+    text-align: center;
+}
+
+
+
+
+
+
+@media screen and (min-width: 820px) {
+    .un, .deux, .trois, .quatre, .cinq{
+   
+        display: flex;
+       flex-direction: row;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+  
+  body{
+    padding: 0 40vh;
+  }
+    .tout{
+    display: flex;
+    justify-content: space-between;
+   }
+   .image{
+    width: 50%;
+   }
+   img{
+    width: 100%;
+   }
+}

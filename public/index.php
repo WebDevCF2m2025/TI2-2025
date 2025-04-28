@@ -16,16 +16,46 @@ require_once "../model/guestbookModel.php";
 
 /*
  * Connexion à la base de données en utilisant PDO
+ * 
  * Avec un try catch pour gérer les erreurs de connexion
+  
  * Utilisez les constantes de config.php
  * Activez le mode d'erreur de PDO à Exception et
  * le mode fetch à tableau associatif
  */
+try{
+
+    $db = new PDO(DB_DSN , DB_LOGIN, DB_PWD,
+  
+        [
+         
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+         
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]
+    );
+}catch(Exception $e){
+
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
+
 
 /*
  * Si le formulaire a été soumis
  */
-
+if(isset($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['phone'],$_POST['postcode'],$_POST['message'])){
+  
+    $insert = addGuestbook($db, $_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
+ var_dump($insert);
+  
+    if($insert===true){
+        header("Location: ./");
+        exit();
+    }else{
+        $error = $insert;
+    } 
+}
+ 
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
 // si l'insertion a réussi
@@ -39,7 +69,7 @@ require_once "../model/guestbookModel.php";
  */
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
-
+$articles = getAllGuestbook($db);
 /*********************
  * Ou Bonus Pagination
  *********************/
@@ -63,3 +93,5 @@ require_once "../model/guestbookModel.php";
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+
+$db = null;
