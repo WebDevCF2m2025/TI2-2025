@@ -117,7 +117,7 @@ text.addEventListener("keyup",function(){
   let characters = text.value.split('');
   wordCount.innerText = characters.length;
 
-  if(characters > 300) {
-    setError(text, "Too long")
+  if(text.length > 300) {
+
   }
 });

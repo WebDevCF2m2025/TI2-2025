@@ -7,6 +7,17 @@ body {
   font-family: sans-serif;
 }
 
+
+
+.message-cont {
+  display: inline-block;
+}
+
+.message-cont p {
+  display: inline;
+  
+}
+
 #form {
   width: 300px;
   margin: 20vh auto 0 auto;
@@ -85,4 +96,22 @@ display: none;
 
 #the-count {
   float: right;
+}
+
+@media screen and (min-width: 960px) {
+  #form {
+    text-align: left;
+    width: 700px;
+  }
+  textarea {
+    height: 100px;
+    resize: none;
+  }
+  .smart-container {
+    display: block;
+  }
+  .message-cont {
+    background-color: #f0f0f0;
+
+  }
 }

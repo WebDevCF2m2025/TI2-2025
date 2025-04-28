@@ -70,7 +70,7 @@ if(isset($insert)){
 
     <div class="input-control">
       <label for="message">Message</label>
-      <textarea  name="message" id="message"></textarea>
+      <textarea  name="message" id="message" maxlength="300"></textarea>
       <div class="error"></div>
     </div>
   <div id="the-count">
@@ -84,36 +84,34 @@ if(isset($insert)){
 <div class="smart-container">
 
 
-
+  <?php
+  if(empty($nbGuessBook)):
+    ?>
+    <h3>Pas encore de message</h3>
+  <?php else:
+    $pluriel = $nbGuessBook>1? "s":"";
+    ?>
+    <!-- Si 1 message -->
+    <h3>Le<?=$pluriel ?> message<?=$pluriel ?> précédent<?=$pluriel ?></h3>
+    <h3>Il y a <?= $nbGuessBook ?> message<?=$pluriel ?></h3>
+    <!-- Si plusieurs messages -->
+  <?php
+  endif;
+  ?>
 
 <!-- Pagination (BONUS) -->
-  <h3><?= $pagination ?></h3>
 <!-- Liste des messages -->
   <?php foreach ($books as $book):  ?>
-<ul>
-    <li>
-        <p><strong><?= $book['firstname'] ?> <?= $book['lastname'] ?></strong></p>
-        <p><em><?= $book['datemessage']?> </em></p>
+  <div class="message-cont">
+        <p><strong><?= $book['firstname'] ?> <?= $book['lastname'] ?> - </strong></p>
+        <p><em> a écrit le message le <?= $book['datemessage']?> </em></p>
         <p><?= $book['message']?></p>
-    </li>
-</ul>
   <?php endforeach; ?>
+  </div>
 </div>
 
-<?php
-if(empty($nbGuessBook)):
-  ?>
-  <h3>Pas encore de message</h3>
-<?php else:
-  $pluriel = $nbGuessBook>1? "s":"";
-  ?>
-  <!-- Si 1 message -->
-  <h3>Le<?=$pluriel ?> message<?=$pluriel ?> précédent<?=$pluriel ?></h3>
-  <h3>Il y a <?= $nbGuessBook ?> message<?=$pluriel ?></h3>
-  <!-- Si plusieurs messages -->
-<?php
-endif;
-?>
+  <h3><?= $pagination ?></h3>
+
 <?php
 // À commenter quand on a fini de tester
 //echo "<h3>Nos var_dump() pour le débugage</h3>";
