@@ -20,24 +20,55 @@
  * Une requête préparée est utilisée pour éviter les injections SQL
  * Les données sont échappées pour éviter les injections XSS (protection backend)
  */
-function addGuestbook(PDO $db,
-                    string $firstname,
-                    string $lastname,
-                    string $usermail,
-                    string $phone,
-                    string $postcode,
-                    string $message
-): bool
-{
+function addGuestbook(
+    PDO $db,
+    string $firstname,
+    string $lastname,
+    string $usermail,
+    string $phone,
+    string $postcode,
+    string $message
+): bool {
     // traitement des données backend (SECURITE)
+    $insertfirstName = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
+    $insertlastName = trim(htmlspecialchars(strip_tags($lastname), ENT_QUOTES));
+    $usermailInsert = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+    $insertPhone = trim(htmlspecialchars(strip_tags($phone), ENT_QUOTES));
+    $postcodeInsert = trim(htmlspecialchars(strip_tags($postcode), ENT_QUOTES));
+    $messageInsert = trim(htmlspecialchars(strip_tags($message), ENT_QUOTES));
 
+
+    if (empty($inserfirstName)) return false;
+    if (strlen($insertfirstName) >= 100) return false;
+
+    if (empty($inserlastName)) return false;
+    if (strlen($insertlastName) >= 100) return false;
+
+    if ($usermailInsert === false && $usermailInsert >= 200) return false;
+
+    if (strlen($phone) >= 20) return false;
+
+    if (empty($postcodeInsert)) return false;
+    if ($postcodeInsert == 4) return false;
+
+    if (empty($messagesInsert)) return false;
+    if (strlen($messagesInsert) >= 500) return false;
+
+    $prepare = $db->prepare("INSERT INTO `guestbook`(`firstname`,`lastname`,`phone`,`postcode`,`message`) VALUES (?,?,?,?,?);");
+
+    try {
+        $prepare->execute([$insertfirstName,$insertlastName, $insertPhone,$postcodeInsert, $messageInsert]);
+        return true;
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
+    // return false;
     // requête préparée obligatoire !
 
     // try catch
-        // si l'insertion a réussi
-        // on renvoie true
+    // si l'insertion a réussi
+    // on renvoie true
     // sinon, on fait un die de l'erreur
 
 }
@@ -56,11 +87,18 @@ function addGuestbook(PDO $db,
  */
 function getAllGuestbook(PDO $db): array
 {
+    try {
+        $connect = $db->prepare("SELECT * FROM  `guestbook` ORDER BY `datemessage` DESC");
+        $connect->execute();
+        return $connect->fetchAll();
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+
     // try catch
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    return [];
     // sinon, on fait un die de l'erreur
 }
 
@@ -118,7 +156,7 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  * Fonction qui génère le code HTML de la pagination
  * si le nombre de pages est supérieur à une.
  */
-function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
+function pagination(int $nbtotalMessage, string $get = "page", int $pageActu = 1, int $perPage = 5): string
 {
     $sortie = "";
     if ($nbtotalMessage === 0) return "";
@@ -150,5 +188,4 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
     }
     $sortie .= "</p>";
     return $sortie;
-
 }

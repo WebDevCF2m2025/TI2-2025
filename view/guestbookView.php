@@ -21,15 +21,15 @@
 
     <main>
         <img src="img/sign-up-amico.png" alt="img-form" />
-        <form>
+        <form  action="" method="post">
             <div class="label prenom">
                 <label for="nom">Prénom :</label>
-                <input type="text" id="nom" name="nom" required>
+                <input type="text" id="prenom" name="prenom" required>
             </div>
 
             <div class="label nom">
                 <label for="prenom">Nom :</label>
-                <input type="text" id="prenom" name="prenom" required>
+                <input type="text" id="nom" name="nom" required>
             </div>
 
             <div class="label tel">
@@ -42,9 +42,14 @@
                 <input type="email" id="email" name="email" required>
             </div>
 
+            <div class="label postal">
+                <label for="email">Code postal :</label>
+                <input type="num" id="postal" name="postal" required>
+            </div>
+
             <div class="label message">
                 <label for="texte">Message :</label>
-                <textarea id="texte" name="texte" rows="4" required></textarea>
+                <textarea id="texte" name="message" rows="4" required></textarea>
             </div>
             <div class="label button">
                 <button type="submit">Envoyer</button>
