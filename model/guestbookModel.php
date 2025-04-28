@@ -31,15 +31,47 @@ function addGuestbook(PDO $db,
 {
     // traitement des données backend (SECURITE)
 
+    # strip_tags : Avec ça on retire les tags
+    # htmlspecialchars : Avec ça on protège des caractères spéciaux (avec ' et ")
+    # trim : Avec ça on supprime les espaces devant et derrière les variable $firstname, $lastname ... 
+
+    $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES)); 
+    $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
+    $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+    $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+    $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+    $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
+    if(
+        empty($firstname) || strlen($firstname > 100) || # Ici on vérifie que $firstname n'est pas vide et que sa longueur ne dépasse pas les 100 caractères
+        empty($lastname) || strlen($lastname > 100) || # Ici on vérifie que $last name n'est pas vide et que sa longueur ne dépasse pas les 100 caractères
+        $usermail === false || strlen($usermail > 200) || # Ici on vérifie que $usermail n'est pas incorrect et que sa longueur ne dépasse pas les 200 caractères
+        empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false || # Ici on vérifie que $phone n'est pas vide, que sa longueur ne dépasse pas les 20 caractères et que ce sont bien des chiffres
+        empty($postcode) || strlen($postcode > 4) || ctype_digit($postcode) === false || # Ici on vérifie que $postcode n'est pas vide, que sa longueur ne dépasse pas les 4 caractères et que ce sont bien des chiffres
+        empty($message) || strlen($message) > 500 # Ici on vérifie que $message n'est pas vide et que sa longueur ne dépasse pas les 500 caractères
+    ) {
+        return false;
+    }
+
     // requête préparée obligatoire !
+    $prepare = $db->prepare("
+    INSERT INTO `guestbook` (`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`)
+    VALUES (?,?,?,?,?,?)
+    ");
 
     // try catch
         // si l'insertion a réussi
-        // on renvoie true
-    // sinon, on fait un die de l'erreur
+    try {
+        $prepare->execute([$firstname, $lastname, $usermail, $phone, $postcode, $message]);
 
+        // on renvoie true
+        return true;
+
+    // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
 
 /***************************
@@ -55,13 +87,29 @@ function addGuestbook(PDO $db,
  * Si pas de message, renvoie un tableau vide
  */
 function getAllGuestbook(PDO $db): array
-{
+{  
+    $prepare = $db->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook` . `datemessage` ASC
+    ");
+
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
+    try {
+        $prepare->execute();
+
+        // si la requête a réussi,
+        $result = $prepare->fetchAll();
+
+        // bonne pratique, fermez le curseur
+        $prepare->closeCursor();
+
+        // renvoyer le tableau de(s) message(s)
+        return $result;
+
+    } catch (Exception $e) {
+            // sinon, on fait un die de l'erreur
+            die($e->getMessage());
+    }
 }
 
 /**************************
