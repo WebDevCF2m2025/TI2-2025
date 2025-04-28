@@ -1,5 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+
+
+    
     // Recuperation des spans et du formulaire
     const form = document.getElementById("form");
     const spanName = document.getElementById("spanName");

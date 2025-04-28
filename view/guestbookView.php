@@ -15,10 +15,12 @@
 
 <body>
     <main>
-
+        <!-- titre, image et paragraphe -->
         <h1>TI2 | Livre d'or</h1>
         <img class="signUp" src="../public/img/sign-up-amico.png" alt="Image tablette">
         <p>Laissez nous un messages</p>
+
+        <!-- formulaire de methode POST et preparation des espaces pour afficher les erreurs javascripte -->
         <form action="" method="post" id="form">
             <div>
                 <label for="prenom">Prénom</label>
@@ -53,7 +55,8 @@
 
             <div>
                 <label for="message">Message</label>
-                <textarea id="message-input" name="message" id="message"></textarea>
+                <textarea id="message" name="message" onkeydown="limite();" ></textarea>
+
                 <span id="spanMessage"></span>
             </div>
 
@@ -61,12 +64,19 @@
                 <button type="submit">Envoyez</button>
                 <span id="spanGeneral"></span>
             </div>
+
+            <kbd id="compteur">0/300</kbd>
+
         </form>
+
+        <!-- affichage du tableau des messages recuperer -->
         <div class="message">
             <h2>Les précedents messages</h2>
+            <!-- 0 message ? affiche le h3 pas encors de messages h3 -->
             <?php if ($count === 0) : ?>
                 <h3>Pas encore de message</h3>
             <?php else: ?>
+                page 1 ?
                 <?php if ($count === 1): ?>
                     <h3>Il y a 1 message</h3>
                 <?php else: ?>
@@ -101,6 +111,17 @@
 
     <script src="../public/js/validation.js"></script>
 
+    <script>
+        // ajout de la limitation de charactere
+        function limite() {
+            let total = document.getElementById("message").value.length + 1;
+            document.getElementById("compteur").innerHTML = total + "/300";
+            if (total > 300) {
+                document.getElementById("message").disabled= true;
+                document.getElementById("compteur").innerHTML = "300/300";
+            }
+        }
+    </script>
 </body>
 
 </html>
