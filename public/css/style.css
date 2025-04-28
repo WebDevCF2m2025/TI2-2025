@@ -1,3 +1,4 @@
+/* ecran iphone */
 form{
     display:flex; 
     flex-direction: column; 
@@ -109,7 +110,7 @@ nav:active{
     text-align: center;
     color: black;
 }
-
+/* ecran tablet */
 @media screen and ( min-width: 480px){
     .label{
         display:flex;
@@ -117,7 +118,7 @@ nav:active{
         flex-direction: row;
     }
 }
-
+/* ecran pc */
 @media screen and ( min-width: 960px){
     .label{
         display:flex;

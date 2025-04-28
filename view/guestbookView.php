@@ -24,7 +24,8 @@
     <div>
          <h2>Laissez nous un message</h2>
         <!-- Formulaire d'ajout d'un message -->
-        <form action="" method="POST">
+         <h2 id="bug"><h2>
+        <form action="" method="POST" id="form">
             <div class="label">
                 <label for="firstname">Prenom *</label>
                 <input type="text" id="firstname" name="firstname">
