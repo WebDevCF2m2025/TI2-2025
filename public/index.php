@@ -42,12 +42,12 @@ try{
 /*
  * Si le formulaire a été soumis
  */
-if(isset($_POST['surname'],$_POST['email'],$_POST['message'])){
-
+if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['message'],$_POST['postal'],$_POST['portable'])){
+echo"ok";
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
-    $insert = addGuestbook($db,$_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
+    $insert = addGuestbook($db,$_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['portable'],$_POST['postal'],$_POST['message']);
 
-
+var_dump($insert);
 // si l'insertion a réussi
 // on redirige vers la page actuelle (ou on affiche un message de succès)
 

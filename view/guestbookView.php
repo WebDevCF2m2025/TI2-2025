@@ -27,13 +27,14 @@
                 <label for="firsname">Prénom *</label>
                 <input id="prenom" type="text" name="prenom">
                 <label for="lastname">Nom *</label>
-                <input id="nom" type="text" name="prenom">
+                <input id="nom" type="text" name="nom">
                 <label for="email">Email *</label>
                 <input id="email" type="email" name="email" placeholder="email">
                 <label for="postal">c/code postal *</label>
                 <input id="postal" type="text" name="postal">
                 <label for="portable">Portable *</label>
                 <input id="portable" type="text" name="portable">
+                <input id="message" type="text" name="message">
                 <button type="submit">Envoyer </button>
             
 </form>
@@ -76,7 +77,7 @@ else:
 endif;
 
 
-//var_dump($_POST,$_GET,);
+var_dump($_POST,$_GET,);
 ?>
 
 <!-- Pagination (BONUS) -->
@@ -84,7 +85,7 @@ endif;
 <!-- Liste des messages -->
 <ul>
     <li>
-        <p><strong><?=$firstname?><?=$lastname?></strong></p>
+        <p><strong></strong></p>
         <p><em>datemessage</em></p>
         <p><</p>
     </li>

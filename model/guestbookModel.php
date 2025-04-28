@@ -83,7 +83,7 @@ function getAllGuestbookOrderByDateASC(PDO $db): array
 // essai / erreur
 try{
     // exécution de la requête
-    $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
+    $prepare->execute();
 
     // on renvoie le tableau (array) indexé contenant tous les résultats (peut être vide si pas de message).
     return $prepare->fetchAll();
