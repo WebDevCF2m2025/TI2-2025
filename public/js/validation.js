@@ -53,6 +53,8 @@ form.addEventListener("submit", function(e){
 
     if (verifyMail(email) && verifyPostal(postalCode) && verifyPhone(phoneNumber)) {
         sucessMessage.style.display = "block"
+    } else if (firstName === "") {
+        firstNameError.style.display = "block"
     }
     
     
