@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>Livre d'or</h1>
+<h1> TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
-<h2>Ici le formulaire</h2>
+
+<div class="tout"> <div class="image"><img src="img/sign-up-amico.png" alt=""></div>
+
 <div class="formu">
-    <form action="" method="$_POST">
+    <form action="" method="POST">
         <label for="firstname">firstname</label>
         <input type="text" name="firstname" id="firstname">
         <label for="lastname">lastname</label>
@@ -25,13 +27,14 @@
         <label for="usermail">usermail</label>
         <input type="email" name="email" id="email">
         <label for="phone">phone</label>
-        <input type="number" name="phone" id="phone">
+        <input type="text" name="phone" id="phone">
         <label for="postcode">postcode</label>
-        <input type="number" name="postcode" id="postcode">
+        <input type="text" name="postcode" id="postcode">
         <textarea name="message" id="message" rows="10" required></textarea>
         <button type="submit" >envoyer</button>
     </form>
-</div>
+</div></div>
+
 <!-- Si pas de message -->
 <h3>Pas encore de message</h3>
 <!-- Si 1 message -->

@@ -43,16 +43,17 @@ try{
 /*
  * Si le formulaire a été soumis
  */
-if(isset($_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message'],$_POST['datemessage'])){
+if(isset($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['phone'],$_POST['postcode'],$_POST['message'])){
   
-    $insert = addGuestbook($db, $_POST['firstname'],$_POST['lastname'],$_POST['usermail'],$_POST['phone'],$_POST['postcode'],$_POST['message'],$_POST['datemessage']);
- 
+    $insert = addGuestbook($db, $_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['phone'],$_POST['postcode'],$_POST['message']);
+ var_dump($insert);
+    /*
     if($insert===true){
         header("Location: ./");
         exit();
     }else{
         $error = $insert;
-    }
+    } */
 }
  
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
