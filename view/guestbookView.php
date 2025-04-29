@@ -1,5 +1,3 @@
-<?php
-?>
 <!doctype html>
 <html lang="fr">
 
@@ -12,6 +10,7 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/monLayer.css">
 </head>
 
 <body>
@@ -19,8 +18,8 @@
         <!-- titre, image et paragraphe -->
         <h1>TI2 | Livre d'or</h1>
         <img class="signUp" src="../public/img/sign-up-amico.png" alt="Image tablette">
-        <p>Laissez nous un messages</p>
 
+        <p class="paragraphTitle">Laissez nous un messages</p>
         <!-- formulaire de methode POST et preparation des espaces pour afficher les erreurs javascripte -->
         <form method="POST" id="form">
             <div>
@@ -60,15 +59,13 @@
 
                 <span id="spanMessage"></span>
             </div>
-
-            <div>
-                <button type="submit">Envoyez</button>
-                <span id="spanGeneral"></span>
-            </div>
-
             <div id="limitation">
                 <kbd id="compteur">0/300</kbd>
                 <span id="errorLimit"></span>
+            </div>
+            <div>
+                <button type="submit">Envoyez</button>
+                <span id="spanGeneral"></span>
             </div>
 
         </form>
@@ -108,8 +105,8 @@
             <?php endif; ?>
         </div>
 
+        <?= $pagination ?>
     </main>
-    <?= $pagination ?>
 
 
 

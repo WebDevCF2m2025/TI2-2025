@@ -130,7 +130,7 @@ function pagination(int $nbtotalMessage, string $get = "page", int $pageActu = 1
     if ($nbtotalMessage === 0) return "";
     $nbPages = ceil($nbtotalMessage / $perPage);
     if ($nbPages == 1) return "";
-    $sortie .= "<p>";
+    $sortie .= "<p class='pagination'>";
     for ($i = 1; $i <= $nbPages; $i++) {
         if ($i === 1) {
             if ($pageActu === 1) {
