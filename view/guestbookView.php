@@ -79,18 +79,19 @@
 
 
 
-
+ 
 
     <?php
     foreach ($afficher as $e):
+        $date = date('d/m/Y H:i', strtotime($e['datemessage']));
 
         ?>
         <div class="messagees">
             <br>
-            <?= $e['firstname'] ?> a écrit  <?=  $e['message'] ?>  le <?= $e['datemessage'] ?> 
+          <strong> <?= $e['firstname'] . " " . $e['lastname'] ?> </strong>  a écrit  <?=  $e['message'] ?>  le <?= $date ?> 
             <br>
             <br>
-            <hr
+            <hr>
            
         </div>
         <?php
@@ -98,6 +99,7 @@
 
     ?>
 
+    <h2><?= $date ?></h2>
 
     <?php
     // À commenter quand on a fini de tester
