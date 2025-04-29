@@ -22,7 +22,8 @@ try {
 if (isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['phone'], $_POST['postal'], $_POST['message'])) {
     // Si oui, on insert les données
     $insert = addGuestbook($conn, $_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['phone'], $_POST['postal'], $_POST['message']);
-}
+
+} 
 
 // recup des livres de la bdd dans un variable
 $messages = getAllGuestbook($conn);

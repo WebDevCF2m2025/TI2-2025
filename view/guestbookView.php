@@ -10,6 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TI2 | Livre d'or</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -21,41 +22,41 @@
         <p>Laissez nous un messages</p>
 
         <!-- formulaire de methode POST et preparation des espaces pour afficher les erreurs javascripte -->
-        <form action="" method="post" id="form">
+        <form method="POST" id="form">
             <div>
                 <label for="prenom">Prénom</label>
-                <input id="name-input" type="text" name="prenom">
+                <input id="nameInput" type="text" name="prenom">
                 <span id="spanName"></span>
             </div>
 
             <div>
                 <label for="nom">Nom</label>
-                <input id="surname-input" type="text" name="nom">
+                <input id="surnameInput" type="text" name="nom">
                 <span id="spanSurname"></span>
             </div>
 
             <div>
                 <label for="email">Email</label>
-                <input id="email-input" type="email" name="email">
+                <input id="emailInput" type="email" name="email">
                 <span id="spanEmail"></span>
             </div>
 
             <div>
 
                 <label for="postal">Postal</label>
-                <input id="postal-input" type="number" name="postal">
+                <input id="postalInput" type="number" name="postal">
                 <span id="spanPostal"></span>
             </div>
 
             <div>
                 <label for="phone">Telephone</label>
-                <input id="phone-input" type="number" name="phone">
+                <input id="phoneInput" type="number" name="phone">
                 <span id="spanPhone"></span>
             </div>
 
             <div>
                 <label for="message">Message</label>
-                <textarea id="message" name="message" onkeydown="limite();" ></textarea>
+                <textarea id="messageInput" name="message" onkeydown="limite();"></textarea>
 
                 <span id="spanMessage"></span>
             </div>
@@ -65,7 +66,10 @@
                 <span id="spanGeneral"></span>
             </div>
 
-            <kbd id="compteur">0/300</kbd>
+            <div id="limitation">
+                <kbd id="compteur">0/300</kbd>
+                <span id="errorLimit"></span>
+            </div>
 
         </form>
 
@@ -76,7 +80,6 @@
             <?php if ($count === 0) : ?>
                 <h3>Pas encore de message</h3>
             <?php else: ?>
-                page 1 ?
                 <?php if ($count === 1): ?>
                     <h3>Il y a 1 message</h3>
                 <?php else: ?>
@@ -109,19 +112,21 @@
     <?= $pagination ?>
 
 
-    <script src="../public/js/validation.js"></script>
 
     <script>
         // ajout de la limitation de charactere
         function limite() {
-            let total = document.getElementById("message").value.length + 1;
+            let total = document.getElementById("messageInput").value.length + 1;
             document.getElementById("compteur").innerHTML = total + "/300";
             if (total > 300) {
-                document.getElementById("message").disabled= true;
+                document.getElementById("messageInput").disabled = true;
                 document.getElementById("compteur").innerHTML = "300/300";
+                document.getElementById("errorLimit").innerHTML = "Limite atteinte !";
             }
         }
     </script>
+    <script src="js/validation.js"></script>
+
 </body>
 
 </html>

@@ -59,6 +59,19 @@ body > p {
   text-align: center;
 }
 
+#limitation{
+  display: flex;
+  flex-direction: column;
+}
+#compteur{
+  text-align: right !important;
+}
+#errorLimit{
+  margin: 0 !important;
+  text-align: left !important;
+}
+
+
 /* Tableau */
 ul li {
   list-style-type: none;
@@ -93,8 +106,6 @@ tr:nth-child(even) {
   flex-direction: column;
   align-items: center;
 }
-
-
 
 
 /* tablette */
@@ -154,6 +165,12 @@ tr:nth-child(even) {
     height: 1vh;
     text-align: center;
   }
+
+  #errorLimit{
+    margin-top: 10px !important;
+    font-size: 15px !important;
+  }
+  
   /* tableau tablette */
   table {
     width: 80%;
@@ -292,5 +309,8 @@ tr:nth-child(even) {
     border: 1px solid white;
     padding: 0.5rem;
     text-align: center;
+  }
+  main>p:first-of-type{
+    display: none;
   }
 }

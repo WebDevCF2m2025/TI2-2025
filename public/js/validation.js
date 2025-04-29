@@ -1,41 +1,34 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-
-
-    
-    // Recuperation des spans et du formulaire
+    // form & spans
     const form = document.getElementById("form");
     const spanName = document.getElementById("spanName");
     const spanSurname = document.getElementById("spanSurname");
     const spanEmail = document.getElementById("spanEmail");
-    const spanPostal = document.getElementById("spanPostal");
     const spanPhone = document.getElementById("spanPhone");
     const spanMessage = document.getElementById("spanMessage");
     const spanGeneral = document.getElementById("spanGeneral");
 
-    // Mise en place des regex
-    const nameRegex = /^[(a-zA-Z)]{2,60}$/;
-    const surnameRegex = /^[a-zA-Z]{2,60}$/;
-    const emailRegex = /^[a-zA-Z0-9._-]{2,60}@[a-zA-Z0-9._-]{2,60}\.[a-zA-Z]{2,3}$/;
+    // Regex (tchat GPT et j'assume)
+    const nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]{2,60}$/;
+    const surnameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]{2,60}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const postalRegex = /^[0-9]{4}$/;
-    const phoneRegex = /^04[(0-9)]{8}$/;
-    const messageRegex = /^[a-zA-Z0-9%._-]{0,500}$/;
+    const phoneRegex = /^[0-9]{10}$/;
+    const messageRegex = /^.{0,500}$/;
 
-    // validateur de formulaire
     function validateForm() {
-        // defini sur true par defaut, si false affiche les msg derreur, sinon valide le formulaire
         let valid = true;
         let allEmpty = true;
 
-        // ciblage des inputs
-        const name = document.getElementById("name-input").value.trim();
-        const surname = document.getElementById("surname-input").value.trim();
-        const email = document.getElementById("email-input").value.trim();
-        const postal = document.getElementById("postal-input").value.trim();
-        const phone = document.getElementById("phone-input").value.trim();
-        const message = document.getElementById("message-input").value.trim();
+        // stockage des champs du formulaire
+        const name = document.getElementById("nameInput").value.trim();
+        const surname = document.getElementById("surnameInput").value.trim();
+        const email = document.getElementById("emailInput").value.trim();
+        const postal = document.getElementById("postalInput").value.trim();
+        const phone = document.getElementById("phoneInput").value.trim();
+        const message = document.getElementById("messageInput").value.trim();
 
-        // definition du contenu des span du formulaire
+        // Reset des messages
         spanName.textContent = "";
         spanSurname.textContent = "";
         spanEmail.textContent = "";
@@ -44,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         spanMessage.textContent = "";
         spanGeneral.textContent = "";
 
-        // prenom verif champs vide ou invalide(regX)
+        // Si les sont vide ou ne respectent pas les regex = message d'erreur
         if (name === "") {
             spanName.textContent = "Ce champ est requis.";
             valid = false;
@@ -57,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
             allEmpty = false;
         }
 
-        // nom ""
         if (surname === "") {
             spanSurname.textContent = "Ce champ est requis.";
             valid = false;
@@ -70,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
             allEmpty = false;
         }
 
-        // email ""
         if (email === "") {
             spanEmail.textContent = "Ce champ est requis.";
             valid = false;
@@ -83,12 +74,11 @@ document.addEventListener("DOMContentLoaded", function () {
             allEmpty = false;
         }
 
-        // code postal ""
         if (postal === "") {
             spanPostal.textContent = "Ce champ est requis.";
             valid = false;
         } else if (!postalRegex.test(postal)) {
-            spanPostal.textContent = "Code postal invalide.";
+            spanPostal.textContent = "Postal invalide.";
             valid = false;
             allEmpty = false;
 
@@ -96,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
             allEmpty = false;
         }
 
-        // telephone ""
         if (phone === "") {
             spanPhone.textContent = "Ce champ est requis.";
             valid = false;
@@ -109,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
             allEmpty = false;
         }
 
-        // message ""
         if (message === "") {
             spanMessage.textContent = "Ce champ est requis.";
             valid = false;
@@ -122,24 +110,19 @@ document.addEventListener("DOMContentLoaded", function () {
             allEmpty = false;
         }
 
-        // Si allEmpty = true, renvoi que tout les champs sont vides
+        // Si tous les champs sont vides = message d'erreur global
         if (allEmpty) {
             spanGeneral.textContent = "Tous les champs sont vides.";
             valid = false;
         }
 
-        // si cest non vide et valid, return valid qui est =  true
         return valid;
     }
 
-    // au submit du formulaire
     form.addEventListener("submit", function (e) {
-        // on empeche le rechargement de la page
-        e.preventDefault();
-        // si valideform est true ?
+        e.preventDefault();  // Empêche la soumission par défaut
         if (validateForm()) {
-            // force le submit du formulaire
-            form.submit();
+            form.submit(); // Soumission si formulaire valide
         }
     });
 });
