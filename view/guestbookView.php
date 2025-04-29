@@ -27,27 +27,42 @@
         <p id="verifTel"></p>
 
         <div class="container">
+            
             <form action="" id="formulaire" method="post">
-                <label for="firstname">Prénom *</label>
-                <input type="text" name="firstname" id="firstname" required>
 
-                <label for="lastname">Nom *</label>
-                <input type="text" name="lastname" id="lastname" required>
-
-                <label for="usermail">E-mail *</label>
-                <input type="email" name="usermail" id="usermail">
-
-                <label for="postcode">c/postal *</label>
-                <input type="text" name="postcode" id="postcode">
-
-                <label for="phone">Portable</label>
-                <input type="text" name="phone" id="phone">
-
-                <label for="message">Message</label>
-                <textarea name="message" id="message" rows="10" maxlength="300" required></textarea>
+                <div class="form-group">
+                    <label for="firstname">Prénom *</label>
+                    <input type="text" name="firstname" id="firstname" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="lastname">Nom *</label>
+                    <input type="text" name="lastname" id="lastname" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="usermail">E-mail *</label>
+                    <input type="email" name="usermail" id="usermail">
+                </div>
+    
+                <div class="form-group">
+                    <label for="postcode">c/postal *</label>
+                    <input type="text" name="postcode" id="postcode">
+                </div>
+    
+                <div class="form-group">
+                    <label for="phone">Portable</label>
+                    <input type="text" name="phone" id="phone">
+                </div>
+    
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="10" maxlength="300" required></textarea>
+                </div>
+            
                 <p id="caracCount">0/300 caractères</p>
-
                 <button type="submit">Envoyer</button>
+                
             </form>
         </div>
     </div>
@@ -70,7 +85,7 @@ else:
     ;
 
     // On ajoute une variable pour le 's' de message si nécéssaire
-    $pluriel = $nbMessages > 1 ? "s" : "";
+    $pluriel = $nbMessage > 1 ? "s" : "";
 ?>
 
 <div class="message">

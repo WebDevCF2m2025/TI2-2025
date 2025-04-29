@@ -1,4 +1,4 @@
-//////////////////////////////////// EMAIL //////////////////////////////////////////////////////
+//////////////////////////////////// EMAIL ///////////////////////////////////////////////////////
 
 // Fonction qui permet de vérifier l'email
 function verifEmail(email) {
@@ -12,7 +12,7 @@ const email2 = document.getElementById("verifEmail");
 
 
 
-//////////////////////////////////// CODE POSTAL //////////////////////////////////////////////////////
+//////////////////////////////////// CODE POSTAL /////////////////////////////////////////////////
 
 // Fonction qui permet de vérifier le code postal 
 function verifCodePostal(postal) {
@@ -25,7 +25,7 @@ const codePostal = document.getElementById("postcode");
 const codePostal2 = document.getElementById("verifCP");
 
 
-//////////////////////////////////// NUMÉRO DE TÉLÉPHONE //////////////////////////////////////////////////////
+//////////////////////////////////// NUMÉRO DE TÉLÉPHONE /////////////////////////////////////////
 
 // Fonction qui permet de vérifier le numéro de téléphone 
 function verifTelephone(telephone) {
@@ -38,7 +38,7 @@ const telephone = document.getElementById("phone");
 const telephone2 = document.getElementById("verifTel");
 
 
-//////////////////////////////////// EVENEMENT //////////////////////////////////////////////////////
+//////////////////////////////////// EVENEMENT ///////////////////////////////////////////////////
 
 // On attribue la constante formulaire à l'id "formulaire" du formulaire
 const formulaire = document.getElementById("formulaire");
@@ -55,7 +55,7 @@ formulaire.addEventListener("submit", function(event) {
     
     const mail = email.value.trim();
     if (!verifEmail(mail)) {
-        email2.textContent = 'Veuillez entrer un e-mail valide (ex : prenom.nom@mail.com)';
+        email2.textContent = 'Veuillez entrer un e-mail valide';
         email2.style.color = 'red';
         return;
     }
@@ -82,19 +82,17 @@ formulaire.addEventListener("submit", function(event) {
 
 
 
-//////////////////////////////////// COMPTAGE CARACTÈRES //////////////////////////////////////////////////////
+//////////////////////////////////// COMPTAGE CARACTÈRES /////////////////////////////////////////
 const messageInput = document.getElementById('message');
 const caracteresCount = document.getElementById('caracCount');
 
 messageInput.addEventListener('input', function() {
     const maxLength = 300;
     const currentLength = messageInput.value.length;
-
     caracteresCount.textContent = `${currentLength} / ${maxLength} caractères`;
 
     if (currentLength >= maxLength) {
         caracteresCount.style.color = 'red';
-        messageInput.value = messageInput.value.slice(0, maxLength); // Bloquer au max
     } else {
         caracteresCount.style.color = 'white';
     }

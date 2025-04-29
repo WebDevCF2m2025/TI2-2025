@@ -1,3 +1,5 @@
+/* ========================= CSS GÉNÉRAL ====================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -20,24 +22,46 @@ h1 {
 .avis {
     text-align: center;
     color: white;
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
-form {
-    margin: 20px 100px;
-    display: flex;
-    flex-direction: column;
-    width: 300px;
+
+/* ========================= IMAGE ====================== */
+
+.image {
+    text-align: center;
 }
+
+img {
+    width: 200px;
+    height: 200px;
+    margin: 20px 0;
+}
+
+
+/* ========================= FORMULAIRE ====================== */
 
 .container {
     background: #959b9f;
     width: auto;
     height: auto;
     padding: 10px;
-    margin: 5px 0;
+    margin: 10px 0;
     border-radius: 10px;
     box-shadow: 1px 1px 30px rgba(184, 105, 199, 1);
+}
+
+form {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .form-block {
@@ -45,6 +69,43 @@ form {
     flex-direction: column;
     align-items: center;
 }
+
+label {
+    color: white;
+    text-align: center;
+}
+
+input {
+    background-color: #2d393e;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+textarea {
+    background-color: #2d393e;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+}
+
+#caracCount {
+    color:white;
+    text-align: right;
+    margin-top: 80px;
+}
+
+button {
+    background-color: #2d393e;
+    color: white;
+    border-radius: 20px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+
+/* ========================= MESSAGES ====================== */
 
 ul {
     list-style-type: none;
@@ -62,45 +123,8 @@ li {
     color: white;
 }
 
-label {
-    color: white;
-    text-align: center;
-}
-
-input {
-    background-color: #2d393e;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    margin-bottom: 20px;
-}
-
-textarea {
-    background-color: #2d393e;
-    border-radius: 5px;
-    color: white;
-    padding: 10px;
-}
-
-.image {
-    text-align: center;
-}
-
-button {
-    background-color: #2d393e;
-    color: white;
-    border-radius: 20px;
-    margin-top: 30px;
-}
-
 .message h2 {
     margin: 20px;
-}
-
-#caracCount {
-    color:white;
-    text-align: right;
-    margin-top: 80px;
 }
 
 .message {
@@ -109,17 +133,49 @@ button {
     margin: 20px 0;
 }
 
-img {
-    width: 200px;
-    height: 200px;
-    margin: 20px 0;
-}
+
+/* ========================= BONUS JS ====================== */
 
 #verifEmail, #verifCP, #verifTel {
-    font-size: 24px;
+    font-size: 20px;
+    margin-bottom: 5px;
 }
 
-@media screen and (min-width: 1024px) {
+
+/* ========================= TABLETTE ====================== */
+
+@media screen and (min-width: 640px) and (max-width: 960px) {
+    .form-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .form-group label {
+        width: 100px;
+        text-align: right;
+        margin-right: 10px;
+        padding-bottom: 15px;
+    }
+
+    form {
+        width: 500px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        flex: 1;
+    }
+
+    #caracCount {
+        text-align: right;
+    }
+
+}
+
+
+/* ========================= PC ====================== */
+@media screen and (min-width: 960px) {
     .content-desktop {
         display: flex;
         justify-content: center;
@@ -130,7 +186,6 @@ img {
 
     .image {
         flex: 1;
-        text-align: right;
     }
 
     .image img {
@@ -138,8 +193,52 @@ img {
         height: auto;
     }
 
-    .container {
+    .form-block {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .form-group label {
+        width: 100px;
+        text-align: right;
+        margin-right: 10px;
+        padding-bottom: 15px;
+    }
+
+    form {
         width: 500px;
     }
+
+    .form-group input,
+    .form-group textarea {
+        flex: 1;
+        margin-right: 30px;
+    }
+
+    #caracCount {
+        margin-right: 35px;
+    }
+
+    button {
+        margin-right: 15px;
+    }
 }
+
+
+
+
+
