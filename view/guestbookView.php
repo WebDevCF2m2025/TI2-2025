@@ -22,14 +22,14 @@
     <form action="" method="post" id="form">
         <label for="prenomID">Prénom</label>
         <input type="text" id="prenomID" name="prenom" placeholder="Entrez votre prénom">
-        <span class="span" id="nomError"></span>
+        <span class="span" id="prenomError"></span>
 
         <label for="NomID">Nom</label>
         <input type="text" id="nomID" name="nom" placeholder="Entrez votre nom">
-        <span class="span" id="prenomError"></span>
+        <span class="span" id="nomError"></span>
 
         <label for="emailID">Email</label>
-        <input type="email" id="emailID" name="email" placeholder="Entrez votre email">
+        <input type="text" id="emailID" name="email" placeholder="Entrez votre email">
         <span class="span" id="emailError"></span>
 
 

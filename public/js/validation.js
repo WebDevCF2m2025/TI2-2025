@@ -16,7 +16,7 @@ function verificationDeInput() {
 
 
     const emailRegex = /^([a-zA-Z0-9.-_]+)@([a-z0-9]+).([a-z]{2,3})$/;
-    const telRegex = /^((04)|\+324)([0-9]){8}}$/;
+    const telRegex = /^((04)|\+324)([0-9]){8}$/;
     const messageRegex = /^([a-zA-Z0-9 \+ \/ -])+$/;
     const postRegex = /^[0-9]{4}$/;
 
@@ -31,37 +31,16 @@ function verificationDeInput() {
         const inputCodePostal = document.querySelector("#codePostal").value.trim();
 
 
-        if (inputName == "") {
+        if (inputName === "") {
             nomError.textContent = "Nom est vide";
             nomError.style.color = "red";
             isValid = false;
-        } else if (!nameRegex.test(inputName)) {
-            nomError.textContent = "Nom n'est pas valide";
-            nomError.style.color = "red";
-            isValid = false;
         } else {
             nomError.textContent = "";
         }
-
-        if (inputCodePostal == "") {
-            codePostalErro.textContent = "Nom est vide";
-            codePostalErro.style.color = "red";
-            isValid = false;
-        } else if (!postRegex.test(inputCodePostal)) {
-            codePostalErro.textContent = "Nom n'est pas valide";
-            codePostalErro.style.color = "red";
-            isValid = false;
-        } else {
-            nomError.textContent = "";
-        }
-
-
-        if (inputPrenom == "") {
+    
+        if (inputPrenom === "") {
             prenomError.textContent = "Prénom est vide";
-            prenomError.style.color = "red";
-            isValid = false;
-        } else if (!prenomRegex.test(inputPrenom)) {
-            prenomError.textContent = "Prénom n'est pas valide";
             prenomError.style.color = "red";
             isValid = false;
         } else {
@@ -69,7 +48,24 @@ function verificationDeInput() {
         }
 
 
-        if (inputEmail == "") {
+
+
+        if (inputCodePostal === "") {
+            codePostalErro.textContent = "CodePostal est vide";
+            codePostalErro.style.color = "red";
+            isValid = false;
+        } else if (!postRegex.test(inputCodePostal)) {
+            codePostalErro.textContent = "CodePostal n'est pas valide";
+            codePostalErro.style.color = "red";
+            isValid = false;
+        } else {
+            codePostalErro.textContent = "";
+        }
+
+
+
+
+        if (inputEmail === "") {
             emailError.textContent = "Email est vide";
             emailError.style.color = "red";
             isValid = false;
@@ -82,7 +78,7 @@ function verificationDeInput() {
         }
 
 
-        if (inputTel == "") {
+        if (inputTel === "") {
             telephoneError.textContent = "Téléphone est vide";
             telephoneError.style.color = "red";
             isValid = false;
@@ -95,7 +91,7 @@ function verificationDeInput() {
         }
 
 
-        if (inputMessage == "") {
+        if (inputMessage === "") {
             messageError.textContent = "Message est vide";
             messageError.style.color = "red";
             isValid = false;
