@@ -15,6 +15,19 @@
 </head>
 
 <body>
+    <?php
+    $error = "";
+    $thanks = "";
+    if (isset($insert)) {
+        if ($insert === true) {
+            $thanks = "Message bien envoyé";
+        } elseif ($insert === false) {
+            $error = "Pas inséré côté serveur";
+        }
+    }
+    ?>
+    <h3 class="merci"><?= $thanks ?></h3>
+    <h3 class="erreur"><?= $error ?></h3>
 
     <h1>TI2 | Livre d'or</h1>
     <!-- Formulaire d'ajout d'un message -->
@@ -33,7 +46,7 @@
         <span class="span" id="emailError"></span>
 
 
-        <label for="nbPortablelID">Code Postal</label>
+        <label for="nbPortablelID">Telephone</label>
         <input type="text" id="nbPortablelID" name="telephone" placeholder="Entrez votre numero de portable">
         <span class="span" id="telephoneError"></span>
 
@@ -47,55 +60,54 @@
 
         <button type="submit" id="btn">Envoyer</button>
     </form>
+
+
     <?php
-    $error = "";
-    $thanks = "";
-    if (isset($insert)) {
-        if ($insert === true) {
-            $thanks = "Message bien envoyé";
-        } elseif ($insert === false) {
-            $error = "Pas inséré côté serveur";
-        }
+
+    $nbMessage = count($afficher);
+
+    $message = "";
+    if ($nbMessage <= 0) {
+        $message = "Pas encore de message";
+    } elseif ($nbMessage == 1) {
+        $message = "Il y a 1 message";
+    } else {
+        $message = " Il y a " . $nbMessage . " " . "messages";
     }
     ?>
-    <?
+    <h2><?= $message ?></h2>
+
+
+
+
+
+    <?php
     foreach ($afficher as $e):
+
         ?>
-        <p><strong><? $e['firstname'] ?>omer</strong></p>
-        <hr>
+        <div class="messagees">
+            <br>
+            <?= $e['firstname'] ?> a écrit  <?=  $e['message'] ?>  le <?= $e['datemessage'] ?> 
+            <br>
+            <br>
+            <hr
+           
+        </div>
         <?php
-
-
-        ?>
-    <?
     endforeach;
+
     ?>
 
-    <!-- Pagination (BONUS) -->
 
-    <!-- Liste des messages -->
-    <ul>
-        <li>
-            <p><strong><? ?></strong></p>
-            <p><em>datemessage</em></p>
-            <p>message</p>
-        </li>
-        <!-- Autres messages -->
-        <li>
-            <p><strong>firstname lastname</strong></p>
-            <p><em>datemessage</em></p>
-            <p>message</p>
-        </li>
-    </ul>
-    etc ...
-    <!-- Pagination (BONUS) -->
     <?php
     // À commenter quand on a fini de tester
     echo "<h3>Nos var_dump() pour le débugage</h3>";
     echo '<p>$_POST</p>';
     var_dump($_POST);
+    echo '<p>$insert</p>';
+    var_dump($insert);
     echo '<p>$_GET</p>';
-    var_dump($_GET, $insert, $afficher);
+    var_dump($_GET, $nbMessage);
     ?>
 
     <script src="js/validation.js"></script>

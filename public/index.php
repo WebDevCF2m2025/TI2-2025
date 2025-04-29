@@ -5,14 +5,14 @@
 /*
  * Front Controller de la gestion du livre d'or
  */
-
+require_once "../model/guestbookModel.php";
 /*
  * Chargement des dépendances
  */
 // chargement de configuration
 require_once "../config.php";
 // chargement du modèle de la table guestbook
-require_once "../model/guestbookModel.php";
+
 
 /*
  * Connexion à la base de données en utilisant PDO
@@ -43,15 +43,22 @@ try {
 
 
 
-$afficher = addAllProfAsk($conecte);
 
 
+$insert = null;
 if (isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['telephone']) && isset($_POST['codePostal']) && isset($_POST['messages'])) {
     $insert = insert($conecte, $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['codePostal'], $_POST['messages']);
+    // header('Location: ./');
+    // exit;
+}
+if ($insert === true) {
     header('Location: ./');
     exit;
-}
+} 
 
+
+
+$afficher = addAllProfAsk($conecte);
 
 $con = null;
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
@@ -88,6 +95,6 @@ $con = null;
 
 // Appel de la vue
 
-include "../view/guestbookView.php";
+include_once "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)

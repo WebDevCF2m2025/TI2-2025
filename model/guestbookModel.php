@@ -34,7 +34,7 @@ function insert(PDO $conecte, string $nom, string $prenom, string $email, string
     try {
 
         $insert = $conecte->prepare("INSERT INTO guestbook (firstname, lastname, usermail, phone , postcode, `message` ) VALUES (?, ?, ?, ?,?, ?)");
-        $insert->execute([$nomInsert, $prenomInsert, $emailInsert, $telephoneInsert, $codePostalInsert, $messageInsert]);
+        $insert->execute([ $prenomInsert, $nomInsert, $emailInsert, $telephoneInsert, $codePostalInsert, $messageInsert]);
         $insert->closeCursor();
         return true;
     } catch (Exception $e) {
