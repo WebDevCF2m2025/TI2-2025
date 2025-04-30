@@ -1,0 +1,121 @@
+#form,
+#bigContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body {
+  font-family: "Poppins";
+  font-size: 22px;
+  background-color: #d16161;
+}
+
+#form {
+  background-color: #954c4c;
+  padding: 30px 40px;
+  border-top-left-radius: 400px 300px;
+  border-bottom-right-radius: 400px 300px;
+  box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.2);
+  width: 350px;
+}
+
+#imgForm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+label,
+h1 {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: white;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: gray;
+}
+
+input,
+textarea,
+button {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.messagesTop {
+  border-top-left-radius: 400px 300px;
+  border-top-right-radius: 400px 300px;
+}
+.messagesBottom,
+.messagesTop {
+  width: 50%;
+  text-align: center;
+  background-color: #954c4c;
+}
+
+.messagesBottom {
+  border-bottom-left-radius: 400px 300px;
+  border-bottom-right-radius: 400px 300px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #373477;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b06652;
+}
+
+.span {
+  color: red;
+  font-size: 12px;
+}
+
+@media only screen and (max-width: 480px) {
+  #imgForm {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  #imgForm {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+}
+
+.bar {
+  height: 2px;
+  width: 80%;
+  background-color: azure;
+}
