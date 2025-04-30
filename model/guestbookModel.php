@@ -281,5 +281,5 @@ function dateFR(string $datetime): string
     $stringtotime = strtotime($datetime);
     
     // Retour de la date au format
-    return date("d/m/Y \à H:m:s",$stringtotime);
+    return date("d/m/Y \à H\hi",$stringtotime);
 }

@@ -21,12 +21,15 @@
 
     <!-- Formulaire d'ajout d'un message -->
     <div class="form-block"> 
-        <h2 class="avis">Laissez-nous un message</h2>
-        <p id="verifEmail"></p>
-        <p id="verifCP"></p>
-        <p id="verifTel"></p>
-        <p id="succes"></p>
 
+        <div class="verifMessage">
+            <h2 class="avis">Laissez-nous un message</h2>
+            <p id="verifEmail"></p>
+            <p id="verifCP"></p>
+            <p id="verifTel"></p>
+            <p id="succes"></p>
+        </div>
+        
         <div class="container">
             
             <form action="" id="formulaire" method="post">

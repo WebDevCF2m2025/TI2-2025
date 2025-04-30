@@ -139,7 +139,8 @@ li {
 
 /* ========================= BONUS JS ========================= */
 
-#verifEmail, #verifCP, #verifTel, #succes {
+
+.verifMessage {
     font-size: 20px;
     margin-bottom: 5px;
 }
@@ -162,13 +163,19 @@ li {
     }
 
     form {
-        width: 500px;
+        width: auto;
     }
 
     .form-group input,
     .form-group textarea {
         flex: 1;
     }
+
+    .container {
+        width: 600px;
+        margin: 0 auto;
+    }
+
 
     #caracCount {
         text-align: right;
@@ -204,8 +211,7 @@ li {
     }
 
     .container {
-        width: 100%;
-        max-width: 500px;
+        width: 600px;
         margin: 0 auto;
     }
 
@@ -223,7 +229,7 @@ li {
     }
 
     form {
-        width: 500px;
+        width: auto;
     }
 
     .form-group input,
