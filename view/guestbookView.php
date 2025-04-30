@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/js/validation.js">
+    
     
     <title>Formulaire</title>
 </head>
@@ -56,7 +56,7 @@
     
 </form>
 <div class="photoSignUpAmico">
-<img  src="../public/img/sign-up-amico.png" alt="">
+<img  src="img/sign-up-amico.png" alt="">
 </div> 
 
 </div>
@@ -101,6 +101,6 @@ if(empty($nbMessage)): ?>
     
     ?>  
     
-<script src="../js/validation.js"></script>
+<script src=" js/validation.js"></script>
 </body>
 </html>

@@ -47,11 +47,11 @@ array (size=6)
 
 
 if(isset($_POST['firstname'],
-        $_POST['lastname'],
-    $_POST['usermail'],
-    $_POST['phone'],
-    $_POST['postcode'],
-    $_POST['message']))
+         $_POST['lastname'],
+         $_POST['usermail'],
+         $_POST['phone'],
+         $_POST['postcode'],
+         $_POST['message']))
 {
 
  // Insertion dans la base de données   
