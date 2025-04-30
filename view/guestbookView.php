@@ -43,7 +43,7 @@
             <div>
 
                 <label for="postal">Postal</label>
-                <input id="postalInput" type="number" name="postal">
+                <input id="postalInput" type="text" name="postal">
                 <span id="spanPostal"></span>
             </div>
 
@@ -72,36 +72,38 @@
 
         <!-- affichage du tableau des messages recuperer -->
         <div class="message">
-            <h2>Les précedents messages</h2>
-            <!-- 0 message ? affiche le h3 pas encors de messages h3 -->
             <?php if ($count === 0) : ?>
                 <h3>Pas encore de message</h3>
             <?php else: ?>
-                <?php if ($count === 1): ?>
-                    <h3>Il y a 1 message</h3>
+                <h3>Il y a <?= $count ?> message<?= $count > 1 ? "s" : "" ?> </h3>
+
+                <?php if ($count > 1): ?>
+                    <h2>Les précédents messages</h2>
                 <?php else: ?>
-                    <h3>Il y a <?= $count ?> message<?= $count > 1 ? "s" : "" ?> </h3>
-                    <?php foreach ($messages as $message): ?>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
-                                    <th>Date</th>
-                                    <th>Message</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><?= $message['firstname'] ?></td>
-                                    <td><?= $message['lastname'] ?></td>
-                                    <td><em><?= $message['datemessage'] ?></em></td>
-                                    <td><?= $message['message'] ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    <?php endforeach; ?>
+                    <h2>Le précédent message</h2>
+
                 <?php endif; ?>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Date</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($messages as $message): ?>
+                            <tr>
+                                <td><?= $message['firstname'] ?></td>
+                                <td><?= $message['lastname'] ?></td>
+                                <td><em><?= $message['datemessage'] = date("d/m/Y H:i:s", strtotime($message['datemessage'])) ?></em></td>
+                                <td><?= $message['message'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             <?php endif; ?>
         </div>
 

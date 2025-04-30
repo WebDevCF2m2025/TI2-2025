@@ -93,6 +93,12 @@ span{
   font-size: 1.2rem;
 }
 
+
+
+.pagination a.active {
+    color: #ffffff; /* Bleu plus sombre pour la page active */
+}
+
 /* TELEPHONE */
 @media ((min-width:425px) and (max-width:767px)) {
   main{
@@ -141,7 +147,7 @@ span{
     box-shadow: 0 0 5px 2px red;
     border-radius: 10px;
     width: 85%;
-    height: 65vh;
+    height: 90%;
     margin: 2rem 0;
     padding: 2rem 0;
     justify-items: center;
@@ -225,8 +231,11 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 10px; 
 }
-
-  
+.pagination a {
+  color: #007bff; /* Bleu standard */
+  text-decoration: none;
+  padding: 5px;
+}
   #compteur {
     font-size: 2.1rem;
   }
@@ -292,7 +301,6 @@ button {
     display: grid;
     gap: 1.5rem;
     width: 85%;
-    height: 100vh;
     margin: 2rem auto;
     padding: 2rem 0;
     background-color: rgb(45, 45, 45);
@@ -368,6 +376,9 @@ button {
     "message message"
     "pagination pagination";
   }
+  #limitation{
+    height: 50px;
+  }
   h1{
     grid-area: titre;
   }
@@ -383,6 +394,7 @@ button {
   }
   form{
     grid-area: form;
+    margin-bottom: 2vh;
   }
   .message{
     grid-area: message;
@@ -391,5 +403,19 @@ button {
   .pagination{
     grid-area: pagination;
 
+  }
+  label{
+    font-size: 1.5rem;
+  }
+  button{
+    font-size: 1.5rem;
+    padding: 0% ;
+    height: 4vh;
+  }
+  span{
+    font-size: 1.8rem;
+  }
+  input{
+    height: 80%;
   }
 }
