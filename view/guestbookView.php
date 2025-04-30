@@ -17,27 +17,27 @@
 
 <div class="container">
 
-<img class="image1" src="../public/img/sign-up-amico.png" alt="">
-
-<!-- Formulaire d'ajout d'un message -->
-<h2>Laissez-nous un message</h2>
-<!-- Si pas de message -->
-<form id="registrationForm">
-
-                <label for="firsname">Prénom *</label>
-                <input id="prenom" type="text" name="prenom">
-                <label for="lastname">Nom *</label>
-                <input id="nom" type="text" name="nom">
-                <label for="email">Email *</label>
-                <input id="email" type="email" name="email" placeholder="email">
-                <label for="postal">c/code postal *</label>
-                <input id="postal" type="text" name="postal">
-                <label for="portable">Portable *</label>
-                <input id="portable" type="text" name="portable">
-                <input id="message" type="text" name="message">
-                <button type="submit">Envoyer </button>
-            
-</form>
+    <img class="image1" src="../public/img/sign-up-amico.png" alt="">
+    <!-- Formulaire d'ajout d'un message -->
+    <h2>Laissez-nous un message</h2>
+    <!-- Si pas de message -->
+    <form id="registrationForm" method="post">
+                    <label for="prenom">Prénom *</label>
+                    <input id="prenom" type="text" name="prenom">
+                    <label for="nom">Nom *</label>
+                    <input id="nom" type="text" name="nom">
+                    <label for="email">Email *</label>
+                    <input id="email" type="email" name="email" placeholder="email">
+                    <label for="postal">c/code postal *</label>
+                    <input id="postal" type="text" name="postal">
+                    <label for="portable">Portable *</label>
+                    <input id="portable" type="text" name="portable">
+                    <label for="message">Message *</label>
+                    <input id="message" type="text" name="message">
+                    <div class="bouton">
+                    <button type="submit">Envoyer </button>
+                    </div>
+    </form>
 </div>
 <?php
 // articles est un tableau vide
@@ -52,7 +52,7 @@ if(empty($messages)):
 // nous avons au moins un article
 else:
     // on peut compter le nombre d'articles
-    $nbMessage = count($message);
+    $nbMessage = count($messages);
     // ternaire pour ajouter un s à article
     // si on en a plus d'un
     $pluriel = $nbMessage>1? "s" : "";
@@ -77,7 +77,7 @@ else:
 endif;
 
 
-var_dump($_POST,$_GET,);
+var_dump($_POST,$_GET,$messages);
 ?>
 
 <!-- Pagination (BONUS) -->
@@ -100,6 +100,6 @@ etc ...
 <!-- Pagination (BONUS) -->
 
 
-<script src="validation.js"></script>
+<script src="js/validation.js"></script>
 </body>
 </html>
