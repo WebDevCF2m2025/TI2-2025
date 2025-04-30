@@ -26,7 +26,7 @@ h3 {
 .avis {
     text-align: center;
     color: white;
-    margin-top: 20px;
+    margin: 20px;
 }
 
 
@@ -143,6 +143,7 @@ li {
 .verifMessage {
     font-size: 20px;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 
