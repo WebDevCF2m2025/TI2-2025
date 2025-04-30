@@ -38,6 +38,12 @@ const telephone = document.getElementById("phone");
 const telephone2 = document.getElementById("verifTel");
 
 
+//////////////////////////////////// SUCCESS /////////////////////////////////////////////////////
+
+// On attribue la constante success à l'id "success" du formulaire pour le message de validation des champs
+const success = document.getElementById("succes");
+
+
 //////////////////////////////////// EVENEMENT ///////////////////////////////////////////////////
 
 // On attribue la constante formulaire à l'id "formulaire" du formulaire
@@ -45,17 +51,18 @@ const formulaire = document.getElementById("formulaire");
 
 
 // On ajoute un événement lorsqu'on envoit le formulaire
-formulaire.addEventListener("submit", function(event) {
+formulaire.addEventListener("submit", function handleSubmit(event) {
     event.preventDefault();
 
+    // Réinitialisation des messages
     email2.textContent = "";
     codePostal2.textContent = "";
     telephone2.textContent = "";
+    success.textContent = "";
 
-    
     const mail = email.value.trim();
     if (!verifEmail(mail)) {
-        email2.textContent = 'Veuillez entrer un e-mail valide';
+        email2.textContent = 'Veuillez entrer un email valide';
         email2.style.color = 'red';
         return;
     }
@@ -74,10 +81,13 @@ formulaire.addEventListener("submit", function(event) {
         return;
     }
 
+    success.textContent = "Formulaire validé avec succès !";
+    success.style.color = "green";
 
-        alert("Tout est valide, merci !");
-        formulaire.submit();
-
+    setTimeout(() => {
+        formulaire.submit(); // Soumission réelle
+    }, 3000);
+    
 });
 
 

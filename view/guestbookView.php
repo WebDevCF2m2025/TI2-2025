@@ -25,6 +25,7 @@
         <p id="verifEmail"></p>
         <p id="verifCP"></p>
         <p id="verifTel"></p>
+        <p id="succes"></p>
 
         <div class="container">
             
