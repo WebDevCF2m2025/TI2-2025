@@ -56,3 +56,21 @@ form.addEventListener("submit", function(event){
     }
 
 })
+
+
+let score = document.getElementById("score");
+let compte = 0;
+let text;
+let textReduit;
+message.addEventListener("input",function(){
+    text = message.value;
+       
+    compte = text.length;
+    score.innerHTML = compte + "/250"
+    if (text.length >= 250){
+        textReduit =text.substring(0, text.length -2) 
+        message.value = textReduit;
+        console.log("c'est trop long");
+    }
+
+});
