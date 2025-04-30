@@ -77,8 +77,15 @@ function EnvoieFormulaire() {
 
 form.addEventListener('submit', function (e) {
         e.preventDefault();
-    if (EnvoieFormulaire()) {
+        if (EnvoieFormulaire()) {
         form.submit();
     }
+}
+);
+
+const compteur = document.getElementById('compteur');
+const maxChar = 300;
+
+compteur.addEventListener("input",() {
 
 });

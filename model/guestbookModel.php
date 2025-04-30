@@ -88,8 +88,8 @@ function addGuestbook(
 function getAllGuestbook(PDO $db): array
 {
     try {
-        $connect = $db->prepare("SELECT * FROM  `guestbook` ORDER BY `datemessage` DESC");
-        $connect->execute();
+        $connect = $db->prepare("SELECT * FROM  `guestbook` ORDER BY `datemessage` ASC");
+        $data = $connect->execute();
         return $connect->fetchAll();
     } catch (Exception $e) {
         die($e->getMessage());
@@ -171,7 +171,7 @@ function getMessagePagination(PDO $con, int $offset, int $limit): array
 {
     $prepare = $con->prepare(
         "SELECT * FROM `guestbook`
-        ORDER BY `datemessage` DESC
+        ORDER BY `datemessage` ASC
         LIMIT ?,?"
     );
     try{

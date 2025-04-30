@@ -46,10 +46,9 @@ try {
 if (isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['telephone'], $_POST['postal'], $_POST['message'])) {
     $insert = addGuestbook($db, $_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['telephone'], $_POST['postal'], $_POST['message']);
     if ($insert === true) {
-        header("Location: ./");
-        exit();
-    } else {
-        $error = $insert;
+        $success = true;
+        // header("Location: ./");
+        // exit();
     }
 }
 

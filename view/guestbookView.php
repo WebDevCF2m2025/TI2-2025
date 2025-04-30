@@ -18,10 +18,26 @@
     <h1>TI2 | Livre d'or</h1>
     <!-- Formulaire d'ajout d'un message -->
     <h2>Ici le formulaire</h2>
-
+    <div id="validation-message"></div>
+    <?php
+    if (isset($success) && $success === true):
+    ?>
+        <script>
+            const validationMessage = document.getElementById("validation-message");
+            validationMessage.innerText = "Votre message a été envoyé avec succès !";
+            validationMessage.style.color = "green";
+            validationMessage.style.fontSize = "bold";
+            // Masquer le message après 5 secondes
+            setTimeout(() => {
+                validationMessage.innerText = "";
+            }, 3000);
+        </script>
+    <?php
+    endif;
+    ?>
     <main>
         <div class="img">
-            <img src="img/sign-up-amico.png" alt="img-form" id="image"/>
+            <img src="img/sign-up-amico.png" alt="img-form" id="image" />
         </div>
         <form method="post" action="" class="form">
             <div class="champ">
@@ -53,6 +69,7 @@
                 <label for="message">Message :</label>
                 <textarea type="text" id="message" name="message" rows="5"></textarea>
             </div>
+            <div id="compteur"></div>
             <button type="submit" id="button">Envoyer</button>
         </form>
     </main
@@ -64,15 +81,13 @@
     <h3>Pas encore de message</h3>
     </div>
 <?php
-        else:
-            $nbmessage = count($message);
-            ($nbmessage > 1) ? $pluriel = "s" : $pluriel = "";
+        else: ($nbTotMessage > 1) ? $pluriel = "s" : $pluriel = "";
 ?>
     <!-- Si 1 message -->
-    <h3>Il y a <?= $nbmessage ?> message<?= $pluriel ?></h3>
+    <h3>Il y a <?= $nbTotMessage ?> message<?= $pluriel ?></h3>
     <!-- Si plusieurs messages -->
     <?php
-    foreach ($message as $messages):
+            foreach ($message as $messages):
     ?>
         <!-- Pagination (BONUS) -->
 
@@ -85,7 +100,7 @@
             </div>
         </div>
     <?php
-    endforeach;
+            endforeach;
     ?>
 <?php
         endif;
