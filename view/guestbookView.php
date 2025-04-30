@@ -22,26 +22,34 @@
     <h4 class="err"><?=$erreur?></h4>
 <?php endif; ?>
 
+<img src="img/sign-up-amico.png" height="400px" alt="">
 <div class="formulaire">
 
     <form action="" method="post">
-        <label for="firstname">Prenom *</label>
+        <div class="bloc">
+            <label for="firstname">Prenom *</label>
         <input type="text" name="firstname" id="firstname" maxlength="100" required>
-
-        <label for="lastname">Nom *</label>    
+        </div>
+        <div class="bloc">
+            <label for="lastname">Nom *</label>    
         <input type="text" name="lastname" id="lastname" maxlength="100" required>
-
-        <label for="usermail">Email *</label>
-        <input type="mail" name="usermail" id="usermail" maxlength="200" required>
-
-        <label for="postcode">c /postal *</label>
+        </div>
+        <div class="bloc">
+             <label for="usermail">Email *</label>
+        <input type="email" name="usermail" id="usermail" maxlength="200" required>
+        </div>
+        <div class="bloc">
+            <label for="postcode">c /postal *</label>
         <input type="text" name="postcode" id="postcode" maxlength="4" required>  
-
-        <label for="phone">Portable *</label>
+        </div>
+        <div class="bloc">
+            <label for="phone">Portable *</label>
         <input type="tel" name="phone" id="phone" maxlength="20" required>
-
-        <label for="message">Message *</label>
+        </div>
+        <div class="bloc">
+            <label for="message">Message *</label>
         <textarea name="message" id="message" rows="6" maxlength="300" required style = "resize: none;"></textarea>
+        </div> 
 
         <button type="submit">Envoyer</button>
     </form>
@@ -49,30 +57,48 @@
 </div>
 
 
-<!-- Si pas de message -->
-<h3>Pas encore de message</h3>
-<!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
-<!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
 
-<!-- Pagination (BONUS) -->
-
-<!-- Liste des messages -->
 <ul>
     <li>
         <p><strong>firstname lastname</strong></p>
         <p><em>datemessage</em></p>
         <p>message</p>
     </li>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-</ul>
-etc ...
+
+
+<?php
+// si on a pas de message $nbMessage === 0
+if(empty($nbMessage)):
+?>
+
+<div class="nomessage">
+    <h2>Pas de message</h2>
+    <p>Veuillez consulter cette page plus tard</p>
+</div>
+<?php
+else:    
+    $pluriel = $nbMessage>1? "s" : "";
+?>
+
+<div class="messages">
+    <h2>Il y a <?=$nbMessage?> message<?=$pluriel?></h2>
+    
+    <?php
+    // ici affichage de la pagination
+    // tant qu'on a des messages
+
+    foreach ($getmessage as $message):
+
+    ?>
+    <h4>Ecrit par <?=$message['firstname']?> le <?=dateFR($message['datemessage'])?></h4>
+    <p><?=nl2br($message['message'])?></p>
+    <hr>
+    <?php
+    endforeach;
+endif;
+    ?>
+
+
 <!-- Pagination (BONUS) -->
 <?php
 // À commenter quand on a fini de tester
@@ -81,6 +107,7 @@ echo '<p>$_POST</p>';
 var_dump($_POST);
 echo '<p>$_GET</p>';
 var_dump($_GET);
+// var_dump($insert);
 ?>
 
 <script src="js/validation.js"></script>

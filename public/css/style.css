@@ -1,6 +1,11 @@
 body{
-    background-color: #c2c2c2;
+    background-color: rgb(211, 211, 211) ;
 
+}
+
+h1{
+    text-align: center;
+    color: rgb(184, 103, 199);
 }
 
 .err{
@@ -11,7 +16,9 @@ body{
     display: grid;
     grid-template-columns: 2fr 3fr;
     width: 80%;
-
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
 }
 
 .container h2{
@@ -20,31 +27,112 @@ body{
     text-align: center;
 }
 
+
 .formulaire{
-    display: grid;    
-    grid-row-start: 2;
     grid-column-start: 2;
-    grid-template-columns: 1fr 4fr;
-    gap:20px;
-    background-color: rgb(107, 107, 107);
-    row-gap: 20px;
-    padding: 10px;
+    display: flex;
+    background-color: rgb(149, 156, 159);
+    border: solid 1px  rgb(184, 103, 199);
     border-radius: 10px;
+    box-shadow: inset rgb(184, 103, 199) ;
     justify-content: center;
-    text-align: center;
+    text-align: end;
+    margin: 0 auto;
+    width: 450px;
+    box-shadow: 1px 0px 11px 3px rgba(184,103,199,0.92);
+
+}
+
+img{
+    margin: 0 auto;
 }
 
 label{
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-column-start:1;
     text-align: end;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
-input, textarea{
-    grid-column-start: 2;
-    grid-column-end: -1;
+input, textarea, button{
+    background-color: rgb(46, 58, 64);
+    width: 300px;
     border-radius: 5px;
     color: white;
-    background-color: rgb(43, 43, 43);
+    transition: 250ms;
+    padding: 5px;
+    &:focus{
+        box-shadow: 1px 0px 11px 3px rgba(184,103,199,0.92);
+    }
+    &:hover{
+        background-color: rgb(59, 74, 82);
+    }
 }
+.bloc{
+    margin-top: 10px;
+}
+
+button{
+    margin-top: 25px;
+}
+
+@media (max-width: 480px){
+    .container{
+        grid-template-columns:1fr
+    }
+    .container h2{
+        grid-column-start: 1;
+    }
+    img{
+        width: 250px;
+        height: auto;
+    }
+
+    .formulaire{
+        grid-column-start: 1;
+        margin-top: 20px;
+        width: 400px;
+        padding-bottom: 20px;
+    }
+
+    input, textarea, button{
+        background-color: rgb(46, 58, 64);
+        width: 250px;
+        border-radius: 5px;
+        color: white;
+        transition: 250ms;
+        padding: 5px;    
+    }
+}
+
+@media (max-width: 960px){
+    .container{
+        grid-template-columns:1fr
+    }
+    .container h2{
+        grid-column-start: 1;
+    }
+    img{
+        width: 350px;
+        height: auto;
+    }
+
+    .formulaire{
+        grid-column-start: 1;
+        margin-top: 20px;
+        width: 350px;
+        padding-bottom: 20px;
+    }
+
+    input, textarea, button{
+        background-color: rgb(46, 58, 64);
+        width: 250px;
+        border-radius: 5px;
+        color: white;
+        transition: 250ms;
+        padding: 5px;    
+    }
+}
+
+
+
+    

@@ -55,10 +55,7 @@ function addGuestbook(PDO $db,
         $erreur .= "Email incorrect.<br>";
     }
 
-    if (!is_int($phone)){
-        $erreur .= "Phone n'est pas correct <br>";
-    }
-
+ 
     $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
     if(empty($message)||strlen($message)>300){
         $erreur .= "Message incorrect<br>";
@@ -69,7 +66,7 @@ function addGuestbook(PDO $db,
 
 
     $prepare = $db->prepare("
-INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`) VALUES (?,?,?,?,??)
+INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`) VALUES (?,?,?,?,?,?)
     ");
     try{
         $prepare->execute([$firstnameVerify, $lastnameVerify, $usermail , $phone, $postcode, $message]);
@@ -77,18 +74,19 @@ INSERT INTO `guestbook`(`firstname`, `lastname`, `usermail`, `phone`, `postcode`
     }catch(Exception $e){
         die($e->getMessage());
     }
+}
 
 
-
-    // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    
-    // requête préparée obligatoire !
-
-    // try catch
-        // si l'insertion a réussi
-        // on renvoie true
-    // sinon, on fait un die de l'erreur
-
+function countMessages(PDO $db): int
+{
+    try{
+        $request = $db->query("SELECT COUNT(*) as nb FROM guestbook ");
+        $nb = $request->fetch()['nb'];
+        $request->closeCursor();
+        return $nb;
+    }catch (Exception $e){
+        die($e->getMessage());
+    }
 }
 
 /***************************
@@ -131,7 +129,13 @@ try{
     return [];
     // sinon, on fait un die de l'erreur
 
-
+    function dateFR(string $datetime): string
+    {
+        // temps unix en seconde de la date venant de la db
+        $stringtotime = strtotime($datetime);
+        // retour de la date au format
+        return date("d/m/Y \à H:m:s",$stringtotime);
+    }
 /**************************
  * Pour le Bonus Pagination
  **************************/
