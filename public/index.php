@@ -48,13 +48,12 @@ try {
 $insert = null;
 if (isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['email']) && isset($_POST['telephone']) && isset($_POST['codePostal']) && isset($_POST['messages'])) {
     $insert = insert($conecte, $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['codePostal'], $_POST['messages']);
-    // header('Location: ./');
-    // exit;
+
 }
 if ($insert === true) {
     header('Location: ./');
     exit;
-} 
+}
 
 
 

@@ -28,13 +28,13 @@ function insert(PDO $conecte, string $nom, string $prenom, string $email, string
 
 
 
-    if (empty($nomInsert) || strlen($nomInsert) > 100 || empty($codePostalInsert) || strlen($codePostalInsert) > 4 || empty($prenomInsert) || strlen($prenomInsert) > 100 || $emailInsert === false || empty($messageInsert) || strlen($messageInsert) > 500 || empty($telephoneInsert) || strlen($telephoneInsert) > 20) {
+    if (empty($nomInsert) || strlen($nomInsert) > 100 || empty($codePostalInsert) || strlen($codePostalInsert) != 4 || empty($prenomInsert) || strlen($prenomInsert) > 100 || $emailInsert === false || empty($messageInsert) || strlen($messageInsert) > 500 || empty($telephoneInsert) || strlen($telephoneInsert) > 20) {
         return false;
     }
     try {
 
         $insert = $conecte->prepare("INSERT INTO guestbook (firstname, lastname, usermail, phone , postcode, `message` ) VALUES (?, ?, ?, ?,?, ?)");
-        $insert->execute([ $prenomInsert, $nomInsert, $emailInsert, $telephoneInsert, $codePostalInsert, $messageInsert]);
+        $insert->execute([$prenomInsert, $nomInsert, $emailInsert, $telephoneInsert, $codePostalInsert, $messageInsert]);
         $insert->closeCursor();
         return true;
     } catch (Exception $e) {
