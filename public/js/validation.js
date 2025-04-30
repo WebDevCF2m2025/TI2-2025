@@ -1,4 +1,4 @@
-addEventListener
+
 
 let form = document.getElementById("form");
 let firstname = document.getElementById("firstname")
@@ -8,33 +8,48 @@ let postcode = document.getElementById("postcode")
 let phone = document.getElementById("phone")
 let message = document.getElementById("message")
 let bug = document.getElementById("bug");
+
+let usermailRegex= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
+let postcodeRegex= /^\d{4}$/;
+let phoneRegex= /^04\d{8}$/;
+let messageRegex= /^[a-zA-Z0-9 ]{1,300}$/;
+
+
+function ausermailRegex (a){
+    console.log(a.value);
+    return usermailRegex.test(a.value);
+}
+function apostcodeRegex (a){
+    console.log(a.value);
+    return postcodeRegex.test(a.value);
+}
+function aphoneRegex (a){
+    console.log(a.value);
+    return phoneRegex.test(a.value);
+}
+function amessageRegex (a){
+    console.log(a.value);
+    return messageRegex.test(a.value);
+}
+
+
 form.addEventListener("submit", function(event){
 
-    usermailRegex= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/;
-    postcodeRegex= /^\d{4}/;
-    phoneRegex= /^04\d{8}$/;
-    messageRegex= /^[a-zA-Z0-9 ]{1,300}$/;
-
-
-    ausermailRegex.test();
-    apostcodeRegex.test();
-    aphoneRegex.test();
-    amessageRegex.test();
-
-    if(!ausermailRegex){
+   
+    if(!ausermailRegex(usermail)){
         bug.innerHTML= '<span style="background: red;">Le email est incorrect</span>';
         event.preventDefault();
-    }else if(!apostcodeRegex){
+    }else if(!apostcodeRegex(postcode)){
         bug.innerHTML= '<span style="background: red;">Le code postal est incorrect</span>';
         event.preventDefault();
-    }else if(!aphoneRegex){
+
+    }else if(!aphoneRegex(phone)){
         bug.innerHTML= '<span style="background: red;">Le phone est incorrect</span>';
         event.preventDefault();
-    }else if(amessageRegex){
+
+    }else if(!amessageRegex(message)){
         bug.innerHTML= '<span style="background: red;">Le message est incorrect</span>';
         event.preventDefault();
-    }else{
-        bug.innerHTML= '<span style="background: green;">Toutes les information sont valide</span>';
     }
 
 })

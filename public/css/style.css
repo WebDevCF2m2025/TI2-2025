@@ -67,7 +67,7 @@ input{
 
 label{
     color: white;
-    width: 80px;
+    width: 120px;
 }
 
 textarea{
@@ -86,7 +86,7 @@ button{
     color: white;
     height: 30px;
     width: 81%;
-    margin:auto;
+    margin-left: 0px;
 }
 
 .message{
@@ -119,6 +119,9 @@ nav:active{
         align-items: center;
         flex-direction: row;
     }
+    button{
+        margin-left: 90px;
+    }
 }
 /* ecran pc */
 @media screen and ( min-width: 960px){
@@ -140,5 +143,8 @@ nav:active{
         width: 20vw;
         margin-right: 30px;
     
+    }
+    button{
+        margin-left: 128px;
     }
 }

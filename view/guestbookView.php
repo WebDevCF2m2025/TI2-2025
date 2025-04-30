@@ -50,8 +50,9 @@
                 <label for="message">Message *</label>
                 <textarea name="message" id="message"></textarea>
             </div>
-
-            <button type="submit">Envoyer</button>
+            <div class="label">
+                <button type="submit">Envoyer</button>
+            </div>
         </form>
 
     </div>
