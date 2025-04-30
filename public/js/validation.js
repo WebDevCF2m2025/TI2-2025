@@ -85,8 +85,8 @@ formulaire.addEventListener("submit", function handleSubmit(event) {
     success.style.color = "green";
 
     setTimeout(() => {
-        formulaire.submit(); // Soumission réelle
-    }, 3000);
+        formulaire.submit();
+    }, 1200);
     
 });
 
