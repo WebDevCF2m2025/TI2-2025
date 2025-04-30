@@ -133,6 +133,11 @@ button:hover {
     justify-content: space-evenly;
     flex-direction: column;
   }
+  .messagesBottom,
+  .messagesTop {
+    width: 80%;
+    border-radius: 10px;
+  }
 }
 
 .bar {

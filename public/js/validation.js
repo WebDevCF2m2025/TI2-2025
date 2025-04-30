@@ -38,7 +38,7 @@ function verificationDeInput() {
         } else {
             nomError.textContent = "";
         }
-    
+
         if (inputPrenom === "") {
             prenomError.textContent = "Prénom est vide";
             prenomError.style.color = "red";
