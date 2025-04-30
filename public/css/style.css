@@ -46,7 +46,7 @@ h1{
     margin: 0 auto;
     width: 450px;
     box-shadow: 1px 0px 11px 3px rgba(184,103,199,0.92);
-
+    padding-bottom:15px;
 }
 
 img{
