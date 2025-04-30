@@ -45,29 +45,29 @@
             </div>
             <div class="formeContainer">
                 <form action="" method="post" id="form">
-                    <label for="prenomID">Prénom</label>
+                    <label for="prenomID">Prénom :</label>
                     <input type="text" id="prenomID" name="prenom" placeholder="Entrez votre prénom">
                     <span class="span" id="prenomError"></span>
 
-                    <label for="NomID">Nom</label>
+                    <label for="NomID">Nom :</label>
                     <input type="text" id="nomID" name="nom" placeholder="Entrez votre nom">
                     <span class="span" id="nomError"></span>
 
-                    <label for="emailID">Email</label>
+                    <label for="emailID">Email :</label>
                     <input type="text" id="emailID" name="email" placeholder="Entrez votre email">
                     <span class="span" id="emailError"></span>
 
 
-                    <label for="nbPortablelID">Telephone</label>
+                    <label for="nbPortablelID">Telephone :</label>
                     <input type="text" id="nbPortablelID" name="telephone"
                         placeholder="Entrez votre numero de portable">
                     <span class="span" id="telephoneError"></span>
 
-                    <label for="codePostalID">Code Postal</label>
+                    <label for="codePostalID">Code Postal :</label>
                     <input type="text" id="codePostal" name="codePostal" placeholder="Entrez votre Code Postal">
                     <span class="span" id="codePostalError"></span>
 
-                    <label for="message">Message</label>
+                    <label for="message">Message :</label>
                     <textarea id="messages" name="messages" rows="11" placeholder="Entrez votre message"></textarea>
                     <span class="span" id="messageError"></span>
 
@@ -97,6 +97,9 @@
 
 
 
+        <?php
+        $a = "0";
+        ?>
 
 
         <?php
@@ -104,38 +107,45 @@
             $date = date('d/m/Y H:i', strtotime($e['datemessage']));
 
             ?>
-            <div class="messagees">
-                <br>
-                <strong> <?= $e['firstname'] . " " . $e['lastname'] ?> </strong> a écrit <?= $e['message'] ?> le
-                <?= $date ?>
-                <br>
-                <br>
-                <hr>
-
-            </div>
             <?php
+            if ($a === "0") {
+                ?>
+                <div class="messagesTop">
+                    <?php
+                    $a = "1";
+            } elseif ($a === "1") {
+                ?>
+                    <div class="messagesBottom">
+
+                        <?php
+                        $a = "0";
+            }
+
+            ?>
+
+
+                    <br>
+                    <strong> <?= $e['firstname'] . " " . $e['lastname'] ?> </strong> a écrit <?= $e['message'] ?> le
+                    <?= $date ?>
+                    <br>
+
+                    <br>
+                </div>
+                <br>
+                <?php
         endforeach;
 
         ?>
 
 
-        <?php
-        // À commenter quand on a fini de tester
-        echo "<h3>Nos var_dump() pour le débugage</h3>";
-        echo '<p>$_POST</p>';
-        var_dump($_POST);
-        echo '<p>$insert</p>';
-        var_dump($insert);
-        echo '<p>$_GET</p>';
-        var_dump($_GET, $nbMessage);
-        ?>
-
-
-    </div>
 
 
 
-    <script src="js/validation.js"></script>
+        </div>
+
+
+
+        <script src="js/validation.js"></script>
 </body>
 
 </html>

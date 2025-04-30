@@ -11,11 +11,11 @@ body {
 }
 
 #form {
-  background-color: #f9f9f9;
+  background-color: #954c4c;
   padding: 30px 40px;
   border-top-left-radius: 400px 300px;
   border-bottom-right-radius: 400px 300px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.2);
   width: 350px;
 }
 
@@ -26,10 +26,12 @@ body {
   justify-content: space-evenly;
 }
 
-label {
+label,
+h1 {
   display: block;
   margin-top: 15px;
   font-weight: bold;
+  color: white;
 }
 
 .input-container {
@@ -45,7 +47,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+button {
   width: 100%;
   padding: 10px 10px 10px 35px;
   margin-top: 5px;
@@ -54,8 +57,20 @@ textarea {
   font-size: 14px;
 }
 
-textarea {
-  resize: none;
+.messagesTop {
+  border-top-left-radius: 400px 300px;
+  border-top-right-radius: 400px 300px;
+}
+.messagesBottom,
+.messagesTop {
+  width: 50%;
+  text-align: center;
+  background-color: #954c4c;
+}
+
+.messagesBottom {
+  border-bottom-left-radius: 400px 300px;
+  border-bottom-right-radius: 400px 300px;
 }
 
 button {
@@ -77,4 +92,30 @@ button:hover {
 .span {
   color: red;
   font-size: 12px;
+}
+
+@media only screen and (max-width: 480px) {
+  #imgForm {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  #imgForm {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+}
+
+.bar {
+  height: 2px;
+  width: 80%;
+  background-color: azure;
 }
