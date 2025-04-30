@@ -105,7 +105,7 @@ function getAllGuestbook(PDO $db): array
 {
     $prepare = $db->prepare("
     SELECT * FROM `guestbook`
-    ORDER BY `guestbook`.`datemessage` DESC
+    ORDER BY `guestbook`.`datemessage` ASC
     ");
 // essai / erreur
 try{
