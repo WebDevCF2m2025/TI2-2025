@@ -28,10 +28,15 @@ body {
 
 label,
 h1 {
-  display: block;
   margin-top: 15px;
   font-weight: bold;
   color: white;
+}
+
+label {
+  display: inline-block;
+  text-align: left;
+  width: 165px;
 }
 
 .input-container {
@@ -49,12 +54,15 @@ h1 {
 input,
 textarea,
 button {
-  width: 100%;
-  padding: 10px 10px 10px 35px;
+  padding: 10px 0px 10px 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
+}
+.fild {
+  display: flex;
+  align-items: center;
 }
 
 .messagesTop {
@@ -101,6 +109,19 @@ button:hover {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+  }
+  input {
+    padding: 10px 10px 10px 35px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+  }
+  .fild {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 

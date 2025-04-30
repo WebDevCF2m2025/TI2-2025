@@ -45,32 +45,39 @@
             </div>
             <div class="formeContainer">
                 <form action="" method="post" id="form">
-                    <label for="prenomID">Prénom :</label>
-                    <input type="text" id="prenomID" name="prenom" placeholder="Entrez votre prénom">
-                    <span class="span" id="prenomError"></span>
+                    <div class="fild">
+                        <label for="prenomID">Prénom :</label>
+                        <input type="text" id="prenomID" name="prenom" placeholder="Entrez votre prénom">
+                        <span class="span" id="prenomError"></span>
+                    </div>
 
-                    <label for="NomID">Nom :</label>
-                    <input type="text" id="nomID" name="nom" placeholder="Entrez votre nom">
-                    <span class="span" id="nomError"></span>
+                    <div class="fild">
+                        <label for="NomID">Nom :</label>
+                        <input type="text" id="nomID" name="nom" placeholder="Entrez votre nom">
+                        <span class="span" id="nomError"></span>
+                    </div>
+                    <div class="fild">
+                        <label for="emailID">Email :</label>
+                        <input type="text" id="emailID" name="email" placeholder="Entrez votre email">
+                        <span class="span" id="emailError"></span>
+                    </div>
+                    <div class="fild">
+                        <label for="nbPortablelID">Telephone :</label>
+                        <input type="text" id="nbPortablelID" name="telephone" placeholder="Entrez numero de portable">
+                        <span class="span" id="telephoneError"></span>
+                    </div>
 
-                    <label for="emailID">Email :</label>
-                    <input type="text" id="emailID" name="email" placeholder="Entrez votre email">
-                    <span class="span" id="emailError"></span>
+                    <div class="fild">
+                        <label for="codePostalID">Code Postal :</label>
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Entrez Code Postal">
+                        <span class="span" id="codePostalError"></span>
+                    </div>
 
-
-                    <label for="nbPortablelID">Telephone :</label>
-                    <input type="text" id="nbPortablelID" name="telephone"
-                        placeholder="Entrez votre numero de portable">
-                    <span class="span" id="telephoneError"></span>
-
-                    <label for="codePostalID">Code Postal :</label>
-                    <input type="text" id="codePostal" name="codePostal" placeholder="Entrez votre Code Postal">
-                    <span class="span" id="codePostalError"></span>
-
-                    <label for="message">Message :</label>
-                    <textarea id="messages" name="messages" rows="11" placeholder="Entrez votre message"></textarea>
-                    <span class="span" id="messageError"></span>
-
+                    <div class="fild">
+                        <label for="message">Message :</label>
+                        <textarea id="messages" name="messages" rows="11" placeholder="Entrez votre message"></textarea>
+                        <span class="span" id="messageError"></span>
+                    </div>
                     <button type="submit" id="btn">Envoyer</button>
                 </form>
 
