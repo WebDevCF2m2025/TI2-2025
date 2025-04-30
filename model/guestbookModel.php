@@ -48,7 +48,7 @@ function addGuestbook(PDO $db,
         empty($lastname) || strlen($lastname) > 100 || # Ici on vérifie que $last name n'est pas vide et que sa longueur ne dépasse pas les 100 caractères
         $usermail === false || strlen($usermail) > 200 || # Ici on vérifie que $usermail n'est pas incorrect et que sa longueur ne dépasse pas les 200 caractères
         empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false || # Ici on vérifie que $phone n'est pas vide, que sa longueur ne dépasse pas les 20 caractères et que ce sont bien des chiffres
-        empty($postcode) || strlen($postcode) > 4 || ctype_digit($postcode) === false || # Ici on vérifie que $postcode n'est pas vide, que sa longueur ne dépasse pas les 4 caractères et que ce sont bien des chiffres
+        empty($postcode) || strlen($postcode) !== 4 || ctype_digit($postcode) === false || # Ici on vérifie que $postcode n'est pas vide, que sa longueur ne dépasse pas les 4 caractères et que ce sont bien des chiffres
         empty($message) || strlen($message) > 500 # Ici on vérifie que $message n'est pas vide et que sa longueur ne dépasse pas les 500 caractères
     ) {
         return false;
