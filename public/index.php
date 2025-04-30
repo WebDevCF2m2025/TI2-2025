@@ -62,15 +62,15 @@ if(isset(
  
 )) {
  
-
-   $insert = addGuestbook($con,
+  $insert = addGuestbook($con,
        $_POST['prenom'],
        $_POST['nom'],
        $_POST['email'],
-       $_POST['postal'],
        $_POST['portable'],
+       $_POST['postal'],
        $_POST['message']  
     );
+ 
 }
 
 /*

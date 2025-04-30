@@ -34,8 +34,8 @@ function addGuestbook(PDO $db,
     $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
     $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
     $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
-    $phone = preg_replace('/[^0-9]/', '', $phone);
-    $postcode = preg_replace('/[^0-9]/', '', $postcode);
+    $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+    $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
     $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
  
     if(
@@ -43,7 +43,7 @@ function addGuestbook(PDO $db,
         empty($lastname) || strlen($lastname) > 100 ||
         $usermail === false || strlen($usermail) > 200 ||
         empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false   ||
-        empty($postcode) || strlen($postcode) === 4 || ctype_digit($postcode) === false ||
+        empty($postcode) || strlen($postcode) > 4 || ctype_digit($postcode) === false ||
         empty($message) || strlen($message) > 500 
 
     ){
@@ -170,7 +170,7 @@ function dateFR(string $datetime): string
     // temps unix en seconde de la date venant de la db
     $stringtotime = strtotime($datetime);
     // retour de la date au format
-    return date("d/m/Y \à H:m:s",$stringtotime);
+    return date("d/m/Y \à H\hm",$stringtotime);
 }
 
 
@@ -200,9 +200,9 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
             if ($pageActu === 1) {
                 $sortie .= "<< < 1 |";
             } elseif ($pageActu === 2) {
-                $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='./'>&lt;</a> <a href='./'>1</a> |";
             } else {
-                $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='?$get=" . ($pageActu - 1) . "'>&lt;</a> <a href='./'>1</a> |";
             }
         } elseif ($i < $nbPages) {
             if ($i === $pageActu) {
@@ -214,7 +214,7 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
             if ($pageActu >= $nbPages) {
                 $sortie .= "  $nbPages > >>";
             } else {
-                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
+                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>&gt;</a> <a href='?$get=$nbPages'>&gt;&gt;</a>";
             }
         }
     }

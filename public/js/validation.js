@@ -1,13 +1,15 @@
 function verificationDeInput() {
     const btn = document.getElementById("btn");
- 
+    const prenomError = document.getElementById("prenomError");
+    const nomError = document.getElementById("nomError");
    
     const emailError = document.getElementById("emailError");
     const postalError = document.getElementById("postalError");
     const portableError = document.getElementById("portableError");
 
 
-   
+    const regexPrenom = /^[A-Za-zÀ-ÿ\-\' ]+$/;
+    const regexNom = /^[A-Za-zÀ-ÿ\-\' ]+$/;
     const regexEmail = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[a-z]{2,}$/;
     const regexPostal = /^\d{4}$/;
     const regexPortable = /^04\d{8}$/;
@@ -15,14 +17,41 @@ function verificationDeInput() {
 
  
     btn.addEventListener('click', function (e) {
-        let Valid = true;
+        let isValid = true;
 
-    
+        const inputprenom = document.getElementById("prenom").value.trim();
+        const inputnom = document.getElementById("nom").value.trim();
         const inputemail = document.getElementById("email").value.trim();
         const inputpostal = document.getElementById("postal").value.trim();
         const inputportable = document.getElementById("portable").value.trim();
         const inputmessage = document.getElementById("message").value.trim();
- 
+    // Prénom
+    if (inputprenom == "") {
+        prenomError.textContent = "Prénom est vide";
+        prenomError.style.color = "red";
+        isValid = false;
+    } else if (!regexPrenom.test(inputprenom)) {
+        prenomError.textContent = "prénom n'est pas valide";
+        prenomError.style.color = "red";
+        isValid = false;
+    } else {
+        prenomError.textContent = "";
+       
+    }
+
+        // Nom
+        if (inputnom == "") {
+            nomError.textContent = "Nom est vide";
+            nomError.style.color = "red";
+            isValid = false;
+        } else if (!regexnom.test(inputnom)) {
+            nomError.textContent = "Nom n'est pas valide";
+            nomError.style.color = "red";
+            isValid = false;
+        } else {
+            prenomError.textContent = "";
+           
+        }
        
 
  
@@ -37,6 +66,7 @@ function verificationDeInput() {
             isValid = false;
         } else {
             emailError.textContent = "";
+           
         }
  
         // Téléphone
@@ -64,11 +94,14 @@ function verificationDeInput() {
         } else {
             postalError.textContent = "";
         }
-        if (!Valid) {
+        if (!isValid) {
             e.preventDefault();
         }
         
     });
 }
+
+
  
 verificationDeInput();
+
