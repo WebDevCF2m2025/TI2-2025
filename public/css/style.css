@@ -140,8 +140,15 @@ li {
     margin: 20px;
 }
 
-/* ========================= BONUS JS ========================= */
+.error {
+    color: red;
+}
 
+.merci {
+    color: green;
+}
+
+/* ========================= BONUS JS ========================= */
 
 .verifMessage {
     font-size: 20px;
@@ -184,11 +191,11 @@ li {
     #caracCount {
         text-align: right;
     }
-
 }
 
 
 /* ========================= PC =============================== */
+
 @media screen and (min-width: 960px) {
     .content-desktop {
         display: flex;

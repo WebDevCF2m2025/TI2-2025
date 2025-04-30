@@ -14,6 +14,22 @@
 <body>
 <h1>TI2 | Livre d'or</h1>
 
+<?php
+$error = "";
+$thanks ="";
+
+if(isset($insert)){
+    if ($insert===true) {
+    $thanks = "Message bien envoyé côté serveur";
+    } elseif ($insert===false){
+    $error ="Message non envoyé côté serveur";
+    }
+}
+?>
+
+<h3 class="merci"><?=$thanks?></h3>
+<h3 class="erreur"><?=$error?></h3>
+
 <div class="content-desktop">
     <div class="image">
         <img src="img/sign-up-amico.png">

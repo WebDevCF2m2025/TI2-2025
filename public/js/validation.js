@@ -62,27 +62,40 @@ formulaire.addEventListener("submit", function handleSubmit(event) {
 
     const mail = email.value.trim();
     if (!verifEmail(mail)) {
+        email.style.backgroundColor= "red";
         email2.textContent = 'Veuillez entrer un email valide';
         email2.style.color = 'red';
         return;
+    } else {
+        email.style.backgroundColor= "#2d393e";
     }
 
     const postal = codePostal.value.trim();
     if (!verifCodePostal(postal)) {
+        codePostal.style.backgroundColor= "red";
         codePostal2.textContent = 'Veuillez entrer un code postal Belge valide (4 chiffres)';
         codePostal2.style.color = 'red';
         return;
+    } else {
+        codePostal.style.backgroundColor= "#2d393e";
     }
 
     const tel = telephone.value.trim();
     if (!verifTelephone(tel)) {
+        telephone.style.backgroundColor= "red";
         telephone2.textContent = 'Veuillez entrer un numéro de téléphone correct';
         telephone2.style.color = 'red';
         return;
+    } else {
+        telephone.style.backgroundColor= "#2d393e";
     }
 
     success.textContent = "Formulaire validé avec succès !";
     success.style.color = "green";
+
+    codePostal.style.backgroundColor= "green";
+    email.style.backgroundColor= "green";
+    telephone.style.backgroundColor= "green";
 
     setTimeout(() => {
         formulaire.submit();
@@ -107,3 +120,17 @@ messageInput.addEventListener('input', function() {
         caracteresCount.style.color = 'white';
     }
 });
+
+
+//////////////////////////////////// VALIDATION COTÉ SERVEUR /////////////////////////////////////
+setTimeout(() => {
+    const merci = document.querySelector('.merci');
+    const erreur = document.querySelector('.erreur');
+    
+    if (merci) {
+        merci.style.display = 'none';
+    }
+    if (erreur) {
+        erreur.style.display = 'none';
+    }
+}, 1000); 
