@@ -48,9 +48,9 @@ if(isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'],$_POST['pho
 // sinon, on affiche un message d'erreur
 
     if($save === true){
-        $saved = "Message enregistré";
+        $saved = "<span style='color:green'>Message enregistré</span>";
     }else{
-        $notSaved = "Message NON enregistré";
+        $notSaved = "<span style='color:red'>Message NON enregistré</span>";
     }
 }
 

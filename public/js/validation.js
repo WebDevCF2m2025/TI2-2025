@@ -1,6 +1,7 @@
 
 
 let form = document.getElementById("form");
+let yes = document.getElementById("yes");
 let firstname = document.getElementById("firstname")
 let lastname = document.getElementById("lastname")
 let usermail = document.getElementById("usermail")
@@ -38,18 +39,20 @@ form.addEventListener("submit", function(event){
    
     if(!ausermailRegex(usermail)){
         bug.innerHTML= '<span style="background: red;">Le email est incorrect</span>';
+        yes.innerHTML= '<span style="color: red;">Message non enrigstré</span>';
         event.preventDefault();
     }else if(!apostcodeRegex(postcode)){
         bug.innerHTML= '<span style="background: red;">Le code postal est incorrect</span>';
         event.preventDefault();
-
+        yes.innerHTML= '<span style="color: red;">Message non enrigstré</span>';
     }else if(!aphoneRegex(phone)){
-        bug.innerHTML= '<span style="background: red;">Le phone est incorrect</span>';
+        bug.innerHTML= '<span style="background: red;">Le numéro est incorrect</span>';
         event.preventDefault();
-
+        yes.innerHTML= '<span style="color: red;">Message non enrigstré</span>';
     }else if(!amessageRegex(message)){
         bug.innerHTML= '<span style="background: red;">Le message est incorrect</span>';
         event.preventDefault();
+        yes.innerHTML= '<span style="color: red;">Message non enrigstré</span>';
     }
 
 })

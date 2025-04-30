@@ -24,7 +24,7 @@
     <div>
          <h2>Laissez nous un message</h2>
         <!-- Formulaire d'ajout d'un message -->
-         <h2 id="bug"><h2>
+         <h2 id="bug"></h2>
         <form action="" method="POST" id="form">
             <div class="label">
                 <label for="firstname">Prenom *</label>
@@ -58,7 +58,7 @@
     </div>
 </div>
     <?php if(isset($saved)): ?>
-        <h3 ><?=$saved?></h3>
+        <h3 id="yes"><?=$saved?></h3>
     <?php elseif(isset($notSaved)):?>
         <h3 ><?=$notSaved?></h3>
     <?php endif;?>
