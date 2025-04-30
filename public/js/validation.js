@@ -68,7 +68,7 @@ message.addEventListener("input",function(){
     compte = text.length;
     score.innerHTML = compte + "/250"
     if (text.length >= 250){
-        textReduit =text.substring(0, text.length -2) 
+        textReduit =text.substring(0, text.length -(text.length-248)) 
         message.value = textReduit;
         console.log("c'est trop long");
     }

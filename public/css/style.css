@@ -147,4 +147,7 @@ nav:active{
     button{
         margin-left: 128px;
     }
+    form{
+        margin-right: 100px;
+    }
 }
