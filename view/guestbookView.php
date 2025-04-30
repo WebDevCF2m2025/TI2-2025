@@ -16,6 +16,21 @@
 <h1>TI2 | Livre d'or</h1>
 <!-- Formulaire d'ajout d'un message -->
 <div class="container">
+
+<?php
+$error = "";
+$thanks ="";
+if(isset($insert)){
+    if($insert===true) {
+        $thanks = "Message bien envoyé";
+    }elseif($insert===false){
+        $error ="Pas inséré côté serveur";
+    }
+}
+?>
+<h3 class="merci"><?=$thanks?></h3>
+<h3 class="err"><?=$error?></h3>
+
     <h2>Ici le formulaire</h2>
 
     <?php if (isset($erreur)):?>
@@ -53,7 +68,7 @@
 
             <div class="bloc">
                 <label for="message">Message *</label>
-                <textarea name="message" id="message" rows="6" maxlength="300" required style = "resize: none;"></textarea>
+                <textarea name="message" id="message" rows="8" maxlength="300" required style = "resize: none;"></textarea>
             </div> 
 
             <button type="submit">Envoyer</button>
@@ -81,7 +96,7 @@ else:
 <?php
     foreach ($getmessage as $message):
 ?>
-
+    <div class="message">
     <ul>
         <li>
             <p><strong>
@@ -93,6 +108,7 @@ else:
             <p><?=nl2br($message['message'])?></p>    
         </li>
     </ul>
+    </div>
     <?php
     endforeach;
 endif;
