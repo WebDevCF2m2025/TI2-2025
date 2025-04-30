@@ -29,7 +29,7 @@
             <p id="verifTel"></p>
             <p id="succes"></p>
         </div>
-        
+
         <div class="container">
             
             <form action="" id="formulaire" method="post">
@@ -108,7 +108,7 @@ else:
     <ul>
         <li>
             <p><strong><?=$message['firstname'] . ' ' . $message['lastname']?></strong> - a écrit le message le <em><?=dateFR($message['datemessage'])?></em></p>
-            <p><?=$message['message']?></p>
+            <p><?=nl2br($message['message'])?></p>
         </li>
     </ul>
 
