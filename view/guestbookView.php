@@ -97,8 +97,8 @@ else:
     foreach ($getmessage as $message):
 ?>
     <div class="message">
-    <ul>
-        <li>
+    
+        
             <p><strong>
             <?=$message['firstname']." ".$message['lastname'] ?>
             </strong></p>
@@ -106,8 +106,8 @@ else:
             <?=dateFR($message['datemessage'])?>
             </em></p>
             <p><?=nl2br($message['message'])?></p>    
-        </li>
-    </ul>
+        
+    
     </div>
     <?php
     endforeach;

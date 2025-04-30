@@ -57,7 +57,7 @@ function addGuestbook(PDO $db,
 
  
     $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
-    if(empty($message)||strlen($message)>300){
+    if(empty($message)||strlen($message)>500){
         $erreur .= "Message incorrect<br>";
     }
 
