@@ -206,5 +206,5 @@ function dateFR(string $datetime): string
   // temps unix en seconde de la date venant de la db
   $stringtotime = strtotime($datetime);
   // retour de la date au format
-  return date("d/m/Y \à H:m:s",$stringtotime);
+  return date("d/m/Y \à H:i:s",$stringtotime);
 }
