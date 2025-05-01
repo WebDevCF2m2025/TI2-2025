@@ -224,17 +224,17 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
             if ($pageActu === 1) {
                 
                 // Pas de lien
-                $sortie .= "<< < 1 |";
+                $sortie .= "&lt;&lt; &lt; 1 |";
 
             // Si nous sommes sur la deuxième page
             } elseif ($pageActu === 2) {
 
                 // Tous les liens vont vers la page 1
-                $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='./'>&lt;</a> <a href='./'>1</a> |";
 
             // Si nous sommes sur d'autres pages, le retour va vers la page précédente
             } else {
-                $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='?$get=" . ($pageActu - 1) . "'>&lt;</a> <a href='./'>1</a> |";
             }
 
         // Nous ne sommes pas sur le premier ni sur le dernier tour de boucle
@@ -259,13 +259,13 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
             if ($pageActu >= $nbPages) {
 
                 // Pas de lien
-                $sortie .= "  $nbPages > >>";
+                $sortie .= "  $nbPages &gt; &gt;&gt;";
 
             // Si nous ne sommes pas sur la dernière page
             } else {
 
                 // Tous les liens vont vers la dernière page
-                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
+                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>&gt;</a> <a href='?$get=$nbPages'>&gt;&gt;</a>";
             }
         }
     }
