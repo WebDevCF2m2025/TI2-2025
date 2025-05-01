@@ -79,7 +79,7 @@ if (isset($_GET[PAGINATION_GET]) && ctype_digit($_GET[PAGINATION_GET])) {
 }
 
 # on compte le nombre total de messages
-$nbTotMessage = getNbTotalMessage($db);
+$nbTotMessage = getNbTotalGuestbook($db);
 
 # on récupère la pagination
 $pagination = pagination($nbTotMessage, PAGINATION_GET, $page, PAGINATION_NB);
@@ -87,7 +87,7 @@ $pagination = pagination($nbTotMessage, PAGINATION_GET, $page, PAGINATION_NB);
 # pour obtenir le $offset pour les messages
 $offset = ($page - 1) * PAGINATION_NB;
 
-$message = getMessagePagination($db, $offset, PAGINATION_NB);
+$message = getGuestbookPagination($db, $offset, PAGINATION_NB);
 
 // on vérifie sur quelle page on est (et que c'est un string qui contient que des numériques sans "." ni "-" => ctype_digit) en utilisant la variable $_GET et les constantes de config.php
 

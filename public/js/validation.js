@@ -83,9 +83,12 @@ form.addEventListener('submit', function (e) {
 }
 );
 
-const compteur = document.getElementById('compteur');
+const compteur = document.getElementById('remain');
 const maxChar = 300;
+const Inputmessage = document.getElementById('message');
 
-compteur.addEventListener("input",() {
-
+Inputmessage.addEventListener('input',function (){
+    const remainingChars = maxChar - Inputmessage.value.length;
+    compteur.innerText = remainingChars;
+    compteur.style.color = "white";
 });

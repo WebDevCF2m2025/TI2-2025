@@ -1,25 +1,4 @@
 <?php
-# model/guestbookModel.php
-/********************************
- * Model de la page livre d'or
- *******************************/
-
-// INSERTION d'un message dans le livre d'or
-
-/**
- * @param PDO $db
- * @param string $firstname
- * @param string $lastname
- * @param string $usermail
- * @param string $phone
- * @param string $postcode
- * @param string $message
- * @return bool
- * Fonction qui insère un message dans la base de données 'ti2web2025' et sa table 'guestbook'
- * Renvoie true si l'insertion a réussi, false sinon
- * Une requête préparée est utilisée pour éviter les injections SQL
- * Les données sont échappées pour éviter les injections XSS (protection backend)
- */
 function addGuestbook(
     PDO $db,
     string $firstname,
@@ -73,18 +52,7 @@ function addGuestbook(
 
 }
 
-/***************************
- * Sans le Bonus Pagination
- **************************/
 
-// SELECTION de messages dans le livre d'or par ordre de date croissante
-/**
- * @param PDO $db
- * @return array
- * Fonction qui récupère tous les messages du livre d'or par ordre de date croissante
- * venant de la base de données 'ti2web2025' et de la table 'guestbook'
- * Si pas de message, renvoie un tableau vide
- */
 function getAllGuestbook(PDO $db): array
 {
     try {
@@ -102,64 +70,12 @@ function getAllGuestbook(PDO $db): array
     // sinon, on fait un die de l'erreur
 }
 
-/**************************
- * Pour le Bonus Pagination
- **************************/
 
-// SELECTION du nombre total de messages
-/**
- * @param PDO $db
- * @return int
- * Fonction qui compte le nombre total de messages dans la table 'guestbook'
- */
+
 function getNbTotalGuestbook(PDO $db): int
 {
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur,
-    // renvoyez le nombre total de messages
-    return 0;
-    // sinon, on fait un die de l'erreur
-}
-// SELECTION de messages dans le livre d'or par ordre de date croissante
-// en lien avec la pagination
-/**
- * @param PDO $db
- * @param int $offset
- * @param int $limit
- * @return array
- * Fonction qui récupère les messages du livre d'or par ordre de date croissante
- * venant de la base de données 'ti2web2025' et de la table 'guestbook'
- * en utilisant une requête préparée (injection SQL), n'affiche que les messages
- * de la page courante
- */
-function getGuestbookPagination(PDO $db, int $offset, int $limit): array
-{
-    // Requête préparée obligatoire !
-    // Le $offset et le $limit sont des entiers, il faut donc les passer
-    // en paramètres de la requête préparée en tant qu'entiers !
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
-}
-
-// FONCTION de pagination
-/**
- * @param int $nbtotalMessage
- * @param string $get
- * @param int $pageActu
- * @param int $perPage
- * @return string
- * Fonction qui génère le code HTML de la pagination
- * si le nombre de pages est supérieur à une.
- */
-function getNbTotalMessage(PDO $con): int
-{
     // on compte le nombre de messages total
-    $query = $con->query("SELECT COUNT(*) as nb FROM `guestbook` ");
+    $query = $db->query("SELECT COUNT(*) as nb FROM `guestbook` ");
     # bonne pratique
     $result = $query->fetch()['nb'];
     $query->closeCursor();
@@ -167,9 +83,9 @@ function getNbTotalMessage(PDO $con): int
     return $result;
 }
  
-function getMessagePagination(PDO $con, int $offset, int $limit): array
+function getGuestbookPagination(PDO $db, int $offset, int $limit): array
 {
-    $prepare = $con->prepare(
+    $prepare = $db->prepare(
         "SELECT * FROM `guestbook`
         ORDER BY `datemessage` ASC
         LIMIT ?,?"

@@ -119,10 +119,13 @@ h3{
     font-weight: bold;
 }
 
-.compteur{
-    height: 1em;
+.compteur-container {
     display: flex;
     justify-content: flex-end;
+    width: 100%; /* S'assurer que le parent occupe toute la largeur */
+}
+.compteur{
+    height: 1em;
 }
 
 

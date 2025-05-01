@@ -69,7 +69,9 @@
                 <label for="message">Message :</label>
                 <textarea type="text" id="message" name="message" rows="5"></textarea>
             </div>
-            <div id="compteur"></div>
+            <div class="compteur-container">
+                <div id="compteur"><span id="remain">300</span> / 300</div>
+            </div>
             <button type="submit" id="button">Envoyer</button>
         </form>
     </main
