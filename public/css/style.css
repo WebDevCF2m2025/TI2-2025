@@ -1,0 +1,256 @@
+/* ========================= CSS GÉNÉRAL ====================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #d3d3d3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    color: #b867c7;
+    margin-top: 30px;
+}
+
+h3 {
+    margin-bottom: 5px;
+}
+
+.avis {
+    text-align: center;
+    color: white;
+    margin: 20px;
+}
+
+
+/* ========================= IMAGE ============================ */
+
+.image {
+    text-align: center;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    margin: 20px 0;
+}
+
+
+/* ========================= FORMULAIRE ======================= */
+
+.container {
+    background: #959b9f;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 1px 1px 30px rgba(184, 105, 199, 1);
+}
+
+form {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.form-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    color: white;
+    text-align: center;
+}
+
+input {
+    background-color: #2d393e;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+textarea {
+    background-color: #2d393e;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+}
+
+#caracCount {
+    color:white;
+    text-align: right;
+    margin-top: 80px;
+}
+
+button {
+    background-color: #2d393e;
+    color: white;
+    border-radius: 20px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+
+/* ========================= MESSAGES ========================= */
+
+ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+li {
+    background: #959b9f;
+    width: 500px;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.message h2 {
+    margin: 20px;
+}
+
+.message {
+    color: black;
+    text-align: center;
+}
+
+.nomessage {
+    margin: 20px;
+}
+
+.error {
+    color: red;
+}
+
+.merci {
+    color: green;
+}
+
+/* ========================= BONUS JS ========================= */
+
+.verifMessage {
+    font-size: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+
+/* ========================= TABLETTE ========================= */
+
+@media screen and (min-width: 640px) and (max-width: 960px) {
+    .form-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .form-group label {
+        width: 100px;
+        text-align: right;
+        margin-right: 10px;
+        padding-bottom: 15px;
+    }
+
+    form {
+        width: auto;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        flex: 1;
+    }
+
+    .container {
+        width: 600px;
+        margin: 0 auto;
+    }
+
+
+    #caracCount {
+        text-align: right;
+    }
+}
+
+
+/* ========================= PC =============================== */
+
+@media screen and (min-width: 960px) {
+    .content-desktop {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+        margin-top: 30px;
+    }
+
+    .image {
+        flex: 1;
+    }
+
+    .image img {
+        width: 300px;
+        height: auto;
+    }
+
+    .form-block {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .form-group label {
+        width: 100px;
+        text-align: right;
+        margin-right: 10px;
+        padding-bottom: 15px;
+    }
+
+    form {
+        width: auto;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        flex: 1;
+        margin-right: 30px;
+    }
+}
+
+
+
+
+

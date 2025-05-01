@@ -31,15 +31,47 @@ function addGuestbook(PDO $db,
 {
     // traitement des données backend (SECURITE)
 
+    # strip_tags : Avec ça on retire les tags
+    # htmlspecialchars : Avec ça on protège des caractères spéciaux (avec ' et ")
+    # trim : Avec ça on supprime les espaces devant et derrière les variable $firstname, $lastname ... 
+
+    $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES)); 
+    $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
+    $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+    $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+    $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+    $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
+    if(
+        empty($firstname) || strlen($firstname) > 100 || # Ici on vérifie que $firstname n'est pas vide et que sa longueur ne dépasse pas les 100 caractères
+        empty($lastname) || strlen($lastname) > 100 || # Ici on vérifie que $last name n'est pas vide et que sa longueur ne dépasse pas les 100 caractères
+        $usermail === false || strlen($usermail) > 200 || # Ici on vérifie que $usermail n'est pas incorrect et que sa longueur ne dépasse pas les 200 caractères
+        empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false || # Ici on vérifie que $phone n'est pas vide, que sa longueur ne dépasse pas les 20 caractères et que ce sont bien des chiffres
+        empty($postcode) || strlen($postcode) !== 4 || ctype_digit($postcode) === false || # Ici on vérifie que $postcode n'est pas vide, que sa longueur ne dépasse pas les 4 caractères et que ce sont bien des chiffres
+        empty($message) || strlen($message) > 500 # Ici on vérifie que $message n'est pas vide et que sa longueur ne dépasse pas les 500 caractères
+    ) {
+        return false;
+    }
+
     // requête préparée obligatoire !
+    $prepare = $db->prepare("
+    INSERT INTO `guestbook` (`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`)
+    VALUES (?,?,?,?,?,?)
+    ");
 
     // try catch
         // si l'insertion a réussi
-        // on renvoie true
-    // sinon, on fait un die de l'erreur
+    try {
+        $prepare->execute([$firstname, $lastname, $usermail, $phone, $postcode, $message]);
 
+        // on renvoie true
+        return true;
+
+    // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
 
 /***************************
@@ -55,13 +87,29 @@ function addGuestbook(PDO $db,
  * Si pas de message, renvoie un tableau vide
  */
 function getAllGuestbook(PDO $db): array
-{
+{  
+    $prepare = $db->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook` . `datemessage` ASC
+    ");
+
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
+    try {
+        $prepare->execute();
+
+        // si la requête a réussi,
+        $result = $prepare->fetchAll();
+
+        // bonne pratique, fermez le curseur
+        $prepare->closeCursor();
+
+        // renvoyer le tableau de(s) message(s)
+        return $result;
+
+    } catch (Exception $e) {
+            // sinon, on fait un die de l'erreur
+            die($e->getMessage());
+    }
 }
 
 /**************************
@@ -77,12 +125,23 @@ function getAllGuestbook(PDO $db): array
 function getNbTotalGuestbook(PDO $db): int
 {
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur,
-    // renvoyez le nombre total de messages
-    return 0;
+    try {
+        // si la requête a réussi,
+        $request = $db->query("SELECT COUNT(*) as nb FROM guestbook");
+        $nb = $request->fetch()['nb'];
+
+        // bonne pratique, fermez le curseur,
+        $request->closeCursor();
+
+        // renvoyez le nombre total de messages
+        return $nb;
+    
     // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
+
 // SELECTION de messages dans le livre d'or par ordre de date croissante
 // en lien avec la pagination
 /**
@@ -98,14 +157,34 @@ function getNbTotalGuestbook(PDO $db): int
 function getGuestbookPagination(PDO $db, int $offset, int $limit): array
 {
     // Requête préparée obligatoire !
+    $prepare = $db->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` ASC
+        LIMIT ?,?
+    ");
+
     // Le $offset et le $limit sont des entiers, il faut donc les passer
     // en paramètres de la requête préparée en tant qu'entiers !
+    $prepare->bindParam(1,$offset,PDO::PARAM_INT);
+    $prepare->bindParam(2,$limit,PDO::PARAM_INT);
+
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
+
+    try {
+        // si la requête a réussi,
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+
+        // bonne pratique, fermez le curseur
+        $prepare->closeCursor();
+
+        // renvoyer le tableau de(s) message(s)
+        return $result;
+    
     // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
 
 // FONCTION de pagination
@@ -120,35 +199,87 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  */
 function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
 {
+    // Variable de sortie
     $sortie = "";
+
+    // Si pas de page nécéssaire
     if ($nbtotalMessage === 0) return "";
+
+    // Nombre de pages, division du total des messages mis à l'entier supérieur
     $nbPages = ceil($nbtotalMessage / $perPage);
+
+    // Si une seule page, pas de lien à afficher
     if ($nbPages == 1) return "";
+
+    // Nous avons plus d'une page
     $sortie .= "<p>";
+
+    // Tant qu'on a des pages
     for ($i = 1; $i <= $nbPages; $i++) {
+
+        // Si on est au premier tout de la boucle
         if ($i === 1) {
+
+            // Si on est sur la première page
             if ($pageActu === 1) {
-                $sortie .= "<< < 1 |";
+                
+                // Pas de lien
+                $sortie .= "&lt;&lt; &lt; 1 |";
+
+            // Si nous sommes sur la deuxième page
             } elseif ($pageActu === 2) {
-                $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
+
+                // Tous les liens vont vers la page 1
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='./'>&lt;</a> <a href='./'>1</a> |";
+
+            // Si nous sommes sur d'autres pages, le retour va vers la page précédente
             } else {
-                $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='?$get=" . ($pageActu - 1) . "'>&lt;</a> <a href='./'>1</a> |";
             }
+
+        // Nous ne sommes pas sur le premier ni sur le dernier tour de boucle
         } elseif ($i < $nbPages) {
+
+            // Si nous sommes sur la page actuelle
             if ($i === $pageActu) {
+
+                // Pas de lien
                 $sortie .= "  $i |";
+
             } else {
+
+                // Si nous sommes pas sur la page actuelle
                 $sortie .= "  <a href='?$get=$i'>$i</a> |";
             }
+
+        // Si nous sommes sur le dernier tour de boucle   
         } else {
+
+            // Si nous sommes sur la dernière page
             if ($pageActu >= $nbPages) {
-                $sortie .= "  $nbPages > >>";
+
+                // Pas de lien
+                $sortie .= "  $nbPages &gt; &gt;&gt;";
+
+            // Si nous ne sommes pas sur la dernière page
             } else {
-                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
+
+                // Tous les liens vont vers la dernière page
+                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>&gt;</a> <a href='?$get=$nbPages'>&gt;&gt;</a>";
             }
         }
     }
     $sortie .= "</p>";
     return $sortie;
+}
 
+/* FONCTION DATE DU MESSAGE FORMATÉE AU FORMAT FRANÇAIS*/
+
+function dateFR(string $datetime): string
+{
+    // Temps unix en seconde de la date venant de la db
+    $stringtotime = strtotime($datetime);
+    
+    // Retour de la date au format
+    return date("d/m/Y \à H\hi",$stringtotime);
 }
