@@ -24,38 +24,38 @@
         <form method="POST" id="form">
             <div>
                 <label for="prenom">Prénom</label>
-                <input id="nameInput" type="text" name="prenom">
+                <input id="nameInput" type="text" name="prenom" required>
                 <span id="spanName"></span>
             </div>
 
             <div>
                 <label for="nom">Nom</label>
-                <input id="surnameInput" type="text" name="nom">
+                <input id="surnameInput" type="text" name="nom" required>
                 <span id="spanSurname"></span>
             </div>
 
             <div>
                 <label for="email">Email</label>
-                <input id="emailInput" type="email" name="email">
+                <input id="emailInput" type="email" name="email" required>
                 <span id="spanEmail"></span>
             </div>
 
             <div>
 
                 <label for="postal">Postal</label>
-                <input id="postalInput" type="text" name="postal">
+                <input id="postalInput" type="text" name="postal" required>
                 <span id="spanPostal"></span>
             </div>
 
             <div>
                 <label for="phone">Telephone</label>
-                <input id="phoneInput" type="number" name="phone">
+                <input id="phoneInput" type="number" name="phone" required>
                 <span id="spanPhone"></span>
             </div>
 
             <div>
                 <label for="message">Message</label>
-                <textarea id="messageInput" name="message" onkeydown="limite();"></textarea>
+                <textarea id="messageInput" name="message" required></textarea>
 
                 <span id="spanMessage"></span>
             </div>
@@ -112,18 +112,7 @@
 
 
 
-    <script>
-        // ajout de la limitation de charactere
-        function limite() {
-            let total = document.getElementById("messageInput").value.length + 1;
-            document.getElementById("compteur").innerHTML = total + "/300";
-            if (total > 300) {
-                document.getElementById("messageInput").disabled = true;
-                document.getElementById("compteur").innerHTML = "300/300";
-                document.getElementById("errorLimit").innerHTML = "Limite atteinte !";
-            }
-        }
-    </script>
+
     <script src="js/validation.js"></script>
 
 </body>

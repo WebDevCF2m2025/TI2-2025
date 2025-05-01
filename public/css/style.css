@@ -96,7 +96,12 @@ span{
 
 
 .pagination a.active {
-    color: #ffffff; /* Bleu plus sombre pour la page active */
+    color: #ffffff; 
+}
+td:last-child {
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
 }
 
 /* TELEPHONE */
@@ -197,6 +202,12 @@ span{
     text-align: center;
     margin: 2rem 0;
     font-size: 1.3rem;
+    
+  }
+  .pagination a {
+    color: #007bff; /* Bleu standard */
+    text-decoration: none;
+    /* padding: 5px; */
   }
 }
   
