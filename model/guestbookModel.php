@@ -29,18 +29,44 @@ function addGuestbook(PDO $db,
                     string $message
 ): bool
 {
-    // traitement des données backend (SECURITE)
+    
+    // protection supplémentaire
+    $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
+    $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
+    $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+    $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+    $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+    $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+ 
+    if(
+        empty($firstname) || strlen($firstname) > 100 ||
+        empty($lastname) || strlen($lastname) > 100 ||
+        $usermail === false || strlen($usermail) > 200 ||
+        empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false   ||
+        empty($postcode) || strlen($postcode) > 4 || ctype_digit($postcode) === false ||
+        empty($message) || strlen($message) > 500 
 
-    // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
-    return false;
-    // requête préparée obligatoire !
-
-    // try catch
-        // si l'insertion a réussi
-        // on renvoie true
-    // sinon, on fait un die de l'erreur
+    ){
+        return false;
+    }
+ 
+    // pas d'erreur détectée
+    $prepare = $db->prepare("
+   INSERT INTO `guestbook` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
+    VALUES (?,?,?,?,?,?)
+    ");
+    try{
+        $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
+        return true;
+    }catch(Exception $e){
+        die($e->getMessage());
+    }
 
 }
+
+
+
+
 
 /***************************
  * Sans le Bonus Pagination
@@ -64,6 +90,14 @@ function getAllGuestbook(PDO $db): array
     // sinon, on fait un die de l'erreur
 }
 
+
+
+
+
+
+
+
+
 /**************************
  * Pour le Bonus Pagination
  **************************/
@@ -74,15 +108,20 @@ function getAllGuestbook(PDO $db): array
  * @return int
  * Fonction qui compte le nombre total de messages dans la table 'guestbook'
  */
+
 function getNbTotalGuestbook(PDO $db): int
 {
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur,
-    // renvoyez le nombre total de messages
-    return 0;
-    // sinon, on fait un die de l'erreur
+    try{
+        $request = $db->query("SELECT COUNT(*) as nb FROM guestbook ");
+        $nb = $request->fetch()['nb'];
+        $request->closeCursor();
+        return $nb;
+    }catch (Exception $e){
+        die($e->getMessage());
+    }
 }
+ 
+
 // SELECTION de messages dans le livre d'or par ordre de date croissante
 // en lien avec la pagination
 /**
@@ -95,18 +134,49 @@ function getNbTotalGuestbook(PDO $db): int
  * en utilisant une requête préparée (injection SQL), n'affiche que les messages
  * de la page courante
  */
-function getGuestbookPagination(PDO $db, int $offset, int $limit): array
+function getGuestbookPagination(PDO $con, int $offset, int $limit): array
 {
-    // Requête préparée obligatoire !
-    // Le $offset et le $limit sont des entiers, il faut donc les passer
-    // en paramètres de la requête préparée en tant qu'entiers !
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
+    // préparation de la requête
+    $prepare = $con->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` ASC
+        LIMIT ?,?
+        ");
+    $prepare->bindParam(1,$offset,PDO::PARAM_INT);
+    $prepare->bindParam(2,$limit,PDO::PARAM_INT);
+    // essai / erreur
+    try{
+        // exécution de la requête
+        $prepare->execute();
+ 
+        // on renvoie le tableau (array) indexé contenant tous les résultats (peut être vide si pas de message).
+        $result = $prepare->fetchAll();
+        // bonne pratique
+        $prepare->closeCursor();
+        return $result;
+ 
+        // en cas d'erreur sql
+    }catch (Exception $e){
+        // erreur de requête SQL
+        die($e->getMessage());
+    }
 }
+
+
+
+ 
+function dateFR(string $datetime): string
+{
+    // temps unix en seconde de la date venant de la db
+    $stringtotime = strtotime($datetime);
+    // retour de la date au format
+    return date("d/m/Y \à H\hm",$stringtotime);
+}
+
+
+
+
+
 
 // FONCTION de pagination
 /**
@@ -130,9 +200,9 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
             if ($pageActu === 1) {
                 $sortie .= "<< < 1 |";
             } elseif ($pageActu === 2) {
-                $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='./'>&lt;</a> <a href='./'>1</a> |";
             } else {
-                $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='?$get=" . ($pageActu - 1) . "'>&lt;</a> <a href='./'>1</a> |";
             }
         } elseif ($i < $nbPages) {
             if ($i === $pageActu) {
@@ -144,7 +214,7 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
             if ($pageActu >= $nbPages) {
                 $sortie .= "  $nbPages > >>";
             } else {
-                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
+                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>&gt;</a> <a href='?$get=$nbPages'>&gt;&gt;</a>";
             }
         }
     }

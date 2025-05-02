@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+ 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+img{
+    width: 130px;
+    
+}
+
+.container{
+ 
+    width: 100%;
+    height: 100%;
+    background: #fef1df;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5,auto); 
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    grid-template-areas:
+            "titre"
+            "image"
+            "titredeux"
+            "form"
+            "pied";
+            
+        }
+   
+     
+    #titre {
+        grid-area: titre;
+    }
+    #image {
+        grid-area: image;
+    }
+    #titredeux {
+        grid-area: titredeux;
+    }
+    #form {
+        grid-area: form;
+    }
+    #pied {
+        grid-area: pied;
+    }
+    
+
+   label{
+display: inline-block;
+width: 100px;
+
+   }
+     .groupe input{
+        margin-top: 5px;
+        padding: 10px 5px 10px 30px ;
+        border: 1px solid #cfcfcf;
+        outline-color: #747cdf;
+        border-radius: 5px;
+        }
+
+
+         .groupe textarea{
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #d8d8d8;
+            border: 2px solid #747cdf;
+            outline: none;
+            border-radius: 5px;
+            resize: none;
+            height: 72%;
+         
+             
+         }
+
+
+
+form {
+    width: 90%;
+    max-width: 480px;
+    padding: 50px 30px 20px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+
+  
+    
+}
+form div {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+
+}
+
+
+button{
+       margin-top: 10px;
+       background-color: #747cdf;
+       color: white;
+       font-size: 15px;
+       border: none;
+       padding: 10px 20px;
+       border-radius: 5px;
+       outline: none;
+       cursor: pointer;
+       transition: transform 0.5s;
+       width: 100%;
+    }
+
+ button:hover{
+        transform: scale(1.09);
+      
+      }
+
+ 
+
+  .pied-formulaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;  
+    padding: 20px;
+    text-align: center; /* centre aussi les titres et paragraphes */
+  }
+  
+  .pied-formulaire .messages,
+  .pied-formulaire .nomessage {
+    max-width: 600px; /* largeur max pour ne pas que ce soit trop large */
+    width: 100%;
+    
+  }
+  .messagees{
+    background-color: #747cdf;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 10px;
+color: white;
+  }
+  .afiche {
+    display:flex;
+     justify-content:end;
+     width:100%;
+     height: 1vh;
+  }
+  #compteur {
+    display:flex;
+     justify-content:end;
+     width:100%;
+     height: 1vh;
+  }
+
+  #erreurMsg{
+    display:flex;
+     justify-content:center;
+     width:100%;
+     height: 1vh;
+  }
+ 
+
+  @media screen and (480px< width < 960px) {
+
+  
+        form div {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+           
+        
+        }
+       
+        input,textarea{
+            width: 100%;
+        }
+    
+    
+}
+
+@media screen and ( width > 960px) {
+
+  
+    form div {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+       
+    
+    }
+    input,textarea{
+        width: 100%;
+    }
+    .container{
+ 
+       
+     
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(4,auto); 
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+        gap: 10px;
+        grid-template-areas:
+                "titre titre"
+                "titredeux titredeux"
+                "image form"
+                "pied pied";
+                
+            }
+       
+            img{
+                width: 400px;
+                
+            }
+
+
+
+}
+
+
