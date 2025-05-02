@@ -20,6 +20,23 @@ function verificationDeInput() {
     const messageRegex = /^([a-zA-Z0-9 \+ \/ -])+$/;
     const postRegex = /^[0-9]{4}$/;
 
+    const inputMessage = document.querySelector("#messages")
+    const messageCounter = document.getElementById("messageCounter")
+
+    inputMessage.addEventListener("input", function () {
+        const messageLen = inputMessage.value.length;
+        messageCounter.textContent = `${messageLen} / 300`;
+
+        if (messageLen > 300) {
+            messageCounter.style.color = "red";
+        }
+        else {
+            messageCounter.style.color = "white";
+
+        }
+    });
+
+
     btn.addEventListener('click', function (e) {
         let isValid = true;
 
@@ -95,11 +112,13 @@ function verificationDeInput() {
             messageError.textContent = "Message est vide";
             messageError.style.color = "red";
             isValid = false;
-        } else if (!messageRegex.test(inputMessage)) {
+        } else if (!messageRegex.test(inputMessage) || inputMessage.length > 300) {
             messageError.textContent = "Message n'est pas valide";
             messageError.style.color = "red";
             isValid = false;
-        } else {
+
+        }
+        else {
             messageError.textContent = "";
         }
 
@@ -107,6 +126,8 @@ function verificationDeInput() {
             e.preventDefault();
         }
     });
+    console.log();
+
 }
 
 verificationDeInput();
