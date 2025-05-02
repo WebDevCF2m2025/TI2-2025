@@ -43,11 +43,11 @@ try{
  * Si le formulaire a été soumis
  */
 if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['message'],$_POST['postal'],$_POST['portable'])){
-echo"ok";
+
+;
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
     $insert = addGuestbook($db,$_POST['prenom'],$_POST['nom'],$_POST['email'],$_POST['portable'],$_POST['postal'],$_POST['message']);
 
-var_dump($insert);
 // si l'insertion a réussi
 // on redirige vers la page actuelle (ou on affiche un message de succès)
 
@@ -58,7 +58,7 @@ var_dump($insert);
 
 
 // sinon, on affiche un message d'erreur
-    $error = $insert;
+    $errors = "Impossible d'envoyer le formulaire";
     }
 
 }
@@ -68,7 +68,8 @@ var_dump($insert);
  */
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
-// $messages = getAllGuestbook($db);
+ $messages = getAllGuestbookOrderByDateASC($db);
+
 
 /*********************
  * Ou Bonus Pagination

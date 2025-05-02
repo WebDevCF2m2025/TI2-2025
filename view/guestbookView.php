@@ -16,18 +16,29 @@
 <h1>TI2 | Livre d'or</h1>
 
 <div class="container">
+<?php
+if (isset($thanks)):
+    ?>
+<h3 class="green"><?=$thanks?></h3>
+<?php
+elseif (isset($errors)):
+    ?>
+<h3 class="red"><?=$errors?></h3>
+<?php
+endif
+?>
 
     <img class="image1" src="../public/img/sign-up-amico.png" alt="">
     <!-- Formulaire d'ajout d'un message -->
     <h2>Laissez-nous un message</h2>
     <!-- Si pas de message -->
-    <form id="registrationForm" method="post">
+    <form id="registrationForm" method="POST">
                     <label for="prenom">Prénom *</label>
                     <input id="prenom" type="text" name="prenom">
                     <label for="nom">Nom *</label>
                     <input id="nom" type="text" name="nom">
                     <label for="email">Email *</label>
-                    <input id="email" type="email" name="email" placeholder="email">
+                    <input id="email" type="text" name="email" placeholder="email">
                     <label for="postal">c/code postal *</label>
                     <input id="postal" type="text" name="postal">
                     <label for="portable">Portable *</label>
@@ -39,6 +50,9 @@
                     </div>
     </form>
 </div>
+
+
+
 <?php
 // articles est un tableau vide
 if(empty($messages)):
@@ -46,7 +60,6 @@ if(empty($messages)):
 <div class="nomessage">
 <h3>Pas encore de message</h3>
 <!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
 <!-- Si plusieurs messages -->
 <?php
 // nous avons au moins un article
@@ -64,9 +77,9 @@ else:
     // tant qu'on a des messages
     foreach ($messages as $message):
     ?>
-    <h3><?=$message['name']?></h3>
+    <h3><?=$message['firstname']?> <?=$message['lastname']?></h3>
     <p><?=$message['message']?></p>
-    <p><?=$message['created_at']?></p>
+    <p><?=$message['datemessage']?></p>
     <hr>
     <?php
     endforeach;
@@ -77,27 +90,11 @@ else:
 endif;
 
 
-var_dump($_POST,$_GET,$messages);
+//var_dump($_POST,$_GET,$messages);
 ?>
 
 <!-- Pagination (BONUS) -->
 
-<!-- Liste des messages -->
-<ul>
-    <li>
-        <p><strong></strong></p>
-        <p><em>datemessage</em></p>
-        <p><</p>
-    </li>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-</ul>
-etc ...
-<!-- Pagination (BONUS) -->
 
 
 <script src="js/validation.js"></script>

@@ -17,6 +17,21 @@ h2{
     font-size: 30px;
 }
 
+#envoye{
+display: hidden;
+}
+
+#pasenvoye{
+display:hidden;
+}
+
+.red{
+    color:red;
+}
+
+.green{
+    color:green;
+}
 .image1{
     width: 400px;
     display:block;
