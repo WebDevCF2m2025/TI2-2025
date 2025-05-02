@@ -121,7 +121,7 @@ h3{
 
 .compteur-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%; /* S'assurer que le parent occupe toute la largeur */
 }
 .compteur{

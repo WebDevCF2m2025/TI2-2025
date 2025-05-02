@@ -89,6 +89,9 @@ const Inputmessage = document.getElementById('message');
 
 Inputmessage.addEventListener('input',function (){
     const remainingChars = maxChar - Inputmessage.value.length;
+    if(remainingChars < 0){
+        remainingChars = 0;
+    }
     compteur.innerText = remainingChars;
     compteur.style.color = "white";
 });

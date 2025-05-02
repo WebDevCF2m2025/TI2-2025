@@ -67,9 +67,10 @@
             <div class="errorpostal show"></div>
             <div class="champ">
                 <label for="message">Message :</label>
-                <textarea type="text" id="message" name="message" rows="5"></textarea>
+                <textarea type="text" id="message" name="message" maxlength="300" rows="5"></textarea>
             </div>
             <div class="compteur-container">
+                <div id="alertmax">Salut</div>
                 <div id="compteur"><span id="remain">300</span> / 300</div>
             </div>
             <button type="submit" id="button">Envoyer</button>
@@ -97,7 +98,7 @@
         <div class="message">
             <div class="messagecontenu">
                 <p><strong><?= $messages['firstname'] ?> <?= $messages['lastname'] ?></strong></p>
-                <p> - a écrit le message le <span><em><?= $messages['datemessage'] ?> : </em></span></p>
+                <p> - a écrit le message le <span><em><?php $datetime = new DateTime($messages['datemessage']); echo $datetime->format('d/m/Y \à H\hi'); ?> : </em></span></p>
                 <div><?= $messages['message'] ?></div>
             </div>
         </div>
