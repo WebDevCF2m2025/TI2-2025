@@ -73,63 +73,67 @@
             <div id="portableError" class="afiche"></div>
             <div class="groupe">
                 <label for="message">Message*</label>
-                <textarea name="message" id="message" rows="10" placeholder="saisisez ici ..." required></textarea>
-                <span id="messageError"></span>
+                <textarea name="message" id="message" rows="10" placeholder="saisisez ici ..." oninput="compterCaracteres()" required></textarea>
+                 
             </div>
+            <span id="compteur">0 / 300</span><br>
+            <span id="erreurMsg" class="erreurMsg"></span><br>
             <div>
                 <button id="btn" type="submit">Envoyer</button>
             </div>
         </form>
 
 
+    
 
 
-        <div class="pied-formulaire" id="pied">
 
-            <?php
+                <div class="pied-formulaire" id="pied">
 
-            // si on a pas de message $nbMessage === 0
-            if (empty($nbtotalMessage)):
-            ?>
-
-                <div class="nomessage">
-                    <h3>Pas encore de message</h3>
-                </div>
-            <?php
-            else:
-                    // le tableau n'est pas vide
-                ;
-                // on va ajouter une variable pour le 's' de message
-                $pluriel = $nbtotalMessage > 1 ? "s" : "";
-            ?>
-
-                <div class="messages">
-                    <h2>Les messages précédents</h2>
-                    <h3>Il y a <?= $nbtotalMessage ?> message<?= $pluriel ?></h3>
-                    <nav><?= $pagination ?></nav>
                     <?php
-                    foreach ($messages as $message):
 
+                    // si on a pas de message $nbMessage === 0
+                    if (empty($nbtotalMessage)):
                     ?>
-                        <div class="messagees">
-                            <strong><?= $message['firstname'] ?></strong> a écrit ce message le <?= dateFR($message['datemessage']) ?> <br> <?= nl2br($message['message']) ?>
+
+                        <div class="nomessage">
+                            <h3>Pas encore de message</h3>
                         </div>
                     <?php
-                    endforeach;
+                    else:
+                            // le tableau n'est pas vide
+                        ;
+                        // on va ajouter une variable pour le 's' de message
+                        $pluriel = $nbtotalMessage > 1 ? "s" : "";
+                    ?>
+
+                        <div class="messages">
+                            <h2>Les messages précédents</h2>
+                            <h3>Il y a <?= $nbtotalMessage ?> message<?= $pluriel ?></h3>
+                            <nav><?= $pagination ?></nav>
+                            <?php
+                            foreach ($messages as $message):
+
+                            ?>
+                                <div class="messagees">
+                                    <strong><?= $message['firstname'] ?></strong> a écrit ce message le <?= dateFR($message['datemessage']) ?> <br> <?= nl2br($message['message']) ?>
+                                </div>
+                            <?php
+                            endforeach;
+
+                            ?>
+
+                        </div>
+                    <?php
+
+                    endif;
 
                     ?>
 
                 </div>
-            <?php
 
-            endif;
-
-            ?>
-
-        </div>
-
-    </div>
-    <script src="js/validation.js"></script>
+            </div>
+            <script src="js/validation.js"></script>
 </body>
 
 </html>

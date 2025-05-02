@@ -24,7 +24,7 @@ function verificationDeInput() {
         const inputemail = document.getElementById("email").value.trim();
         const inputpostal = document.getElementById("postal").value.trim();
         const inputportable = document.getElementById("portable").value.trim();
-        const inputmessage = document.getElementById("message").value.trim();
+   
     // Prénom
     if (inputprenom == "") {
         prenomError.textContent = "Prénom est vide";
@@ -105,3 +105,24 @@ function verificationDeInput() {
  
 verificationDeInput();
 
+
+
+  function compterCaracteres() {
+    const textarea = document.getElementById('message');
+    const compteur = document.getElementById('compteur');
+    const erreurMsg = document.getElementById('erreurMsg');
+    const maxCaracteres = 300;
+
+    let texte = textarea.value;
+
+    if (texte.length > maxCaracteres) {
+        texte = texte.substring(0, maxCaracteres);
+        textarea.value = texte;
+        erreurMsg.textContent = "Vous avez atteint la limite de 300 caractères !";
+        erreurMsg.style.color = "red";
+        compteur.textContent = `${maxCaracteres} / ${maxCaracteres}`;
+    } else {
+        erreurMsg.textContent = "";
+        compteur.textContent = `${texte.length} / ${maxCaracteres}`;
+    }
+}

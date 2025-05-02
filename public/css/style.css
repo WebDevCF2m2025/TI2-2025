@@ -149,6 +149,19 @@ color: white;
      width:100%;
      height: 1vh;
   }
+  #compteur {
+    display:flex;
+     justify-content:end;
+     width:100%;
+     height: 1vh;
+  }
+
+  #erreurMsg{
+    display:flex;
+     justify-content:center;
+     width:100%;
+     height: 1vh;
+  }
  
 
   @media screen and (480px< width < 960px) {
