@@ -1,65 +1,58 @@
 <?php
-# public/index.php
 
 
-/*
- * Front Controller de la gestion du livre d'or
- */
-
-/*
- * Chargement des dépendances
- */
-// chargement de configuration
+// inclusion de la configuration et du modele
 require_once "../config.php";
-// chargement du modèle de la table guestbook
 require_once "../model/guestbookModel.php";
 
-/*
- * Connexion à la base de données en utilisant PDO
- * Avec un try catch pour gérer les erreurs de connexion
- * Utilisez les constantes de config.php
- * Activez le mode d'erreur de PDO à Exception et
- * le mode fetch à tableau associatif
- */
+// tentative de connexion a la bdd
+try {
+    $conn = new PDO(DSN, DB_LOGIN, DB_PWD, [
+        // option des erreur et de la recuperation d'array par defaut
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+} catch (Exception $e) {
+    echo "Message : " . $e->getMessage();
+}
 
-/*
- * Si le formulaire a été soumis
- */
 
-// on appelle la fonction d'insertion dans la DB (addGuestbook())
 
-// si l'insertion a réussi
+// verifié si les variables POST existe
+if (isset($_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['phone'], $_POST['postal'], $_POST['message'])) {
+    // Si oui, on insert les données
+    $insert = addGuestbook($conn, $_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['phone'], $_POST['postal'], $_POST['message']);
 
-// on redirige vers la page actuelle (ou on affiche un message de succès)
+} 
 
-// sinon, on affiche un message d'erreur
+// recup des livres de la bdd dans un variable
+$messages = getAllGuestbook($conn);
 
-/*
- * On récupère les messages du livre d'or
- */
+// recup du compte egalement
+$count = count($messages);
 
-// on appelle la fonction de récupération de la DB (getAllGuestbook())
+// Verification de notre position sur la page dans l'url et si la variable pg existe | ctype_digit = transforme les entrées numérique d'un string en integer
+if (isset($_GET[PAGINATION_GET]) && ctype_digit($_GET[PAGINATION_GET])) {
+    $page = (int) $_GET[PAGINATION_GET];
+} else {
+    // par defaut la page -> ?pg=1
+    $page = 1;
+}
 
-/*********************
- * Ou Bonus Pagination
- *********************/
+// recup le nombre total de msg dans une variable
+$nbTotMessage = getNbTotalGuestbook($conn);
 
-// on vérifie sur quelle page on est (et que c'est un string qui contient que des numériques sans "." ni "-" => ctype_digit) en utilisant la variable $_GET et les constantes de config.php
+// recuperation de la pagination dans une variable avec les parametres
+$pagination = pagination($nbTotMessage, PAGINATION_GET, $page, PAGINATION_NB);
 
-# on compte le nombre total de messages (SQL)
+// affiche a partir l'offset, exemple $page=4 ? (4-1)*3=9 ====> affichera 3 message a partir du 10ieme de la bdd
+$offset = ($page - 1) * PAGINATION_NB;
 
-# on récupère la pagination
+// recupere et stock les offset de la bdd
+$messages = getGuestbookPagination($conn,  $offset, PAGINATION_NB);
 
-# pour obtenir le $offset pour les messages (calcul)
-
-# on veut récupérer les messages de la page courante
-
-/**************************
- * Fin du Bonus Pagination
- **************************/
-
-// Appel de la vue
-
+// inclusion de la vue
 include "../view/guestbookView.php";
 
-// fermeture de la connexion (bonne pratique)
+// fermeture de connexion quand terminer
+$conn = null;
