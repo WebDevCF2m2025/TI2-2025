@@ -1,0 +1,178 @@
+body{
+    font-family: Arial,sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1,h2{
+    text-align: center;
+}
+
+h2{
+    margin-bottom: 2em;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    gap:7em;
+}
+
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 2em;
+    background-color:rgb(59, 57, 57);
+    border-radius: 5px;
+}
+
+.champ {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+   }
+
+.img{
+    width:500px;
+}
+
+#image{
+    width: 100%;
+}
+
+
+label {
+    width: 120px;
+    font-weight: bold;
+    }
+
+input, textarea {
+    flex: 1;
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+textarea {
+    resize: vertical;
+    }
+    
+button {
+    padding: 10px;
+    font-size: 1em;
+    background-color: #003e85;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: center;
+    width: 100%;
+    }
+
+.nomessage{
+    display: flex;
+    justify-content: center;
+}
+
+.message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.messagecontenu{
+    margin-bottom: 1em;
+    background-color:gray;
+    width: 50%;
+    padding: 1em;
+    border-radius: 10px;
+}
+
+h3{
+    margin-top: 5em;
+    text-align: center;
+}
+
+.show{
+    height: 0.5em;
+}
+
+.pagination{
+    text-align: center;
+}
+
+.errorPhp{
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 2em;
+    margin-top: 0;
+}
+
+#validation-message{
+    text-align: center;
+    height: 3em;
+    font-weight: bold;
+}
+
+.compteur-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* S'assurer que le parent occupe toute la largeur */
+}
+.compteur{
+    height: 1em;
+}
+
+
+
+@media (max-width: 960px) {
+    main{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    img{
+        width: 50%;
+    }
+
+    .form{
+        width: 70%;
+    }
+
+    button{
+        width: 70%;
+    }
+
+    .messagecontenu{
+        width: 70%;
+    }
+
+    .img{
+        width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .champ{
+        flex-direction: column;
+    }    
+
+    button{
+        width: 100%;
+    }
+
+    input,textarea{
+        width: 80%;
+    }
+
+    .img{
+        width: 250px;
+    }
+}
+
+

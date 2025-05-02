@@ -3,54 +3,118 @@
 ?>
 <!doctype html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TI2 | Livre d'or</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<h1>TI2 | Livre d'or</h1>
-<!-- Formulaire d'ajout d'un message -->
-<h2>Ici le formulaire</h2>
-<!-- Si pas de message -->
-<h3>Pas encore de message</h3>
-<!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
-<!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
-
-<!-- Pagination (BONUS) -->
-
-<!-- Liste des messages -->
-<ul>
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-</ul>
-etc ...
-<!-- Pagination (BONUS) -->
+    <h1>TI2 | Livre d'or</h1>
+    <!-- Formulaire d'ajout d'un message -->
+    <h2>Ici le formulaire</h2>
+    <div id="validation-message"></div>
+    <?php
+    if (isset($success) && $success === true):
+    ?>
+        <script>
+            const validationMessage = document.getElementById("validation-message");
+            validationMessage.innerText = "Votre message a été envoyé avec succès !";
+            validationMessage.style.color = "green";
+            validationMessage.style.fontSize = "bold";
+            // Masquer le message après 5 secondes
+            setTimeout(() => {
+                validationMessage.innerText = "";
+            }, 3000);
+        </script>
+    <?php
+    endif;
+    ?>
+    <main>
+        <div class="img">
+            <img src="img/sign-up-amico.png" alt="img-form" id="image" />
+        </div>
+        <form method="post" action="" class="form">
+            <div class="champ">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom">
+            </div>
+            <div class="errorprenom show"></div>
+            <div class="champ">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom">
+            </div>
+            <div class="errornom show"></div>
+            <div class="champ">
+                <label for="mail">Email :</label>
+                <input type="email" id="mail" name="email">
+            </div>
+            <div class="erroremail show"></div>
+            <div class="champ">
+                <label for="tel">Telephone :</label>
+                <input type="num" id="tel" name="telephone">
+            </div>
+            <div class="errortelephone show"></div>
+            <div class="champ">
+                <label for="code_postal">Code Postal :</label>
+                <input type="num" id="postal" name="postal">
+            </div>
+            <div class="errorpostal show"></div>
+            <div class="champ">
+                <label for="message">Message :</label>
+                <textarea type="text" id="message" name="message" maxlength="300" rows="5"></textarea>
+            </div>
+            <div class="compteur-container">
+                <div id="alertmax">Salut</div>
+                <div id="compteur"><span id="remain">300</span> / 300</div>
+            </div>
+            <button type="submit" id="button">Envoyer</button>
+        </form>
+    </main
+        <?php
+        if (empty($message)):
+        ?>
+        <div class="nomessage">
+    <!-- Si pas de message -->
+    <h3>Pas encore de message</h3>
+    </div>
 <?php
-// À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
+        else: ($nbTotMessage > 1) ? $pluriel = "s" : $pluriel = "";
 ?>
+    <!-- Si 1 message -->
+    <h3>Il y a <?= $nbTotMessage ?> message<?= $pluriel ?></h3>
+    <!-- Si plusieurs messages -->
+    <?php
+            foreach ($message as $messages):
+    ?>
+        <!-- Pagination (BONUS) -->
 
+        <!-- Liste des messages -->
+        <div class="message">
+            <div class="messagecontenu">
+                <p><strong><?= $messages['firstname'] ?> <?= $messages['lastname'] ?></strong></p>
+                <p> - a écrit le message le <span><em><?php $datetime = new DateTime($messages['datemessage']); echo $datetime->format('d/m/Y \à H\hi'); ?> : </em></span></p>
+                <div><?= $messages['message'] ?></div>
+            </div>
+        </div>
+    <?php
+            endforeach;
+    ?>
+<?php
+        endif;
+?>
+<!-- Pagination (BONUS) -->
+<div class="pagination">
+    <?php
+    echo $pagination;
+    ?>
+</div>
 <script src="js/validation.js"></script>
 </body>
-</html>
 
+</html>
