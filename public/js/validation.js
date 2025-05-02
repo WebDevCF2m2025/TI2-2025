@@ -26,7 +26,7 @@ function verificationDeInput() {
         const inputMessage = document.querySelector("#messageID").value.trim();
 
         // Nom
-        if (inputName == "") {
+        if (inputName === "") {
             nomError.textContent = "Nom est vide";
             nomError.style.color = "red";
             isValid = false;
@@ -39,7 +39,7 @@ function verificationDeInput() {
         }
 
         // Prénom
-        if (inputPrenom == "") {
+        if (inputPrenom === "") {
             prenomError.textContent = "Prénom est vide";
             prenomError.style.color = "red";
             isValid = false;
@@ -52,7 +52,7 @@ function verificationDeInput() {
         }
 
         // Email
-        if (inputEmail == "") {
+        if (inputEmail === "") {
             emailError.textContent = "Email est vide";
             emailError.style.color = "red";
             isValid = false;
@@ -65,7 +65,7 @@ function verificationDeInput() {
         }
 
         // Téléphone
-        if (inputTel == "") {
+        if (inputTel === "") {
             telephoneError.textContent = "Téléphone est vide";
             telephoneError.style.color = "red";
             isValid = false;
@@ -77,7 +77,7 @@ function verificationDeInput() {
             telephoneError.textContent = "";
         }
 
-        if (inputpostcode == "") {
+        if (inputpostcode === "") {
             postcodeError.textContent = "code postal est vide";
             postcodeError.style.color = "red";
             isValid = false;
@@ -90,7 +90,7 @@ function verificationDeInput() {
         }
 
         // Message
-        if (inputMessage == "") {
+        if (inputMessage === "") {
             messageError.textContent = "Message est vide";
             messageError.style.color = "red";
             isValid = false;
