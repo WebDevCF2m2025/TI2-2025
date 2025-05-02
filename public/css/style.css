@@ -1,14 +1,19 @@
+
 .container,
 .containerTable {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: black;
 }
-
+body{
+    background-color: black;
+}
 form div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 form {
     display: grid;
@@ -20,40 +25,39 @@ form {
         "prenom message"
         "tel message"
         "email message"
-        "password message";
+        "codepostal message";     
     /* optionnel pour aérer un peu */
 }
 
 
 
-#name {
+#NomID {
     grid-area: name;
 }
-#email {
+#prenomID {
+    grid-area: prenom;
+}
+#emailID {
     grid-area: email;
 }
-#password {
-    grid-area: password;
+#telephone {
+    grid-area: tel;
+}
+#postcodeID {
+    grid-area: postcode;
 }
 #message {
     grid-area: message;
     justify-self: start; /* Aligne le message à gauche dans sa cellule */
 }
-#prenom {
-    grid-area: prenom;
-}
-#telephone {
-    grid-area: tel;
-}
 
-.photoSignUpAmico {
-    width: 200px;
 
-}
 
-.photoSignUpAmico img {
+
+
+img {
     display: block;
-    width: 100%; 
+    width: 10%; 
     
 }
 
@@ -65,12 +69,13 @@ form {
             "prenom"
             "tel"
             "email"
-            "password"
+            "codepostal"
             "message";
             
     }
     
-   
+  
+    
 }
 
 @media screen and (600px< width < 900px) {
@@ -79,11 +84,14 @@ form {
         grid-template-areas: 
             "name prenom"
             "tel email"
-            "message message";
+            "codepostal message"
+            "codepostal message";
     }
     textarea {
         width: 350px;
        
       }
+     
+   
     
 }

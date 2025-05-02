@@ -55,9 +55,9 @@
   
     
 </form>
-<div class="photoSignUpAmico">
-<img  src="img/sign-up-amico.png" alt="">
-</div> 
+
+<img  src="img/sign-up-amico.png" alt="AMIKOPHOTO">
+
 
 </div>
 
