@@ -50,7 +50,7 @@
                 <label for="message">Message *</label>
                 <textarea name="message" id="message"></textarea>
             </div>
-            <p id="score">0/250</p>
+            <p id="score">0/300</p>
             <div class="label">
                 <button type="submit">Envoyer</button>
             </div>

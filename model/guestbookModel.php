@@ -28,7 +28,7 @@ function addGuestbook(PDO $pdo, string $firstname,string $lastname,string $userm
     if(empty($firstname)){
         // $erreur .= "Prénom incorrect.<br>";
         return false;
-    }elseif(strlen($firstname)>20){
+    }elseif(strlen($firstname)>100){
         // $erreur .= "Prénom trop long.<br>";
         return false;
     }
@@ -37,7 +37,7 @@ function addGuestbook(PDO $pdo, string $firstname,string $lastname,string $userm
     if(empty($lastname)){
         // $erreur .= "Nom incorrect.<br>";
         return false;
-    }elseif(strlen($lastname)>20){
+    }elseif(strlen($lastname)>100){
         // $erreur .= "Nom trop long.<br>";
         return false;
     }
@@ -46,7 +46,11 @@ function addGuestbook(PDO $pdo, string $firstname,string $lastname,string $userm
     if(!$usermail){
         // $erreur .= "Email Incorrect.<br>";
         return false;
+    }elseif(strlen($usermail)>100){
+        // $erreur .= "Nom trop long.<br>";
+        return false;
     }
+
 
     $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
     if(!ctype_digit($phone)){
@@ -140,7 +144,7 @@ function getAllGuestbook(PDO $pdo): array
  **************************/
 
 function goodDate(string $dateOf):string {
-    return date("d/m/Y \à H:i", strtotime($dateOf));
+    return date("d/m/Y \à H\hi", strtotime($dateOf));
 }
 
 
