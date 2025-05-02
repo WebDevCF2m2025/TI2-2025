@@ -98,8 +98,8 @@
                             <tr>
                                 <td><?= $message['firstname'] ?></td>
                                 <td><?= $message['lastname'] ?></td>
-                                <td><em><?= $message['datemessage'] = date("d/m/Y H:i:s", strtotime($message['datemessage'])) ?></em></td>
-                                <td><?= $message['message'] ?></td>
+                                <td><em><?= $message['datemessage'] = date("d/m/Y \à H\hs", strtotime($message['datemessage'])) ?></em></td>
+                                <td><?= nl2br($message['message']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
