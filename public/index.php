@@ -10,7 +10,7 @@ require_once "../model/guestbookModel.php";
  * Chargement des dépendances
  */
 // chargement de configuration
-require_once "../config.php";
+require_once "../config.dev.php";
 // chargement du modèle de la table guestbook
 
 
@@ -26,7 +26,7 @@ require_once "../config.php";
 try {
 
     $conecte = new PDO(
-        dns,
+        DB_DSN,
         DB_LOGIN,
         DB_PWD,
         [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,]

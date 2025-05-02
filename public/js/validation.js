@@ -120,6 +120,7 @@ function verificationDeInput() {
         }
         else {
             messageError.textContent = "";
+
         }
 
         if (!isValid) {
