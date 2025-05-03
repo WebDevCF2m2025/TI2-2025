@@ -1,4 +1,5 @@
 # ignore config.php
+config.php.ini
 config.php
 # ignore PHPStorm files
 .idea/
