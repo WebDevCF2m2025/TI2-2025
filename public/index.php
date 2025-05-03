@@ -44,6 +44,7 @@ try {
  * Si le formulaire a été soumis
  */
 
+<<<<<<< HEAD
  if(isset($_POST['firstname'],$_POST['lastname'],$_POST['text'])){
 
     // on appelle la fonction d'insertion dans la DB (addGuestbook())
@@ -62,14 +63,54 @@ try {
 
 
 
+=======
+// on appelle la fonction d'insertion dans la DB (addGuestbook())
+try{
+    // nouvelle instance de PDO
+    $db = new PDO(DB_DSN, DB_LOGIN , DB_PWD,
+        // tableau d'options
+        [
+            // par défaut les résultats sont en tableau associatif
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            // Afficher les exceptions
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]
+    );
+}catch(Exception $e){
+    // arrêt du script et affichage du code erreur, et du message
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
 
-// on redirige vers la page actuelle (ou on affiche un message de succès)
+if(isset(
+    $_POST['firstname'],
+    $_POST['lastname'],
+    $_POST['usermail'],
+    $_POST['phone'],
+    $_POST['postcode'],
+    $_POST['message'],
+>>>>>>> main
 
+)) {
+
+<<<<<<< HEAD
 
 /*
  * On récupère les messages du livre d'or
  */
 $guestBook = getAllGuestbook($db);
+=======
+    // on va tenter l'insertion, car on a protégé addMessage()
+$insert = addGuestbook($db,
+$_POST['firstname'],
+$_POST['lastname'],
+$_POST['usermail'],
+$_POST['phone'],
+$_POST['postcode'],
+$_POST['message'],
+);
+
+}
+>>>>>>> main
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
 /*********************
@@ -95,4 +136,8 @@ $guestBook = getAllGuestbook($db);
 require_once "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+<<<<<<< HEAD
 $db=null;
+=======
+$db = null;
+>>>>>>> main

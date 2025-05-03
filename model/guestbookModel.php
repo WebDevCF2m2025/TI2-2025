@@ -6,6 +6,7 @@
 
 // INSERTION d'un message dans le livre d'or
 
+<<<<<<< HEAD
 // /**
 //  * @param PDO $db
 //  * @param string $firstname
@@ -39,6 +40,62 @@
 //         // si l'insertion a réussi
 //         // on renvoie true
 //     // sinon, on fait un die de l'erreur
+=======
+/**
+ * @param PDO $db
+ * @param string $firstname
+ * @param string $lastname
+ * @param string $usermail
+ * @param string $phone
+ * @param string $postcode
+ * @param string $message
+ * @return bool
+ * Fonction qui insère un message dans la base de données 'ti2web2025' et sa table 'guestbook'
+ * Renvoie true si l'insertion a réussi, false sinon
+ * Une requête préparée est utilisée pour éviter les injections SQL
+ * Les données sont échappées pour éviter les injections XSS (protection backend)
+ */
+function addGuestbook(PDO $db,
+                    string $firstname,
+                    string $lastname,
+                    string $usermail,
+                    string $phone,
+                    string $postcode,
+                    string $message
+): bool
+{
+     // protection supplémentaire
+     $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES));
+     $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
+     $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+     $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+     $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+     $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+ 
+     if(
+         empty($firstname) || strlen($firstname) > 100 ||
+         empty($lastname) || strlen($lastname) > 100 ||
+         empty($usermail) || strlen($usermail) > 200 ||
+         empty($phone) || ctype_digit($phone) ===  false || strlen($phone) > 20 ||
+         empty($postcode) || strlen($postcode) > 4 ||
+         empty($message) || strlen($message) > 500
+         ){
+         return false;
+     }
+ 
+     // pas d'erreur détectée
+     $prepare = $db->prepare("
+     INSERT INTO `guestbook` (`firstname`,`lastname`,`usermail`,`phone`, `postcode`, `message`)
+     VALUES (?,?,?,?,?,?)
+     ");
+     try{
+         $prepare->execute([$firstname,$lastname,$usermail,$phone, $postcode, $message]);
+         return true;
+     }catch(Exception $e){
+         die($e->getMessage());
+     }
+ 
+>>>>>>> main
 
 // }
 
@@ -56,6 +113,7 @@
  */
 function getAllGuestbook(PDO $connection): array
 {
+<<<<<<< HEAD
     $prepare = $connection->prepare("
     SELECT * FROM `guestbook`
     ORDER BY `guestbook`.`datemessage` 
@@ -129,7 +187,29 @@ function addGuestbook(PDO $con,string $firstname, string $lastname, string $user
         die($e->getMessage());
     }
 
+=======
+    // préparation de la requête
+    $prepare = $db->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` ASC 
+        ");
+    // essai / erreur
+    try{
+        // exécution de la requête
+        $prepare->execute();
+
+        // on renvoie le tableau (array) indexé contenant tous les résultats (peut être vide si pas de message).
+        return $prepare->fetchAll();
+
+        // en cas d'erreur sql
+    }catch (Exception $e){
+        // erreur de requête SQL
+        die($e->getMessage());
+    }
+>>>>>>> main
 }
+
+
 
 /**************************
  * Pour le Bonus Pagination
