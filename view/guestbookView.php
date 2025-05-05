@@ -31,54 +31,31 @@
     </div>
 <hr>
 <?php
-$nombMessage = isset($message) ? count($message) : 0;
-if ($nombMessage < 1): ?>
-<!-- Si pas de message -->
-<h3>Pas encore de message</h3>
-<?php elseif ($nombMessage === 1): ?>
-<!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
-<p>1 message : Il y a <?= $nombMessage ?> message</p>
-<?php else: ?>
-<!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
-<p>Plusieurs messages : Il y a <?= $nombMessage ?> messages</p>
-<?php endif; ?>
-<!-- Pagination (BONUS) -->
-
-<!-- Liste des messages -->
-<?php if (!empty($messages)): ?>
-<?php foreach ($messages as $message): ?>
-<ul>
-    <li>
-        <p><strong>firstname lastname</strong></p><h3 style="display: inline;"><?= htmlspecialchars($message['surname'] . ['name']) ?></h3><br>
-        <p><em>datemessage</em></p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
-        <p>message</p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
-    </li>
-    <hr>
-    <?php endforeach; ?>
-<?php endif; ?>
+    if(empty($nbMessage)):
+      ?>
+      <h3>Pas encore de message</h3>
+    <?php else:
+      $pluriel = $nbMessage>1? "s":"";
+      ?>
+      <!-- Si 1 message -->
+      <h3>Le<?=$pluriel ?> message<?=$pluriel ?> précédent<?=$pluriel ?></h3>
+      <h3 id="msg">Il y'a <?= $nbMessage ?> message<?=$pluriel ?></h3>
+      <!-- Si plusieurs messages -->
+    <?php
+    endif;
+    ?>
     <!-- Autres messages -->
-    <?php if (!empty($messages)): ?>
-        <?php foreach ($messages as $message): ?>
-    <li>
-        <p><strong>firstname lastname</strong></p></p><h3 style="display: inline;"><?= htmlspecialchars($message['surname'] . ['name']) ?></h3><br>
-        <p><em>datemessage</em></p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
-        <p>message</p><p style="display: inline;"><?= nl2br(htmlspecialchars($message['message'])) ?></p><br>
-    </li>
-</ul>
-<?php endforeach; ?>
-<?php endif; ?>
+   
 etc ...
 <!-- Pagination (BONUS) -->
 <?php
 // À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
-?>
+// echo "<h3>Nos var_dump() pour le débugage</h3>";
+// echo '<p>$_POST</p>';
+// var_dump($_POST);
+// echo '<p>$_GET</p>';
+// var_dump($_GET);
+// ?>
 
 <script src="js/validation.js"></script>
 </body>

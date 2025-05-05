@@ -5,7 +5,7 @@
       }
       
       function verificationTel(tel) {
-        const regex = /^([0])([4])........$/; 
+        const regex = /^(04)\d{8}$/; 
         return regex.test(tel);
       }
       
@@ -21,6 +21,8 @@
       
       
       formulaire.addEventListener('submit', function(ev) {
+        ev.preventDefault()
+        
         const mail = eMail.value.trim();
         const tel = numTel.value.trim();
         const postal = codePostal.value.trim();
@@ -42,6 +44,7 @@
         } else {
           alert("Code postal invalide");
         }
+        formulaire.submit()
       });
 
 

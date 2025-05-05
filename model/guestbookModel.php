@@ -20,7 +20,6 @@
  * Une requête préparée est utilisée pour éviter les injections SQL
  * Les données sont échappées pour éviter les injections XSS (protection backend)
  */
-
 function addGuestbook(PDO $db,
                     string $firstname,
                     string $lastname,
@@ -29,95 +28,67 @@ function addGuestbook(PDO $db,
                     string $postcode,
                     string $message
 ): bool
-{ // erreur vide au cas où
-    $erreur = "";
+{
     // traitement des données backend (SECURITE)
-    // vérification du nombre de caractères strlen() et validité du nom
-    $nameVerify = strip_tags($firstname); # on retire les tags
-    $nameVerify = htmlspecialchars($nameVerify,ENT_QUOTES); // protection des caractères spéciaux, avec guillemet et double-guillemet
-    $nameVerify = trim($nameVerify); # on retire les espaces avant/arrière du nom
-    // si le nom est vide
-    if(empty($nameVerify)){
-        $erreur.="Votre nom est incorrect.<br>";
+
+    # strip_tags : Avec ça on retire les tags
+    # htmlspecialchars : Avec ça on protège des caractères spéciaux (avec ' et ")
+    # trim : Avec ça on supprime les espaces devant et derrière les variable $firstname, $lastname ... 
+
+    $firstname = trim(htmlspecialchars(strip_tags($firstname),ENT_QUOTES)); 
+    $lastname = trim(htmlspecialchars(strip_tags($lastname),ENT_QUOTES));
+    $usermail = filter_var($usermail, FILTER_VALIDATE_EMAIL);
+    $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+    $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+    $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+
+    // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
+    if(empty($firstname));
     // si le nom est plus long qu'autorisé en db
-    }elseif(strlen($nameVerify)>100){
-        $erreur.="Votre nom est trop long.<br>";
-    }
-    // vérification du nombre de caractères strlen() et validité du prénom
-    $lastNameVerify = strip_tags($lastname); # on retire les tags
-    $lastNameVerify = htmlspecialchars($lastNameVerify,ENT_QUOTES); // protection des caractères spéciaux, avec guillemet et double-guillemet
-    $lastNameVerify = trim($lastNameVerify); # on retire les espaces avant/arrière du nom
- // si le nom est vide
- if(empty($lastNameVerify)){
-     $erreur.="Votre prénom est incorrect.<br>";
- // si le nom est plus long qu'autorisé en db
- }elseif(strlen($lastNameVerify)>100){
-     $erreur.="Votre prénom est trop long.<br>";
- }
-
-    // vérification du mail
-    $usermail = filter_var($usermail,FILTER_VALIDATE_EMAIL);
-    // si le mail n'est pas bon
-    if($usermail===false){
-        $erreur .= "Email incorrect.<br>";
-    }
-    //vérification code postal
-    $postcodeVerif = strip_tags($postcode);
-    $postcodeVerif = htmlspecialchars($postcodeVerif,ENT_QUOTES);
-    $postcodeVerif = trim($postcodeVerif);
-    if(empty($postcodeVerif)){
-        $erreur.="Votre code postal est incorrect.<br>";
-    }elseif(strlen($postcodeVerif)>4){
-        $erreur.="Votre code est trop long.<br>";
-    }elseif(strlen($postcodeVerif)<4){
-        $erreur.="Votre code est trop court.<br>";
-    }
+    elseif(strlen($firstname)>100);
     
+ // si le nom est vide
+     if(empty($lastname));
+ // si le nom est plus long qu'autorisé en db
+     elseif(strlen($lastname)>100);
+  
+    // vérification du mail
+    // si le mail n'est pas bon
+    if($usermail===false);
+    elseif(strlen($lastname)>100);
+    //vérification code postal
+    if(empty($postcode)); 
+    elseif(strlen($postcode)!==4);  
     //vérification numéro de téléphone
-    $phoneVerif = strip_tags($phone);
-    $phoneVerif = htmlspecialchars($phoneVerif,ENT_QUOTES);
-    $phoneVerif = trim($phoneVerif);
-
-    if(empty($phoneVerif)){
-        $erreur.="Votre code postal est incorrect.<br>";
-    }elseif(strlen($phoneVerif)>10){
-        $erreur.="Votre code est trop long.<br>";
-    }elseif(strlen($phoneVerif)<10){
-        $erreur.="Votre code est trop court.<br>";
-    }
-
+    if(empty($phone));
+       
+    elseif(strlen($phone)!==10);
 // vérification du nombre de caractères strlen() et validité du message
-$text = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
-if(empty($text)||strlen($text)>600){
-    $erreur .= "Message incorrect<br>";
-}
+
+    if(empty($messageVerify));
+    elseif(strlen($messageVerify)>600)
 
 // si on a au moins 1 erreur
-if(!empty($erreur)) return $erreur;
-
-// pas d'erreur détectée
-$prepare = $db->prepare("
-INSERT INTO `message` (`firstname`,`lastname`,`usermail`,`phone`,`postcode`,`message`)
-VALUES (?,?,?,?,?,?)
-");
-    // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
+ {
     return false;
+}
+
     // requête préparée obligatoire !
+    $prepare = $db->prepare("
+    INSERT INTO `guestbook` (`firstname`, `lastname`, `usermail`, `phone`, `postcode`, `message`)
+    VALUES (?,?,?,?,?,?)
+    ");
 
     // try catch
         // si l'insertion a réussi
+    try {
+        $prepare->execute([$firstname, $lastname, $usermail, $phone, $postcode, $message]);
+
         // on renvoie true
+        return true;
+
     // sinon, on fait un die de l'erreur
-    try{
-        // exécution de la requête
-        $prepare->execute();
-
-        // on renvoie le tableau (array) indexé contenant tous les résultats (peut être vide si pas de message).
-        return $prepare->fetchAll();
-
-    // en cas d'erreur sql
-    }catch (Exception $e){
-        // erreur de requête SQL
+    } catch (Exception $e) {
         die($e->getMessage());
     }
 }
@@ -135,22 +106,30 @@ VALUES (?,?,?,?,?,?)
  * Si pas de message, renvoie un tableau vide
  */
 function getAllGuestbook(PDO $db): array
-{
-    
+{  
+    $prepare = $db->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook` . `datemessage` ASC
+    ");
+
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
     try {
-        $query = $db->query("SELECT * FROM `guestbook` ORDER BY `datemessage` ASC");
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $prepare->execute();
+
+        // si la requête a réussi,
+        $result = $prepare->fetchAll();
+
+        // bonne pratique, fermez le curseur
+        $prepare->closeCursor();
+
+        // renvoyer le tableau de(s) message(s)
+        return $result;
+
     } catch (Exception $e) {
-        die("Erreur de récupération des messages: " . $e->getMessage());
+            // sinon, on fait un die de l'erreur
+            die($e->getMessage());
     }
 }
-    return [];
-    // sinon, on fait un die de l'erreur
-
 
 /**************************
  * Pour le Bonus Pagination
@@ -165,12 +144,23 @@ function getAllGuestbook(PDO $db): array
 function getNbTotalGuestbook(PDO $db): int
 {
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur,
-    // renvoyez le nombre total de messages
-    return 0;
+    try {
+        // si la requête a réussi,
+        $request = $db->query("SELECT COUNT(*) as nb FROM guestbook");
+        $nb = $request->fetch()['nb'];
+
+        // bonne pratique, fermez le curseur,
+        $request->closeCursor();
+
+        // renvoyez le nombre total de messages
+        return $nb;
+    
     // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
+
 // SELECTION de messages dans le livre d'or par ordre de date croissante
 // en lien avec la pagination
 /**
@@ -186,14 +176,34 @@ function getNbTotalGuestbook(PDO $db): int
 function getGuestbookPagination(PDO $db, int $offset, int $limit): array
 {
     // Requête préparée obligatoire !
+    $prepare = $db->prepare("
+        SELECT * FROM `guestbook`
+        ORDER BY `guestbook`.`datemessage` ASC
+        LIMIT ?,?
+    ");
+
     // Le $offset et le $limit sont des entiers, il faut donc les passer
     // en paramètres de la requête préparée en tant qu'entiers !
+    $prepare->bindParam(1,$offset,PDO::PARAM_INT);
+    $prepare->bindParam(2,$limit,PDO::PARAM_INT);
+
     // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
+
+    try {
+        // si la requête a réussi,
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+
+        // bonne pratique, fermez le curseur
+        $prepare->closeCursor();
+
+        // renvoyer le tableau de(s) message(s)
+        return $result;
+    
     // sinon, on fait un die de l'erreur
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
 }
 
 // FONCTION de pagination
@@ -206,37 +216,48 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
  * Fonction qui génère le code HTML de la pagination
  * si le nombre de pages est supérieur à une.
  */
-// function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
-// {
-//     $sortie = "";
-//     if ($nbtotalMessage === 0) return "";
-//     $nbPages = ceil($nbtotalMessage / $perPage);
-//     if ($nbPages == 1) return "";
-//     $sortie .= "<p>";
-//     for ($i = 1; $i <= $nbPages; $i++) {
-//         if ($i === 1) {
-//             if ($pageActu === 1) {
-//                 $sortie .= "<< < 1 |";
-//             } elseif ($pageActu === 2) {
-//                 $sortie .= " <a href='./'><<</a> <a href='./'><</a> <a href='./'>1</a> |";
-//             } else {
-//                 $sortie .= " <a href='./'><<</a> <a href='?$get=" . ($pageActu - 1) . "'><</a> <a href='./'>1</a> |";
-//             }
-//         } elseif ($i < $nbPages) {
-//             if ($i === $pageActu) {
-//                 $sortie .= "  $i |";
-//             } else {
-//                 $sortie .= "  <a href='?$get=$i'>$i</a> |";
-//             }
-//         } else {
-//             if ($pageActu >= $nbPages) {
-//                 $sortie .= "  $nbPages > >>";
-//             } else {
-//                 $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>></a> <a href='?$get=$nbPages'>>></a>";
-//             }
-//         }
-//     }
-//     $sortie .= "</p>";
-//     return $sortie;
+function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, int $perPage=5 ): string
+{
+    $sortie = "";
+    if ($nbtotalMessage === 0) return "";
+    $nbPages = ceil($nbtotalMessage / $perPage);
+    if ($nbPages == 1) return "";
+    $sortie .= "<p>";
+    for ($i = 1; $i <= $nbPages; $i++) {
+        if ($i === 1) {
 
-// }
+            if ($pageActu === 1) {
+                $sortie .= "&lt;&lt; &lt; 1 |";
+            } elseif ($pageActu === 2) {
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='./'>&lt;</a> <a href='./'>1</a> |";
+            } else {
+                $sortie .= " <a href='./'>&lt;&lt;</a> <a href='?$get=" . ($pageActu - 1) . "'>&lt;</a> <a href='./'>1</a> |";
+            }
+        } elseif ($i < $nbPages) {
+            if ($i === $pageActu) {
+                $sortie .= "  $i |";
+            } else {
+                $sortie .= "  <a href='?$get=$i'>$i</a> |";
+            }
+        } else {
+            if ($pageActu >= $nbPages) {
+                $sortie .= "  $nbPages &gt; &gt;&gt;";
+            } else {
+                $sortie .= "  <a href='?$get=$nbPages'>$nbPages</a> <a href='?$get=" . ($pageActu + 1) . "'>&gt;</a> <a href='?$get=$nbPages'>&gt;&gt;</a>";
+            }
+        }
+    }
+    $sortie .= "</p>";
+    return $sortie;
+}
+
+/* FONCTION DATE DU MESSAGE FORMATÉE AU FORMAT FRANÇAIS*/
+
+function dateFR(string $datetime): string
+{
+    // Temps unix en seconde de la date venant de la db
+    $stringtotime = strtotime($datetime);
+    
+    // Retour de la date au format
+    return date("d/m/Y \à H\hi",$stringtotime);
+}
