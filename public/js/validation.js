@@ -1,21 +1,17 @@
-//alert("Hello world")
-
-
 const form = document.getElementById("form");
-const username = document.getElementById("firstname");
-const lastname = document.getElementById('lastname');
+const firstname = document.getElementById("firstname");
+const lastname = document.getElementById("lastname");
 const email = document.getElementById("usermail");
-const phone = document.getElementById('phone');
-const postcode = document.getElementById('postcode')
-const text = document.getElementById('message')
-
+const phone = document.getElementById("phone");
+const postal = document.getElementById("postcode");
+const message = document.getElementById("message");
+const topmsg = document.getElementById("topmsg");
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  e.preventDefault();
+
+  // Validate inputs
   validateInputs();
-  setTimeout(() => {
-    form.submit();
-  }, 1250);
 });
 
 const setError = (element, message) => {
@@ -38,99 +34,97 @@ const setSuccess = (element) => {
 
 const isValidEmail = (email) => {
   const re =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()\[\]\\.,;:\s@"]+\.)+[^<>()\[\]\\.,;:\s@"]{2,})$/;
+    /^([a-zA-Z0-9._-]+)@([a-z0-9]+)\.([a-zA-Z]{2,3})$/;
   return re.test(String(email).toLowerCase());
 };
 
-const isValidPhone = (phone) => {
-  const re = /^[0-9]{8,9}$/
-return re.test(phone);
+const isValidNumber = (phone) => {
+  const re = /^04\d{8}$/;
+  return re.test(phone);
 }
 
 const isValidPostal = (postal) => {
-  const re =
-    /^(?:(?:[1-9])(?:\d{3}))$/
+  const re =/^\d{4}$/;
   return re.test(postal);
 }
 
-
 const validateInputs = () => {
-  const usernameValue = username.value.trim();
-  const lastnameValue = lastname.value.trim()
+  const firstnameValue = firstname.value.trim();
+  const lastnameValue = lastname.value.trim();
   const emailValue = email.value.trim();
   const phoneValue = phone.value.trim()
-  const textValue = text.value.trim()
-  const postalValue = postcode.value.trim()
+  const postalValue = postal.value.trim()
+  const messageValue = message.value
   let isValid = false;
 
-  if (usernameValue === "") {
-    setError(username, "Please provide a username");
-    isValid = false;
+  if (firstnameValue === "") {
+    setError(firstname, "Veuillez entrez votre prénom.");
   } else {
-    setSuccess(username) ;
+    setSuccess(firstname);
+    isValid = true;
   }
-
   if (lastnameValue === "") {
-    setError(lastname, "Please provide a username");
-    isValid = false;
+    setError(lastname, "Veuillez entrez votre nom.");
   } else {
     setSuccess(lastname);
+    isValid = true;
   }
+
+  if (phoneValue === ""){
+    setError(phone, "Veuillez entrez un numéro de téléphone.")
+  }else if (!isValidNumber(phoneValue)){
+    setError(phone, "Veuillez entrez un numéro de téléphone valide.")
+  }else {
+    setSuccess(phone)
+    isValid = true;
+  }
+
+  if (postalValue === ""){
+    setError(postal, "Veuillez entrez un code postal.")
+  }else if (!isValidPostal(postalValue)){
+    setError(postal, "Veuillez entrez un code postal valide.")
+  }else {
+    setSuccess(postal)
+    isValid = true;
+  }
+
+  if (messageValue === ""){
+    setError(message, "Veuillez entrez un message.")
+  }else {
+    setSuccess(message)
+    isValid = true;
+  }
+
 
   if (emailValue === "") {
-    setError(email, "Please provide an email.");
-    isValid = false;
+    setError(email, "Veuillez entrer une adresse email.");
   } else if (!isValidEmail(emailValue)) {
-    setError(email, "Provide a valid email address.");
-    isValid = false;
+    setError(email, "Veuillez entrez une adresse mail valide.");
   } else {
     setSuccess(email);
+    isValid = true;
   }
-
-  if(phoneValue === ""){
-    setError(phone, "Please provide a phone number");
-    isValid = false;
-  }else if (!isValidPhone(phoneValue)) {
-    setError(phone, "Provide a valid phone number.");
-    isValid = false;
-    setSuccess(phone)
-  }
-
-  if(postalValue === ""){
-    setError(postcode, "Please provide a postal code");
-    isValid = false;
-  }else if (postalValue.length>4){
-    setError(postcode, "Your post code is too long");
-    isValid = false;
-  }else if(!isValidPostal(postalValue)){
-    setError(postcode, "please provide a valid post code");
-    isValid = false;
-  }else{
-    setSuccess(postcode)
-  }
-
-  if (textValue.length > 300 ) {
-    setError(text, "Too long, please shorter."); isValid = false;
-  }else if (textValue === "") {
-    setError(text, "Please provide a text"); isValid = false;
+  if(isValid === true){
+      topmsg.innerHTML = "Merci pour votre message.";
+    setTimeout(() => {
+      form.submit();
+    }, 1200);
   }else {
-    setSuccess(text)
+    topmsg.innerHTML = "Veuillez remplir tous les champs correctement.";
+    setTimeout(() => {
+      location.reload()
+    }, 1400);
+
   }
 
-return isValid
 };
 
 
-////////////: TEXT
-
+//// TEXT COUNT////
 
 let wordCount = document.getElementById("wordCount");
 
-text.addEventListener("keyup",function(){
-  let characters = text.value.split('');
+message.addEventListener("keyup",function(){
+  let characters = message.value.split('');
   wordCount.innerText = characters.length;
-
-  if(text.length > 300) {
-
-  }
 });

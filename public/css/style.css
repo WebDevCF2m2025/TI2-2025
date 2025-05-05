@@ -1,82 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 * {
-
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: lightslategrey;
-  font-family: sans-serif;
+  background-image: url("../img/paris.webp");
+  background-color: #000000;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(20px);
+  box-sizing: border-box;
+  font-family: 'Cinzel', serif;
+  min-height: 100vh;
+  height: 100%;
 }
-
-
-
-.message {
-  background-color: whitesmoke;
-  padding: 30px;
-  border-radius: 20px;
-
-}
-
-.message-cont {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  margin: auto;
-  width: 550px;
-  gap: 5px;
-
-}
-
-#form {
-  width: 301px;
-  margin: 20vh auto 0 auto;
-  padding: 20px;
-  background-color: whitesmoke;
-  border-radius: 4px;
-  font-size: 12px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* S'assure que le flou s'applique sur toute la page */
 }
 
 .container {
   display: flex;
+
   flex-direction: column;
-  align-content: center;
   justify-content: center;
-  text-align: center;
+  align-items: center;
+  height: 100vh;
 }
 
-textarea {
-  height: 150px;
-  resize: none;
+#form {
+  margin-top: 200px;
+  width: 300px;
+  padding: 20px;
+  background-color: rgba(11, 10, 9, 0.8);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #F7D0A2;
+  box-shadow: 0 2px 20px rgba(11, 10, 9, 0.8);
 }
 
 #form h1 {
-  color: #0f2027;
+  color: #F7D0A2;
+  margin-bottom: 20px;
+  font-family: 'Merriweather', serif;
   text-align: center;
+  font-weight: 400;
+
 }
 #form button {
   padding: 10px;
   margin-top: 10px;
   width: 100%;
   color: white;
-  background-color: rgb(41, 57, 194);
+  background-color: #1C1C1C;
   border: none;
   border-radius: 4px;
-
+  transition: all 0.3s ease;
 }
+
+
+#form button:hover {
+  background-color: #C2AA7E;
+  box-shadow: 0 2px 8px  #1C1C1C;
+  color: #1C1C1C;
+}
+#form button:active {
+  background-color: #a5936d;
+}
+
 .input-control {
   display: flex;
   flex-direction: column;
-
 }
 
 .input-control input {
-  border: 2px solid #f0f0f0;
+  border: 2px solid #302f2f;
+  background: #333333;
   border-radius: 4px;
   display: block;
   font-size: 12px;
   padding: 10px;
 }
+
+input, textarea{
+  color: white;
+  font-family: 'Cinzel', serif;
+}
+
 .input-control input:focus {
   outline: 0;
 }
@@ -94,38 +108,74 @@ textarea {
   height: 13px;
 }
 
-#sign-img {
-  height: 250px;
-  width: 250px;
-  margin: auto;
+textarea {
+  border: 2px solid #302f2f;
+  background: #333333;
+  resize: none;
 }
 
-.smart-container {
-display: none;
+h3 {
+  margin-top: 20px;
+  color: #F7D0A2;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  font-weight: 400;
+
 }
 
-#the-count {
-  float: right;
+#msg {
+  margin-bottom: 10px;
+}
+.message p {
+  text-align: center;
+  font-size: 15px;
+  color: whitesmoke;
 }
 
-@media screen and (min-width: 700px) {
+.messages h3{
+  text-align: center;
+}
+.messages{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+
+}
+
+.messages .message{
+  background-image: url("../img/bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+a {
+
+  color: whitesmoke;
+  font-family: 'Cinzel', serif;
+}
+
+a:visited {
+  color: #F7D0A2;
+}
+a:link {
+  color: #F7D0A2;
+}
+a:hover {
+  color: #C2AA7E;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 780px){
   #form {
-    text-align: left;
     width: 700px;
   }
-  textarea {
-    height: 100px;
-    resize: none;
-  }
-  .smart-container {
-    display: block;
-  }
-  .message-cont {
-  }
-}
-
-@media screen and (min-width: 960px){
-
 
 
 }
