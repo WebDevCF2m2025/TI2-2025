@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+    img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        margin-bottom: 20px; 
+    }
+        
+
+
+
+
+body {
+    height: 100vh; 
+    display: grid;
+    place-items: center; 
+    font-family: Arial, sans-serif; 
+}
+
+.monForm {
+    display: grid;
+    justify-items: center; 
+    align-items: center; 
+    width: 100%;
+    max-width: 500px; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+
+textarea {
+    resize: vertical; 
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+    img {
+        width : 400px;
+        height : 300px;
+        }
+
+
+
+
+body {
+    height: 100vh;
+    display: grid;
+    place-items: center; 
+    font-family: Arial, sans-serif; 
+}
+
+.monForm {
+    display: grid;
+    justify-items: center;
+    align-items: center; 
+    width: 100%;
+    max-width: 500px; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+
+textarea {
+    resize: vertical;
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@media screen and (min-width: 960px) {
+    .monForm {
+        width: 50%; 
+    }
+}
+
+
+@media screen and (min-width: 480px) and (max-width: 960px) {
+    .monForm {
+        width: 80%; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .monForm {
+        width: 90%; 
+    }
+}

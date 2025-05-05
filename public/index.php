@@ -21,23 +21,48 @@ require_once "../model/guestbookModel.php";
  * Activez le mode d'erreur de PDO à Exception et
  * le mode fetch à tableau associatif
  */
+try {
+  $db = new PDO(
+    DB_DRIVER . ":host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+    DB_LOGIN,
+    DB_PWD,
+    [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    ]
+);
+  } catch (Exception $e) {
+
+# ici notre code de traitement de la page
+die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
 
 /*
  * Si le formulaire a été soumis
  */
 
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
-
 // si l'insertion a réussi
 
 // on redirige vers la page actuelle (ou on affiche un message de succès)
 
 // sinon, on affiche un message d'erreur
+if (isset($_POST['name'], $_POST['surname'], $_POST['mail'], $_POST['postal'], $_POST['tel'], $_POST['message'])) {
+
+    $insert = addGuestbook($db,$_POST['name'], $_POST['surname'], $_POST['mail'], $_POST['postal'], $_POST['tel'], $_POST['message']);
+  
+    if ($insert === true) {
+      $recue = "Votre message a bien été envoyé";
+    } else {
+      $error = $insert;
+    }
+  }
+
 
 /*
  * On récupère les messages du livre d'or
  */
-
+$messages = getAllGuestbook($db);
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
 
 /*********************
@@ -63,3 +88,4 @@ require_once "../model/guestbookModel.php";
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+$db =null;
