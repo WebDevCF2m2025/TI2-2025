@@ -14,43 +14,89 @@
 </head>
 <body>
 <h1>TI2 | Livre d'or</h1>
-<!-- Formulaire d'ajout d'un message -->
-<h2>Ici le formulaire</h2>
-<!-- Si pas de message -->
+
+<div class="container">
+<?php
+if (isset($thanks)):
+    ?>
+<h3 class="green"><?=$thanks?></h3>
+<?php
+elseif (isset($errors)):
+    ?>
+<h3 class="red"><?=$errors?></h3>
+<?php
+endif
+?>
+
+    <img class="image1" src="../public/img/sign-up-amico.png" alt="">
+    <!-- Formulaire d'ajout d'un message -->
+    <h2>Laissez-nous un message</h2>
+    <!-- Si pas de message -->
+    <form id="registrationForm" method="POST">
+                    <label for="prenom">Prénom *</label>
+                    <input id="prenom" type="text" name="prenom">
+                    <label for="nom">Nom *</label>
+                    <input id="nom" type="text" name="nom">
+                    <label for="email">Email *</label>
+                    <input id="email" type="text" name="email" placeholder="email">
+                    <label for="postal">c/code postal *</label>
+                    <input id="postal" type="text" name="postal">
+                    <label for="portable">Portable *</label>
+                    <input id="portable" type="text" name="portable">
+                    <label for="message">Message *</label>
+                    <input id="message" type="text" name="message">
+                    <div class="bouton">
+                    <button type="submit">Envoyer </button>
+                    </div>
+    </form>
+</div>
+
+
+
+<?php
+// articles est un tableau vide
+if(empty($messages)):
+?>
+<div class="nomessage">
 <h3>Pas encore de message</h3>
 <!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
 <!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
-
-<!-- Pagination (BONUS) -->
-
-<!-- Liste des messages -->
-<ul>
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-</ul>
-etc ...
-<!-- Pagination (BONUS) -->
 <?php
-// À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
+// nous avons au moins un article
+else:
+    // on peut compter le nombre d'articles
+    $nbMessage = count($messages);
+    // ternaire pour ajouter un s à article
+    // si on en a plus d'un
+    $pluriel = $nbMessage>1? "s" : "";
+    ?>
+<div class="messages">
+<h3>Nous avons <?=$nbMessage?> message<?=$pluriel?></h3>
+<hr>
+<?php
+    // tant qu'on a des messages
+    foreach ($messages as $message):
+    ?>
+    <h3><?=$message['firstname']?> <?=$message['lastname']?></h3>
+    <p><?=$message['message']?></p>
+    <p><?=$message['datemessage']?></p>
+    <hr>
+    <?php
+    endforeach;
+    ?>
+    </div>
+<?php
+// fin du if
+endif;
+
+
+//var_dump($_POST,$_GET,$messages);
 ?>
+
+<!-- Pagination (BONUS) -->
+
+
 
 <script src="js/validation.js"></script>
 </body>
 </html>
-

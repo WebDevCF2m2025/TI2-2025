@@ -1,0 +1,106 @@
+body{
+    background-color: lightgrey;
+}
+  
+
+h1{
+    color:rgb(236, 97, 246);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 50px;
+}
+
+h2{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 30px;
+}
+
+#envoye{
+display: hidden;
+}
+
+#pasenvoye{
+display:hidden;
+}
+
+.red{
+    color:red;
+}
+
+.green{
+    color:green;
+}
+.image1{
+    width: 400px;
+    display:block;
+    margin: 0 auto;
+}
+
+.container{
+    display:grid;
+    grid-template-columns: 1fr;
+
+}
+
+#registrationForm label{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#registrationForm input{
+    background-color: rgb(49, 47, 47);
+    border-radius: 5px;
+    margin:14px;
+    width: 300px;
+}
+
+#registrationForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(236, 97, 246);
+    background-color: rgb(147, 145, 145);
+    box-shadow: 0px 10px 10px;
+    opacity: 80%;
+    border-radius: 10px;
+    padding:80px;
+    height: 380px;
+    margin:20px;
+    width: 300px;
+
+}
+
+
+.bouton{
+    background-color: rgb(49, 47, 47);
+}
+
+
+
+
+
+@media (min-width:960px) {
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr 1fr ;
+}
+    
+.image1{
+    width: 350px;
+    height: 350px;
+}
+
+
+
+#registrationForm .bouton{
+    color: rgb(49, 47, 47);
+    font-family: Arial, Helvetica, sans-serif;
+    width: 400px;
+}
+
+}
