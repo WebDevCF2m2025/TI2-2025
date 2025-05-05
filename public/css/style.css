@@ -1,0 +1,153 @@
+/* ecran iphone */
+form{
+    display:flex; 
+    flex-direction: column; 
+    width: 70vw; 
+    margin: auto;
+    background: rgb(123, 123, 123);
+    padding: 20px;
+    border-radius: 25px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px 1px rgb(173, 59, 166);
+}
+body{
+    background: rgb(195, 190, 190);
+}
+
+img{
+    width: 40vw;
+
+}
+
+.block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+
+}
+.label{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1{
+    text-align: center;
+    color:rgb(173, 59, 166);
+}
+
+h3,h2{
+    text-align: center;
+}
+
+h2{ 
+    color: white;
+    margin-top: 60px;
+}
+
+.h3rose{
+    text-shadow: 1px 0  5px rgb(173, 59, 166);
+}
+
+input{
+    border-radius: 10px;
+    height: 30px;
+    background: rgb(59, 59, 83) ;
+    margin: 10px;
+    width: 80%;
+    color: white;
+}
+
+label{
+    color: white;
+    width: 120px;
+}
+
+textarea{
+    border-radius: 10px;
+    height: 60px;
+    background: rgb(59, 59, 83) ;
+    margin: 10px;
+    width: 80%;
+    margin-bottom: 30px;
+    color: white;
+}
+
+button{
+    border-radius: 15px;
+    background: rgb(59, 59, 83);
+    color: white;
+    height: 30px;
+    width: 81%;
+    margin-left: 0px;
+}
+
+.message{
+    color: white;
+    width: 65vw;
+    padding: 10px 30px;
+    background: rgb(123, 123, 123);
+    border-radius: 15px;
+    margin: auto;
+    margin-bottom: 25px;
+}
+
+p, h4{
+    margin:2px;
+}
+
+nav{
+    text-align: center;
+    color: black;
+}
+
+nav:active{
+    text-align: center;
+    color: black;
+}
+/* ecran tablet */
+@media screen and ( min-width: 480px){
+    .label{
+        display:flex;
+        align-items: center;
+        flex-direction: row;
+    }
+    button{
+        margin-left: 90px;
+    }
+}
+/* ecran pc */
+@media screen and ( min-width: 960px){
+    .label{
+        display:flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .block{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+    
+    img{
+        width: 20vw;
+        margin-right: 30px;
+    
+    }
+    button{
+        margin-left: 128px;
+    }
+    form{
+        margin-right: 100px;
+    }
+}

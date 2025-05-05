@@ -22,23 +22,48 @@ require_once "../model/guestbookModel.php";
  * le mode fetch à tableau associatif
  */
 
+try{
+    $connexion = new PDO(DSN, DB_LOGIN, DB_PWD,[
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+}catch (Exeption $e){
+    die($e->getMessage());
+}
+
+
+
 /*
  * Si le formulaire a été soumis
  */
 
 // on appelle la fonction d'insertion dans la DB (addGuestbook())
 
+if(isset($_POST['firstname'], $_POST['lastname'], $_POST['usermail'],$_POST['phone'], $_POST['postcode'], $_POST['message'])){
+    $save = addGuestbook($connexion,$_POST['firstname'], $_POST['lastname'], $_POST['usermail'],$_POST['phone'], $_POST['postcode'], $_POST['message']);
 // si l'insertion a réussi
 
 // on redirige vers la page actuelle (ou on affiche un message de succès)
 
 // sinon, on affiche un message d'erreur
 
+    if($save === true){
+        $saved = "<span style='color:green'>Message enregistré</span>";
+    }else{
+        $notSaved = "<span style='color:red'>Message NON enregistré</span>";
+    }
+}
+
+
+
 /*
  * On récupère les messages du livre d'or
  */
 
 // on appelle la fonction de récupération de la DB (getAllGuestbook())
+
+// $guestbook = getAllGuestbook($connexion);
+// $count = count($guestbook);
 
 /*********************
  * Ou Bonus Pagination
@@ -54,6 +79,27 @@ require_once "../model/guestbookModel.php";
 
 # on veut récupérer les messages de la page courante
 
+
+if(
+    isset($_GET[PAGINATION_GET]) 
+    &&ctype_digit($_GET[PAGINATION_GET]) 
+    &&!empty($_GET[PAGINATION_GET])
+){
+
+    $page = (int) $_GET[PAGINATION_GET];
+}else{
+    $page = 1;
+}
+
+
+$nbMessage = getNbTotalGuestbook($connexion);
+$pagination = pagination($nbMessage,PAGINATION_GET,$page,PAGINATION_NB);
+$offset = ($page-1)*PAGINATION_NB;
+$messages = getGuestbookPagination($connexion,$offset,PAGINATION_NB);
+
+
+
+
 /**************************
  * Fin du Bonus Pagination
  **************************/
@@ -63,3 +109,4 @@ require_once "../model/guestbookModel.php";
 include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+$connexion = null;
