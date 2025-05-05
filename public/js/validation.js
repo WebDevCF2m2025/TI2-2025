@@ -55,56 +55,61 @@ const validateInputs = () => {
   const phoneValue = phone.value.trim()
   const postalValue = postal.value.trim()
   const messageValue = message.value
-  let isValid = false;
+  let isValid = true;
 
   if (firstnameValue === "") {
     setError(firstname, "Veuillez entrez votre prénom.");
+    isValid = false;
   } else {
     setSuccess(firstname);
-    isValid = true;
+
   }
   if (lastnameValue === "") {
     setError(lastname, "Veuillez entrez votre nom.");
+    isValid = false;
   } else {
     setSuccess(lastname);
-    isValid = true;
   }
 
   if (phoneValue === ""){
     setError(phone, "Veuillez entrez un numéro de téléphone.")
+    isValid = false;
   }else if (!isValidNumber(phoneValue)){
     setError(phone, "Veuillez entrez un numéro de téléphone valide.")
+    isValid = false;
   }else {
     setSuccess(phone)
-    isValid = true;
+
   }
+
 
   if (postalValue === ""){
     setError(postal, "Veuillez entrez un code postal.")
+    isValid = false;
   }else if (!isValidPostal(postalValue)){
     setError(postal, "Veuillez entrez un code postal valide.")
+    isValid = false;
   }else {
     setSuccess(postal)
-    isValid = true;
   }
 
   if (messageValue === ""){
     setError(message, "Veuillez entrez un message.")
+    isValid = false;
   }else {
     setSuccess(message)
-    isValid = true;
   }
-
 
   if (emailValue === "") {
     setError(email, "Veuillez entrer une adresse email.");
+    isValid = false;
   } else if (!isValidEmail(emailValue)) {
     setError(email, "Veuillez entrez une adresse mail valide.");
+    isValid = false;
   } else {
     setSuccess(email);
-    isValid = true;
   }
-  if(isValid === true){
+  if(isValid){
       topmsg.innerHTML = "Merci pour votre message.";
     setTimeout(() => {
       form.submit();

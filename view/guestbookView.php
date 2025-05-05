@@ -20,8 +20,8 @@
 <!-- Formulaire d'ajout d'un message -->
 
 
+<div id="topmsg"><br></div>
 <div class="container">
-  <div id="topmsg" ><br></div>
   <form action="" method="post" id="form">
     <h1>Laissez un message</h1>
     <div class="input-control">

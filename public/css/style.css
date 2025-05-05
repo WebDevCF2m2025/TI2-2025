@@ -5,12 +5,10 @@
 }
 
 body {
-  background-image: url("../img/paris.webp");
+  background-image: url("../img/image.jpg");
   background-color: #000000;
-
   background-position: center;
   background-repeat: no-repeat;
-  backdrop-filter: blur(20px);
   box-sizing: border-box;
   font-family: 'Cinzel', serif;
   min-height: 100vh;
@@ -19,7 +17,7 @@ body {
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* S'assure que le flou s'applique sur toute la page */
+  height: 100%;
 }
 
 .container {
@@ -91,6 +89,9 @@ input, textarea{
   font-family: 'Cinzel', serif;
 }
 
+input:focus{
+  border: 2px solid #F7D0A2;
+}
 .input-control input:focus {
   outline: 0;
 }
@@ -110,6 +111,7 @@ input, textarea{
 
 textarea {
   border: 2px solid #302f2f;
+  outline-color: #F7D0A2;
   background: #333333;
   resize: none;
 }
@@ -149,10 +151,17 @@ h3 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  backdrop-filter: blur(10px);
   color: white;
   padding: 30px;
   border-radius: 8px;
+}
+
+#topmsg {
+  text-align: center;
+  margin-top: 100px;
+  color: whitesmoke;
+  font-family: 'Merriweather', serif;
+  font-size: 1.2em;
 }
 
 a {
@@ -176,6 +185,5 @@ a:hover {
   #form {
     width: 700px;
   }
-
 
 }
