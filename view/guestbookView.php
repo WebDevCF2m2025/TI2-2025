@@ -13,42 +13,78 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>TI2 | Livre d'or</h1>
+
+
+
+
 <!-- Formulaire d'ajout d'un message -->
-<h2>Ici le formulaire</h2>
-<!-- Si pas de message -->
-<h3>Pas encore de message</h3>
-<!-- Si 1 message -->
-<h3>Il y a 1 message</h3>
-<!-- Si plusieurs messages -->
-<h3>Il y a X messages</h3>
 
-<!-- Pagination (BONUS) -->
 
-<!-- Liste des messages -->
-<ul>
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-    <!-- Autres messages -->
-    <li>
-        <p><strong>firstname lastname</strong></p>
-        <p><em>datemessage</em></p>
-        <p>message</p>
-    </li>
-</ul>
-etc ...
-<!-- Pagination (BONUS) -->
-<?php
-// À commenter quand on a fini de tester
-echo "<h3>Nos var_dump() pour le débugage</h3>";
-echo '<p>$_POST</p>';
-var_dump($_POST);
-echo '<p>$_GET</p>';
-var_dump($_GET);
-?>
+<div id="topmsg"><br></div>
+<div class="container">
+  <form action="" method="post" id="form">
+    <h1>Laissez un message</h1>
+    <div class="input-control">
+      <label for="firstname">Prénom :</label>
+      <input type="text" name="firstname" id="firstname" />
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="lastname">Nom :</label>
+      <input type="text" name="lastname" id="lastname" />
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="usermail">E-mail :</label>
+      <input type="text" name="usermail" id="usermail" />
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="phone">Téléphone :</label>
+      <input type="text" name="phone" id="phone"/>
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="postcode">Code postal :</label>
+      <input type="text" name="postcode" id="postcode"/>
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="message">Message : </label>
+      <textarea name="message" id="message" cols="30" rows="10" maxlength="300"></textarea>
+      <div class="error"></div>
+    </div>
+    <div id="the-count">
+      <span id="wordCount">0</span>
+      <span >/ 300 caractères</span>
+    </div>
+    <button type="submit">Envoyer</button>
+  </form>
+  <div class="history">
+    <?php
+    if(empty($nbGuessBook)):
+      ?>
+      <h3>Pas encore de message</h3>
+    <?php else:
+      $pluriel = $nbGuessBook>1? "s":"";
+      ?>
+      <!-- Si 1 message -->
+      <h3>Le<?=$pluriel ?> message<?=$pluriel ?> précédent<?=$pluriel ?></h3>
+      <h3 id="msg">Il y'a <?= $nbGuessBook ?> message<?=$pluriel ?></h3>
+      <!-- Si plusieurs messages -->
+    <?php
+    endif;
+    ?>
+
+  </div>
+
+  <?php foreach ($books as $book):  ?>
+  <div class="messages">
+    <div class="message"><p><?= $book['firstname'] ?> <?= $book['lastname'] ?> - a écrit le message le <?= $book['datemessage']?> <?= $book['message']?></p></div>
+    <?php endforeach; ?>
+  </div>
+  <h3><?= $pagination ?></h3>
+</div>
 
 <script src="js/validation.js"></script>
 </body>

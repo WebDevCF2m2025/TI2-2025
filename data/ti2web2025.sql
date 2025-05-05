@@ -8,9 +8,8 @@ SET time_zone = "+00:00";
 -- Création de la base de données `ti2web2025`
 --
 
-DROP DATABASE IF EXISTS `ti2web2025`;
-CREATE DATABASE IF NOT EXISTS `ti2web2025` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `ti2web2025`;
+CREATE DATABASE IF NOT EXISTS `2025_web_reda` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `2025_web_reda`;
 
 
 --

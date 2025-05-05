@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url("../img/image.jpg");
+  background-color: #000000;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  font-family: 'Cinzel', serif;
+  min-height: 100vh;
+  height: 100%;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#form {
+  margin-top: 200px;
+  width: 300px;
+  padding: 20px;
+  background-color: rgba(11, 10, 9, 0.8);
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #F7D0A2;
+  box-shadow: 0 2px 20px rgba(11, 10, 9, 0.8);
+}
+
+#form h1 {
+  color: #F7D0A2;
+  margin-bottom: 20px;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  font-weight: 400;
+
+}
+#form button {
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+  color: white;
+  background-color: #1C1C1C;
+  border: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+
+#form button:hover {
+  background-color: #C2AA7E;
+  box-shadow: 0 2px 8px  #1C1C1C;
+  color: #1C1C1C;
+}
+#form button:active {
+  background-color: #a5936d;
+}
+
+.input-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-control input {
+  border: 2px solid #302f2f;
+  background: #333333;
+  border-radius: 4px;
+  display: block;
+  font-size: 12px;
+  padding: 10px;
+}
+
+input, textarea{
+  color: white;
+  font-family: 'Cinzel', serif;
+}
+
+input:focus{
+  border: 2px solid #F7D0A2;
+}
+.input-control input:focus {
+  outline: 0;
+}
+
+.input-control.success input {
+  border-color: #09c372;
+}
+.input-control.error input {
+  border-color: #ff3860;
+}
+
+.input-control .error {
+  color: #ff3860;
+  font-size: 9px;
+  height: 13px;
+}
+
+textarea {
+  border: 2px solid #302f2f;
+  outline-color: #F7D0A2;
+  background: #333333;
+  resize: none;
+}
+
+h3 {
+  margin-top: 20px;
+  color: #F7D0A2;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  font-weight: 400;
+
+}
+
+#msg {
+  margin-bottom: 10px;
+}
+.message p {
+  text-align: center;
+  font-size: 15px;
+  color: whitesmoke;
+}
+
+.messages h3{
+  text-align: center;
+}
+.messages{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+
+}
+
+.messages .message{
+  background-image: url("../img/bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+#topmsg {
+  text-align: center;
+  margin-top: 100px;
+  color: whitesmoke;
+  font-family: 'Merriweather', serif;
+  font-size: 1.2em;
+}
+
+a {
+
+  color: whitesmoke;
+  font-family: 'Cinzel', serif;
+}
+
+a:visited {
+  color: #F7D0A2;
+}
+a:link {
+  color: #F7D0A2;
+}
+a:hover {
+  color: #C2AA7E;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 780px){
+  #form {
+    width: 700px;
+  }
+
+}

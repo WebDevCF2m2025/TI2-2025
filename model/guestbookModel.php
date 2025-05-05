@@ -30,15 +30,46 @@ function addGuestbook(PDO $db,
 ): bool
 {
     // traitement des données backend (SECURITE)
+  $firstname = trim(htmlspecialchars(strip_tags($firstname), ENT_QUOTES));
+  $lastname = trim(htmlspecialchars(strip_tags($lastname), ENT_QUOTES));
+  $usermail =  filter_var($usermail, FILTER_VALIDATE_EMAIL);
+  $phone = trim(htmlspecialchars(strip_tags($phone),ENT_QUOTES));
+  $postcode = trim(htmlspecialchars(strip_tags($postcode),ENT_QUOTES));
+  $message = trim(htmlspecialchars(strip_tags($message),ENT_QUOTES));
+
+
 
     // si pas de données complètes ou ne correspondant pas à nos attentes, on renvoie false
+  if(
+    empty($firstname) || strlen($firstname) > 100 ||
+    empty($lastname) || strlen($lastname) > 100 ||
+    $usermail === false || strlen($usermail) > 200  ||
+    empty($phone) || strlen($phone) > 20 || ctype_digit($phone) === false ||
+    empty($postcode) || strlen($postcode) > 4 ||
+    empty($message) || strlen($message) > 500
+  ) {
     return false;
-    // requête préparée obligatoire !
+  }
 
+
+    // requête préparée obligatoire
+  $prepare = $db->prepare("
+  INSERT INTO `guestbook` (
+                          `firstname`, `lastname`,
+                          `usermail`,`phone`,
+                          `postcode`,`message`
+                          ) VALUES (?,?,?,?,?,?)" );
     // try catch
         // si l'insertion a réussi
         // on renvoie true
     // sinon, on fait un die de l'erreur
+  try {
+    $prepare->execute([$firstname,$lastname,$usermail,$phone,$postcode,$message]);
+    return true;
+
+  }catch (Exception $e){
+    die($e->getMessage());
+  }
 
 }
 
@@ -54,15 +85,7 @@ function addGuestbook(PDO $db,
  * venant de la base de données 'ti2web2025' et de la table 'guestbook'
  * Si pas de message, renvoie un tableau vide
  */
-function getAllGuestbook(PDO $db): array
-{
-    // try catch
-    // si la requête a réussi,
-    // bonne pratique, fermez le curseur
-    // renvoyer le tableau de(s) message(s)
-    return [];
-    // sinon, on fait un die de l'erreur
-}
+
 
 /**************************
  * Pour le Bonus Pagination
@@ -80,7 +103,14 @@ function getNbTotalGuestbook(PDO $db): int
     // si la requête a réussi,
     // bonne pratique, fermez le curseur,
     // renvoyez le nombre total de messages
-    return 0;
+  try {
+    $request = $db->query("SELECT COUNT(*) as nb FROM `guestbook` ");
+    $nb = $request->fetch()['nb'];
+    $request->closeCursor();
+    return $nb;
+  }catch (Exception $e){
+    die($e->getMessage());
+  }
     // sinon, on fait un die de l'erreur
 }
 // SELECTION de messages dans le livre d'or par ordre de date croissante
@@ -104,8 +134,27 @@ function getGuestbookPagination(PDO $db, int $offset, int $limit): array
     // si la requête a réussi,
     // bonne pratique, fermez le curseur
     // renvoyer le tableau de(s) message(s)
-    return [];
+
+  $prepare = $db->prepare("
+    SELECT * FROM `guestbook` 
+    ORDER BY `guestbook`.`datemessage`
+    ASC LIMIT ?,?
+  ");
+
+  $prepare->bindParam(1,$offset,PDO::PARAM_INT);
+  $prepare->bindParam(2,$limit,PDO::PARAM_INT);
+
+  try {
+    $prepare->execute();
+
+    $result = $prepare->fetchAll();
+
+    $prepare->closeCursor();
+    return $result;
     // sinon, on fait un die de l'erreur
+  } catch (Exception $e){
+    die($e->getMessage());
+  }
 }
 
 // FONCTION de pagination
@@ -151,4 +200,11 @@ function pagination(int $nbtotalMessage, string $get="page", int $pageActu=1, in
     $sortie .= "</p>";
     return $sortie;
 
+}
+function dateFR(string $datetime): string
+{
+  // temps unix en seconde de la date venant de la db
+  $stringtotime = strtotime($datetime);
+  // retour de la date au format
+  return date("d/m/Y \à H:i:s",$stringtotime);
 }
