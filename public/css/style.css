@@ -1,0 +1,97 @@
+
+.container,
+.containerTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+}
+body{
+    background-color: black;
+}
+form div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5,auto); /* <-- ici tu dis : 2 colonnes */
+    gap: 10px;
+    grid-template-areas: 
+        "name message"
+        "prenom message"
+        "tel message"
+        "email message"
+        "codepostal message";     
+    /* optionnel pour aérer un peu */
+}
+
+
+
+#NomID {
+    grid-area: name;
+}
+#prenomID {
+    grid-area: prenom;
+}
+#emailID {
+    grid-area: email;
+}
+#telephone {
+    grid-area: tel;
+}
+#postcodeID {
+    grid-area: postcode;
+}
+#message {
+    grid-area: message;
+    justify-self: start; /* Aligne le message à gauche dans sa cellule */
+}
+
+
+
+
+
+img {
+    display: block;
+    width: 10%; 
+    
+}
+
+@media screen and (width< 600px) {
+    form {
+        grid-template-columns: auto; /* Une seule colonne sur les petits écrans */
+        grid-template-areas: 
+            "name"
+            "prenom"
+            "tel"
+            "email"
+            "codepostal"
+            "message";
+            
+    }
+    
+  
+    
+}
+
+@media screen and (600px< width < 900px) {
+    form {
+        grid-template-columns: auto auto; /* Deux colonnes sur les écrans moyens */
+        grid-template-areas: 
+            "name prenom"
+            "tel email"
+            "codepostal message"
+            "codepostal message";
+    }
+    textarea {
+        width: 350px;
+       
+      }
+     
+   
+    
+}

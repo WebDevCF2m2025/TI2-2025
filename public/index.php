@@ -12,7 +12,7 @@
 // chargement de configuration
 require_once "../config.php";
 // chargement du modèle de la table guestbook
-require_once "../model/guestbookModel.php";
+require_once "../model/guestbookModel.php"; 
 
 /*
  * Connexion à la base de données en utilisant PDO
@@ -21,7 +21,62 @@ require_once "../model/guestbookModel.php";
  * Activez le mode d'erreur de PDO à Exception et
  * le mode fetch à tableau associatif
  */
+try{
+  
+    $connexion = new PDO( DB_DSN , DB_LOGIN, DB_PWD,[PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,]
+    );
+}catch(Exception $e){
+  
+    die("Code : {$e->getCode()} <br> Message : {$e->getMessage()}");
+}
 
+//echo "coucou";
+
+$articles = getAllGuestbook($connexion);
+
+//  Si le formulaire a été soumis
+/*
+array (size=6)
+  'firstname' => string 'abdelkader' (length=10)
+  'lastname' => string 'nordine' (length=7)
+  'usermail' => string 'eloummalnordine@hotmail.com' (length=27)
+  'phone' => string '0484750037' (length=10)
+  'postcode' => string '1050' (length=4)
+  'message' => string '546' (length=3)
+  */
+
+
+if(isset($_POST['firstname'],
+         $_POST['lastname'],
+         $_POST['usermail'],
+         $_POST['phone'],
+         $_POST['postcode'],
+         $_POST['message']))
+{
+
+ // Insertion dans la base de données   
+$insert = addGuestbook($connexion, 
+                        $_POST['firstname'], 
+                        $_POST['lastname'], 
+                        $_POST['usermail'], 
+                        $_POST['phone'], 
+                        $_POST['postcode'], 
+                        $_POST['message'] 
+);
+
+ //Redirection après insertion
+header('Location: ./');
+exit;
+}
+
+
+
+// Appel de la vue
+require_once '../view/guestbookView.php';
+
+
+// Fermeture de la connexion (bonne pratique)
+$connexion = null;
 /*
  * Si le formulaire a été soumis
  */
@@ -60,6 +115,21 @@ require_once "../model/guestbookModel.php";
 
 // Appel de la vue
 
-include "../view/guestbookView.php";
+// include "../view/guestbookView.php";
 
 // fermeture de la connexion (bonne pratique)
+
+
+
+
+
+   
+
+
+    
+
+
+
+
+
+
